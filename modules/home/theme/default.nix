@@ -29,6 +29,10 @@
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+  };
+
   xdg.configFile = {
     "kdeglobals".text = ''
       [General]
@@ -52,6 +56,16 @@
       [Appearance]
       icon_theme=Papirus-Dark
       style=kvantum
+    '';
+    "pcmanfm-qt/default/settings.conf".text = ''
+      [System]
+      IconThemeName=Papirus-Dark
+      Terminal=wezterm
+
+      [Desktop]
+      BgColor=#1f1d2e
+      FgColor=#e0def4
+      ShadowColor=#000000
     '';
     "Kvantum/kvantum.kvconfig".text = ''
       [General]
