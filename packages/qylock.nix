@@ -10,7 +10,7 @@ let
     hash = "sha256-SDghYrgiDvHBOWwHRKPiy4TRemJZ+X9nhmaaew5OM90=";
   };
 
-  swordVideo = pkgs.runCommandNoCC "sword-lockscreen-video.mp4" { } ''
+  swordVideo = pkgs.runCommand "sword-lockscreen-video.mp4" { } ''
     mkdir -p $out
     cp ${../assets/sddm/sword-4k.mp4} $out/bg.mp4
   '';
