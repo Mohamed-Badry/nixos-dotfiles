@@ -55,14 +55,14 @@ let
     gst-libav
   ];
 
-  qmlPath = lib.makeSearchPathOutput "lib" "qt-6/qml" [
+  qmlPath = lib.makeSearchPath "lib/qt-6/qml" [
     pkgs.kdePackages.qt5compat
     pkgs.kdePackages.qtdeclarative
     pkgs.kdePackages.qtmultimedia
     pkgs.kdePackages.qtsvg
   ];
 
-  qtPluginPath = lib.makeSearchPathOutput "lib" "qt-6/plugins" [
+  qtPluginPath = lib.makeSearchPath "lib/qt-6/plugins" [
     pkgs.kdePackages.qtbase
     pkgs.kdePackages.qtdeclarative
     pkgs.kdePackages.qtmultimedia
@@ -101,12 +101,13 @@ rec {
             ln -s ${swordVideo}/bg.mp4 $out/share/qylock/themes/sword/bg.mp4
             cp ${../assets/sddm/bg.jpg} $out/share/qylock/themes/sword/bg.jpg
             cat > $out/share/qylock/themes/sword/BackgroundVideo.qml <<'QML'
-            ${backgroundVideoQml}
-            QML
+${backgroundVideoQml}
+QML
 
             makeWrapper $out/share/qylock/lock.sh $out/bin/qylock-lock \
               --set QS_THEME sword \
               --set QYLOCK_THEMES_ROOT $out/share/qylock/themes \
+              --set XDG_SESSION_TYPE wayland \
               --suffix QML2_IMPORT_PATH : ${qmlPath} \
               --suffix QML_IMPORT_PATH : ${qmlPath} \
               --suffix QT_PLUGIN_PATH : ${qtPluginPath} \
@@ -124,9 +125,23 @@ rec {
               }
 
             substituteInPlace $out/share/qylock/lock.sh \
-              --replace-fail 'export QS_THEME="nier-automata"' 'export QS_THEME="''${QS_THEME:-sword}"' \
-              --replace-fail 'export QS_THEME_PATH="$DIR/../themes/$QS_THEME"' 'export QS_THEME_PATH="$QYLOCK_THEMES_ROOT/$QS_THEME"' \
-              --replace-fail 'export QS_THEME_PATH="$DIR/themes_link/$QS_THEME"' 'export QS_THEME_PATH="$QYLOCK_THEMES_ROOT/$QS_THEME"'
+              --replace-fail \
+                'CONFIG_FILE="$HOME/.config/qylock/theme"
+if [ -n "$1" ]; then
+    export QS_THEME="$1"
+elif [ -f "$CONFIG_FILE" ]; then
+    export QS_THEME=$(cat "$CONFIG_FILE")
+else
+    export QS_THEME="nier-automata"
+fi' \
+                'if [ -n "$1" ]; then export QS_THEME="$1"; fi' \
+              --replace-fail \
+                'if [ -d "$DIR/../themes" ] && [ ! -d "$DIR/themes_link" ]; then
+    export QS_THEME_PATH="$DIR/../themes/$QS_THEME"
+else
+    export QS_THEME_PATH="$DIR/themes_link/$QS_THEME"
+fi' \
+                'export QS_THEME_PATH="$QYLOCK_THEMES_ROOT/$QS_THEME"'
     '';
   };
 }
