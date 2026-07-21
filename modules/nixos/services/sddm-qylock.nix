@@ -39,5 +39,8 @@ in
     ++ gstreamerPlugins;
   };
 
-  environment.systemPackages = [ qylock.lock ];
+  environment.systemPackages = [
+    qylock.lock
+    qylock.sddmTheme
+  ];
 }
