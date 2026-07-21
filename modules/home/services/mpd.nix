@@ -8,6 +8,8 @@
   home.packages = [ pkgs.rmpc ];
   home.file."Music".source = config.lib.file.mkOutOfStoreSymlink "/media/${username}/grind/Music";
 
+  xdg.configFile."rmpc".source = ../../../config/rmpc;
+
   services.mpd = {
     enable = true;
     musicDirectory = "/media/${username}/grind/Music";
