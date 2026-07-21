@@ -62,11 +62,17 @@
       enable = true;
       enableBashIntegration = true;
     };
+    btop.enable = true;
+    fastfetch.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
   };
 
-  xdg.configFile."starship.toml".source = ../../../config/terminal/starship.toml;
+  xdg.configFile = {
+    "starship.toml".source = ../../../config/terminal/starship.toml;
+    "btop/btop.conf".source = ../../../config/btop/btop.conf;
+    "fastfetch/config.jsonc".source = ../../../config/fastfetch/config.jsonc;
+  };
 }

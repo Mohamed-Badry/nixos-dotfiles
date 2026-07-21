@@ -123,4 +123,9 @@
       "x-scheme-handler/mailto" = "Mailspring.desktop";
     };
   };
+
+  xdg.configFile = {
+    "Code/User/settings.json".source = ../../../config/vscode/settings.json;
+    "Code/User/keybindings.json".source = ../../../config/vscode/keybindings.json;
+  };
 }
