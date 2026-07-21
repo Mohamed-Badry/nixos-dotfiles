@@ -8,7 +8,7 @@ stdenvNoCC.mkDerivation {
   installPhase = ''
     mkdir -p $out/share/plymouth/themes
     cp -r hexa_retro $out/share/plymouth/themes/
-    find $out/share/plymouth/themes/hexa_retro -name '*.plymouth' \\
-      -exec sed -i "s|/usr/share/plymouth/themes|$out/share/plymouth/themes|g" {} +
+    find $out/share/plymouth/themes/hexa_retro -name '*.plymouth' -exec \
+      sed -i "s|/usr/share/plymouth/themes|$out/share/plymouth/themes|g" {} +
   '';
 }
