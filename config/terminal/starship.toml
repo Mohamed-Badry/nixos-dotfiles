@@ -1,0 +1,136 @@
+# Rosé Pine Starship Theme
+# Matches WezTerm/Zellij/Helix "Rosé Pine" aesthetic
+
+# Palette:
+# - Base: #191724
+# - Highlight Med: #403d52
+# - Surface: #212030
+# - Iris (Purple): #c4a7e7
+# - Rose (Pink): #ebbcba
+# - Pine (Teal): #31748f
+# - Foam (Cyan): #9ccfd8
+# - Gold (Yellow): #f6c177
+# - Love (Red): #eb6f92
+
+format = "[](#c4a7e7)$os$username[](bg:#403d52 fg:#c4a7e7)$directory[](fg:#403d52 bg:#212030)$git_branch$git_status[](fg:#212030 bg:#191724)$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala$docker_context$python$nix_shell[](fg:#191724 bg:#ebbcba)$time[ ](fg:#ebbcba)"
+
+# Disable the blank line at the start of the prompt
+add_newline = true
+
+[username]
+show_always = true
+style_user = "bg:#c4a7e7 fg:#191724 bold"
+style_root = "bg:#c4a7e7 fg:#191724 bold"
+format = '[$user ]($style)'
+disabled = false
+
+[os]
+style = "bg:#c4a7e7 fg:#191724"
+disabled = true 
+
+[directory]
+style = "bg:#403d52 fg:#e0def4"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:#212030 fg:#e0def4"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:#212030 fg:#e0def4"
+format = '[$all_status$ahead_behind ]($style)'
+
+# Language Modules - Floating on the dark background
+[c]
+symbol = " "
+style = "bg:#191724 fg:#31748f"
+format = '[ $symbol ($version) ]($style)'
+
+[cpp]
+symbol = " "
+style = "bg:#191724 fg:#31748f"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:#191724 fg:#ebbcba"
+format = '[ $symbol $context ]($style)'
+
+[elixir]
+symbol = " "
+style = "bg:#191724 fg:#c4a7e7"
+format = '[ $symbol ($version) ]($style)'
+
+[elm]
+symbol = " "
+style = "bg:#191724 fg:#9ccfd8"
+format = '[ $symbol ($version) ]($style)'
+
+[golang]
+symbol = " "
+style = "bg:#191724 fg:#9ccfd8"
+format = '[ $symbol ($version) ]($style)'
+
+[gradle]
+style = "bg:#191724 fg:#f6c177"
+format = '[ $symbol ($version) ]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:#191724 fg:#c4a7e7"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "bg:#191724 fg:#f6c177"
+format = '[ $symbol ($version) ]($style)'
+
+[julia]
+symbol = " "
+style = "bg:#191724 fg:#c4a7e7"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#191724 fg:#31748f"
+format = '[ $symbol ($version) ]($style)'
+
+[nim]
+symbol = "󰆥 "
+style = "bg:#191724 fg:#f6c177"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#191724 fg:#f6c177"
+format = '[ $symbol ($version) ]($style)'
+
+[scala]
+symbol = " "
+style = "bg:#191724 fg:#f6c177"
+format = '[ $symbol ($version) ]($style)'
+
+[python]
+format = '[ ${symbol}${virtualenv} ]($style)'
+symbol = "󰌠 "
+style = "bg:#191724 fg:#f6c177"
+
+[nix_shell]
+symbol = " "
+style = "bg:#191724 fg:#9ccfd8"
+format = '[ $symbol]($style)'
+
+[time]
+disabled = false
+time_format = "%I:%M %p" # 12-hour AM/PM Format
+style = "bg:#ebbcba fg:#191724"
+format = '[ ♥ $time ]($style)'

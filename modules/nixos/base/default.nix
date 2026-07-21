@@ -1,0 +1,26 @@
+{ hostname, ... }:
+{
+  networking = {
+    hostName = hostname;
+    networkmanager.enable = true;
+  };
+
+  time.timeZone = "Africa/Cairo";
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  console = {
+    font = "Lat2-Terminus16";
+    useXkbConfig = true;
+  };
+
+  nixpkgs.config.allowUnfree = true;
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    auto-optimise-store = true;
+  };
+
+  system.stateVersion = "26.05";
+}

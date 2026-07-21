@@ -1,0 +1,14 @@
+layout {
+    border {
+        width 2
+        active-color "#c4a7e7"
+        inactive-color "#26233a"
+    }
+    shadow {
+        on
+        softness 30
+        spread 3
+        offset x=0 y=5
+        color "#00000077"
+    }
+}
