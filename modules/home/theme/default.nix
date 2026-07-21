@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   qt = {
     enable = true;
@@ -30,7 +30,7 @@
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
   home.sessionVariables = {
-    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
   };
 
   xdg.configFile = {
