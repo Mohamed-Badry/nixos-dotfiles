@@ -3,41 +3,41 @@
   smartPlayerctl = pkgs.writeShellScriptBin "smart-playerctl" ''
     export PATH="${pkgs.lib.makeBinPath (with pkgs; [ playerctl libnotify coreutils gnugrep ])}:$PATH"
     command="$1"
-      state_file="$HOME/.local/state/smart-playerctl-last"
-      mkdir -p "$(dirname "$state_file")"
+    state_file="$HOME/.local/state/smart-playerctl-last"
+    mkdir -p "$(dirname "$state_file")"
 
-      if [ "$command" = switch ] || [ "$command" = cycle ]; then
-        mapfile -t players < <(playerctl --list-all 2>/dev/null)
-        count=''${#players[@]}
-        [ "$count" -gt 0 ] || { notify-send "Player Control" "No players found"; exit 0; }
-        current=$(cat "$state_file" 2>/dev/null || true)
-        next=0
-        for i in "''${!players[@]}"; do
-          [ "''${players[$i]}" = "$current" ] && next=$(( (i + 1) % count ))
-        done
-        printf '%s\\n' "''${players[$next]}" > "$state_file"
-        notify-send "Player Switched" "Active: ''${players[$next]}"
-        exit 0
-      fi
+    if [ "$command" = switch ] || [ "$command" = cycle ]; then
+      mapfile -t players < <(playerctl --list-all 2>/dev/null)
+      count=''${#players[@]}
+      [ "$count" -gt 0 ] || { notify-send "Player Control" "No players found"; exit 0; }
+      current=$(cat "$state_file" 2>/dev/null || true)
+      next=0
+      for i in "''${!players[@]}"; do
+        [ "''${players[$i]}" = "$current" ] && next=$(( (i + 1) % count ))
+      done
+      echo "''${players[$next]}" > "$state_file"
+      notify-send "Player Switched" "Active: ''${players[$next]}"
+      exit 0
+    fi
 
-      playing=$(playerctl --list-all 2>/dev/null | while read -r player; do
-        [ "$(playerctl -p "$player" status 2>/dev/null)" = Playing ] && printf '%s\\n' "$player"
-      done)
-      if [ -n "$playing" ]; then
-        target=$(printf '%s\\n' "$playing" | head -n 1)
-        printf '%s\\n' "$target" > "$state_file"
-        playerctl --player="$target" "$command"
-      else
-        if [ -f "$state_file" ]; then
-          last_player=$(cat "$state_file")
-          if playerctl --list-all 2>/dev/null | grep -Fxq "$last_player"; then
-            playerctl --player="$last_player" "$command"
-            exit 0
-          fi
+    playing=$(playerctl --list-all 2>/dev/null | while read -r player; do
+      [ "$(playerctl -p "$player" status 2>/dev/null)" = Playing ] && echo "$player"
+    done)
+    if [ -n "$playing" ]; then
+      target=$(echo "$playing" | head -n 1)
+      echo "$target" > "$state_file"
+      playerctl --player="$target" "$command"
+    else
+      if [ -f "$state_file" ]; then
+        last_player=$(cat "$state_file")
+        if playerctl --list-all 2>/dev/null | grep -Fxq "$last_player"; then
+          playerctl --player="$last_player" "$command"
+          exit 0
         fi
-        playerctl "$command"
       fi
-    '';
+      playerctl "$command"
+    fi
+  '';
 
   toggleScratchpad = pkgs.writeShellScriptBin "toggle-scratchpad" ''
     export PATH="${pkgs.lib.makeBinPath (with pkgs; [ jq niri wezterm zellij ])}:$PATH"
