@@ -113,14 +113,12 @@
           pkgs = pkgsFor system;
         in
         {
-          rust = pkgs.mkShell {
+          default = pkgs.mkShell {
             packages = with pkgs; [
-              rustc
-              cargo
-              rust-analyzer
-              pkg-config
-              openssl
-              gcc
+              nixfmt-rfc-style
+              nil
+              statix
+              just
             ];
           };
         }
