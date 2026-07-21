@@ -52,10 +52,18 @@ let
     gst-plugins-good
     gst-plugins-bad
     gst-plugins-ugly
+    gst-libav
   ];
 
   qmlPath = lib.makeSearchPathOutput "lib" "qt-6/qml" [
     pkgs.kdePackages.qt5compat
+    pkgs.kdePackages.qtdeclarative
+    pkgs.kdePackages.qtmultimedia
+    pkgs.kdePackages.qtsvg
+  ];
+
+  qtPluginPath = lib.makeSearchPathOutput "lib" "qt-6/plugins" [
+    pkgs.kdePackages.qtbase
     pkgs.kdePackages.qtdeclarative
     pkgs.kdePackages.qtmultimedia
     pkgs.kdePackages.qtsvg
@@ -101,7 +109,7 @@ rec {
               --set QYLOCK_THEMES_ROOT $out/share/qylock/themes \
               --suffix QML2_IMPORT_PATH : ${qmlPath} \
               --suffix QML_IMPORT_PATH : ${qmlPath} \
-              --set QT_PLUGIN_PATH ${pkgs.kdePackages.qtmultimedia}/lib/qt-6/plugins \
+              --suffix QT_PLUGIN_PATH : ${qtPluginPath} \
               --set QT_MEDIA_BACKEND gstreamer \
               --suffix GST_PLUGIN_SYSTEM_PATH_1_0 : ${
                 lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" gstreamerPlugins

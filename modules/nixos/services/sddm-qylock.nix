@@ -7,6 +7,7 @@ let
     gst-plugins-good
     gst-plugins-bad
     gst-plugins-ugly
+    gst-libav
   ];
 in
 {
