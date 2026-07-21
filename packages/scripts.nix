@@ -35,6 +35,13 @@
         printf '%s\\n' "$target" > "$state_file"
         playerctl --player="$target" "$command"
       else
+        if [ -f "$state_file" ]; then
+          last_player=$(cat "$state_file")
+          if playerctl --list-all 2>/dev/null | grep -Fxq "$last_player"; then
+            playerctl --player="$last_player" "$command"
+            exit 0
+          fi
+        fi
         playerctl "$command"
       fi
     '';

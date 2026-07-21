@@ -7,6 +7,7 @@ in
     pkgs.brightnessctl
     pkgs.hyprpicker
     pkgs.jq
+    pkgs.playerctl
     inputs.niri-float-sticky.packages.${pkgs.stdenv.hostPlatform.system}.default
     scripts.smartPlayerctl
     scripts.toggleScratchpad
