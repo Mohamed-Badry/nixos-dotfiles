@@ -26,11 +26,19 @@
         cp = "cp -i";
         mv = "mv -i";
         open = "xdg-open";
+        "cd.." = "cd ..";
+        ".." = "cd ..";
+        "..." = "cd ../..";
+        "...." = "cd ../../..";
+        "....." = "cd ../../../..";
+        bd = "cd \"$OLDPWD\"";
       };
       initExtra = ''
         shopt -s histappend checkwinsize
         PROMPT_COMMAND='history -a'
         export LS_COLORS="$LS_COLORS:ow=01;34:tw=01;34:"
+        export INPUTRC="$HOME/.inputrc"
+        
         export start_dir="/media/crim/productivity/Programming"
         [ -d "$start_dir" ] || export start_dir="$HOME"
         export BUN_INSTALL="$HOME/.bun"
@@ -38,6 +46,55 @@
 
         # Match completion syntax to the Nix-managed Jujutsu version.
         source ${pkgs.jujutsu}/share/bash-completion/completions/jj.bash
+
+        # Enhanced 'cd' that lists files after entering
+        cd () {
+            if [ -n "$1" ]; then
+                builtin cd "$@" && eza --icons=always
+            else
+                builtin cd "$start_dir" && eza --icons=always
+            fi
+        }
+
+        # Detach app from terminal session
+        detach() {
+            setsid -f "$@" > /dev/null 2>&1
+        }
+
+        # Quick Copy/Move/Mkdir & Go
+        cpg () {
+            if [ -d "$2" ];then
+                cp "$1" "$2" && cd "$2"
+            else
+                cp "$1" "$2"
+            fi
+        }
+        mvg () {
+            if [ -d "$2" ];then
+                mv "$1" "$2" && cd "$2"
+            else
+                mv "$1" "$2"
+            fi
+        }
+        mkdirg () {
+            mkdir -p "$1"
+            cd "$1"
+        }
+
+        # Go up N directories
+        up () {
+            local d=""
+            limit=$1
+            for ((i=1 ; i <= limit ; i++))
+                do
+                    d=$d/..
+                done
+            d=$(echo "$d" | sed 's/^\///')
+            if [ -z "$d" ]; then
+                d=..
+            fi
+            cd "$d"
+        }
       '';
     };
 
