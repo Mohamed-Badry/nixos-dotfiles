@@ -1,7 +1,17 @@
 { pkgs }:
 {
   smartPlayerctl = pkgs.writeShellScriptBin "smart-playerctl" ''
-    export PATH="${pkgs.lib.makeBinPath (with pkgs; [ playerctl libnotify coreutils gnugrep ])}:$PATH"
+    export PATH="${
+      pkgs.lib.makeBinPath (
+        with pkgs;
+        [
+          playerctl
+          libnotify
+          coreutils
+          gnugrep
+        ]
+      )
+    }:$PATH"
     command="$1"
     state_file="$HOME/.local/state/smart-playerctl-last"
     mkdir -p "$(dirname "$state_file")"
@@ -40,7 +50,17 @@
   '';
 
   toggleScratchpad = pkgs.writeShellScriptBin "toggle-scratchpad" ''
-    export PATH="${pkgs.lib.makeBinPath (with pkgs; [ jq niri wezterm zellij ])}:$PATH"
+    export PATH="${
+      pkgs.lib.makeBinPath (
+        with pkgs;
+        [
+          jq
+          niri
+          wezterm
+          zellij
+        ]
+      )
+    }:$PATH"
     window_json=$(niri msg -j windows | jq -r '.[] | select(.app_id == "scratchpad")' 2>/dev/null)
       if [ -z "$window_json" ]; then
         wezterm start --class scratchpad -- zellij --layout zj_dev attach -c scratchpad
@@ -53,7 +73,7 @@
           niri msg action focus-window --id "$window_id"
         fi
       fi
-    '';
+  '';
 
   obsToggleRecord =
     pkgs.writers.writePython3Bin "obs-toggle-record"

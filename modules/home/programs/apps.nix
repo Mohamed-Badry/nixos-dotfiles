@@ -1,10 +1,21 @@
 {
+  lib,
   pkgs,
   pkgsUnstable,
   inputs,
   username,
+  fullName ? username,
+  email ? null,
   ...
 }:
+let
+  vcsUser = {
+    name = fullName;
+  }
+  // lib.optionalAttrs (email != null) {
+    inherit email;
+  };
+in
 {
   home.packages = [
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -44,6 +55,7 @@
     git = {
       enable = true;
       settings = {
+        user = vcsUser;
         init.defaultBranch = "main";
         core.editor = "hx";
         pull.rebase = true;
@@ -52,10 +64,7 @@
     jujutsu = {
       enable = true;
       settings = {
-        user = {
-          name = username;
-          email = "${username}@localhost";
-        };
+        user = vcsUser;
         ui = {
           default-command = "log";
           editor = "hx";
@@ -97,35 +106,37 @@
     };
   };
 
-  xdg.desktopEntries.mailspring = {
-    name = "Mailspring";
-    genericName = "Mail Client";
-    exec = "mailspring --password-store=gnome-libsecret %U";
-    terminal = false;
-    categories = [
-      "Network"
-      "Email"
-    ];
-    icon = "mailspring";
-  };
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "inode/directory" = "pcmanfm-qt.desktop";
-      "image/jpeg" = "org.nomacs.ImageLounge.desktop";
-      "image/png" = "org.nomacs.ImageLounge.desktop";
-      "image/webp" = "org.nomacs.ImageLounge.desktop";
-      "x-scheme-handler/http" = "zen.desktop";
-      "x-scheme-handler/https" = "zen.desktop";
-      "text/html" = "zen.desktop";
-      "x-scheme-handler/discord" = "vesktop.desktop";
-      "x-scheme-handler/mailto" = "Mailspring.desktop";
+  xdg = {
+    desktopEntries.mailspring = {
+      name = "Mailspring";
+      genericName = "Mail Client";
+      exec = "mailspring --password-store=gnome-libsecret %U";
+      terminal = false;
+      categories = [
+        "Network"
+        "Email"
+      ];
+      icon = "mailspring";
     };
-  };
 
-  xdg.configFile = {
-    "Code/User/settings.json".source = ../../../config/vscode/settings.json;
-    "Code/User/keybindings.json".source = ../../../config/vscode/keybindings.json;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = "pcmanfm-qt.desktop";
+        "image/jpeg" = "org.nomacs.ImageLounge.desktop";
+        "image/png" = "org.nomacs.ImageLounge.desktop";
+        "image/webp" = "org.nomacs.ImageLounge.desktop";
+        "x-scheme-handler/http" = "zen.desktop";
+        "x-scheme-handler/https" = "zen.desktop";
+        "text/html" = "zen.desktop";
+        "x-scheme-handler/discord" = "vesktop.desktop";
+        "x-scheme-handler/mailto" = "Mailspring.desktop";
+      };
+    };
+
+    configFile = {
+      "Code/User/settings.json".source = ../../../config/vscode/settings.json;
+      "Code/User/keybindings.json".source = ../../../config/vscode/keybindings.json;
+    };
   };
 }

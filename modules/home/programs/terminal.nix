@@ -35,9 +35,9 @@
     "helix/languages.toml".source = ../../../config/terminal/helix/languages.toml;
     "helix/themes/cosmic_red.toml".source = ../../../config/terminal/helix/themes/cosmic_red.toml;
 
-    "zellij/config.kdl".text = lib.replaceStrings [ "/home/crim" ] [ config.home.homeDirectory ] (
-      builtins.readFile ../../../config/terminal/zellij/config.kdl
-    );
+    "zellij/config.kdl".text =
+      lib.replaceStrings [ "@ZELLIJ_THEME_DIR@" ] [ "${config.xdg.configHome}/zellij/themes" ]
+        (builtins.readFile ../../../config/terminal/zellij/config.kdl);
     "zellij/themes/cosmic_red.kdl".source = ../../../config/terminal/zellij/themes/cosmic_red.kdl;
     "zellij/themes/rose-pine.kdl".source = ../../../config/terminal/zellij/themes/rose-pine.kdl;
     "zellij/layouts/svelte_dev.kdl".source = ../../../config/terminal/zellij/layouts/svelte_dev.kdl;

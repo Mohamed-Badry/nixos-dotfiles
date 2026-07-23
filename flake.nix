@@ -1,5 +1,5 @@
 {
-  description = "Crim's declarative NixOS configuration";
+  description = "Declarative NixOS and Home Manager configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
@@ -33,6 +33,8 @@
         nixos = {
           system = "x86_64-linux";
           username = "crim";
+          fullName = "Mohamed Badry";
+          email = "m.badry.fl@gmail.com";
         };
       };
 
@@ -47,7 +49,12 @@
 
       mkHost =
         hostname:
-        { system, username }:
+        {
+          system,
+          username,
+          fullName ? username,
+          email ? null,
+        }:
         let
           pkgsUnstable = import inputs.nixpkgs-unstable {
             inherit system;
@@ -58,6 +65,8 @@
           inherit system;
           specialArgs = {
             inherit
+              email
+              fullName
               inputs
               hostname
               username
@@ -75,6 +84,8 @@
                 backupFileExtension = "backup";
                 extraSpecialArgs = {
                   inherit
+                    email
+                    fullName
                     inputs
                     hostname
                     username

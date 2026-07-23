@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.file.".inputrc".source = ../../../config/shell/inputrc;
 
@@ -38,9 +38,9 @@
         PROMPT_COMMAND='history -a'
         export LS_COLORS="$LS_COLORS:ow=01;34:tw=01;34:"
         export INPUTRC="$HOME/.inputrc"
-        
-        export start_dir="/media/crim/productivity/Programming"
-        [ -d "$start_dir" ] || export start_dir="$HOME"
+
+        start_dir="/media/${config.home.username}/productivity/Programming"
+        [ -d "$start_dir" ] || start_dir="$HOME"
         export BUN_INSTALL="$HOME/.bun"
         export PATH="$BUN_INSTALL/bin:$HOME/.local/bin:$PATH"
 

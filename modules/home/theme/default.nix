@@ -75,8 +75,22 @@
       "${pkgs.rose-pine-kvantum}/share/Kvantum/themes/rose-pine-iris/rose-pine-iris.svg";
     "Kvantum/rose-pine-iris/rose-pine-iris.kvconfig".text =
       builtins.replaceStrings
-        [ "translucent_windows=false" "blurring=false" "transparent_dolphin_view=false" "31,29,46" "respect_DE=true" ]
-        [ "translucent_windows=true" "blurring=true" "transparent_dolphin_view=true" "25,23,36" "respect_DE=false" ]
-        (builtins.readFile "${pkgs.rose-pine-kvantum}/share/Kvantum/themes/rose-pine-iris/rose-pine-iris.kvconfig");
+        [
+          "translucent_windows=false"
+          "blurring=false"
+          "transparent_dolphin_view=false"
+          "31,29,46"
+          "respect_DE=true"
+        ]
+        [
+          "translucent_windows=true"
+          "blurring=true"
+          "transparent_dolphin_view=true"
+          "25,23,36"
+          "respect_DE=false"
+        ]
+        (
+          builtins.readFile "${pkgs.rose-pine-kvantum}/share/Kvantum/themes/rose-pine-iris/rose-pine-iris.kvconfig"
+        );
   };
 }
