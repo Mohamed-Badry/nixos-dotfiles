@@ -107,28 +107,39 @@ in
   };
 
   xdg = {
-    desktopEntries.mailspring = {
-      name = "Mailspring";
-      genericName = "Mail Client";
-      exec = "mailspring --password-store=gnome-libsecret %U";
-      terminal = false;
-      categories = [
-        "Network"
-        "Email"
-      ];
-      icon = "mailspring";
+    desktopEntries = {
+      mailspring = {
+        name = "Mailspring";
+        genericName = "Mail Client";
+        exec = "mailspring --password-store=gnome-libsecret %U";
+        terminal = false;
+        categories = [
+          "Network"
+          "Email"
+        ];
+        icon = "mailspring";
+      };
+      
+      helix = {
+        name = "Helix";
+        genericName = "Text Editor";
+        exec = "${pkgs.wezterm}/bin/wezterm start -- hx %F";
+        terminal = false;
+        categories = [ "Utility" "TextEditor" ];
+        icon = "helix";
+      };
     };
 
     mimeApps = {
       enable = true;
       defaultApplications = {
         "inode/directory" = "pcmanfm-qt.desktop";
-        "text/plain" = "Helix.desktop";
-        "text/markdown" = "Helix.desktop";
-        "application/json" = "Helix.desktop";
-        "text/x-shellscript" = "Helix.desktop";
-        "text/x-python" = "Helix.desktop";
-        "text/x-rust" = "Helix.desktop";
+        "text/plain" = "helix.desktop";
+        "text/markdown" = "helix.desktop";
+        "application/json" = "helix.desktop";
+        "text/x-shellscript" = "helix.desktop";
+        "text/x-python" = "helix.desktop";
+        "text/x-rust" = "helix.desktop";
         "image/jpeg" = "org.nomacs.ImageLounge.desktop";
         "image/png" = "org.nomacs.ImageLounge.desktop";
         "image/webp" = "org.nomacs.ImageLounge.desktop";
