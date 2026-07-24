@@ -57,16 +57,19 @@
       icon_theme=Papirus-Dark
       style=kvantum
     '';
-    "pcmanfm-qt/default/settings.conf".text = ''
-      [System]
-      IconThemeName=Papirus-Dark
-      Terminal=wezterm
+    "pcmanfm-qt/default/settings.conf" = {
+      text = ''
+        [System]
+        IconThemeName=Papirus-Dark
+        Terminal=${pkgs.wezterm}/bin/wezterm start -- %s
 
-      [Desktop]
-      BgColor=#1f1d2e
-      FgColor=#e0def4
-      ShadowColor=#000000
-    '';
+        [Desktop]
+        BgColor=#1f1d2e
+        FgColor=#e0def4
+        ShadowColor=#000000
+      '';
+      force = true;
+    };
     "Kvantum/kvantum.kvconfig".text = ''
       [General]
       theme=rose-pine-iris
