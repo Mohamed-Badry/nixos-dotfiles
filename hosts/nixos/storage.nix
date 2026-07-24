@@ -29,7 +29,7 @@
         "compress=zstd"
         "noatime"
         "noauto"
-        "x-systemd.automount"
+        "users"
         "x-gvfs-show"
         "x-gvfs-name=Pop_OS"
       ];

@@ -123,6 +123,7 @@ in
       enable = true;
       defaultApplications = {
         "inode/directory" = "pcmanfm-qt.desktop";
+        "text/plain" = "code.desktop";
         "image/jpeg" = "org.nomacs.ImageLounge.desktop";
         "image/png" = "org.nomacs.ImageLounge.desktop";
         "image/webp" = "org.nomacs.ImageLounge.desktop";
