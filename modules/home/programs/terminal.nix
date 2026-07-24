@@ -8,7 +8,20 @@
   programs = {
     helix.enable = true;
     zellij.enable = true;
-    wezterm = {
+  };
+
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = [ "org.wezfurlong.wezterm.desktop" ];
+    };
+  };
+
+  home.sessionVariables = {
+    TERMINAL = "wezterm";
+  };
+
+  programs.wezterm = {
       enable = true;
       extraConfig = ''
         local wezterm = require 'wezterm'
@@ -28,7 +41,6 @@
         return config
       '';
     };
-  };
 
   xdg.configFile = {
     "helix/config.toml".source = ../../../config/terminal/helix/config.toml;

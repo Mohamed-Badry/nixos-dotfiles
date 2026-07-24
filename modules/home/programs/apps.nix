@@ -123,7 +123,12 @@ in
       enable = true;
       defaultApplications = {
         "inode/directory" = "pcmanfm-qt.desktop";
-        "text/plain" = "code.desktop";
+        "text/plain" = "Helix.desktop";
+        "text/markdown" = "Helix.desktop";
+        "application/json" = "Helix.desktop";
+        "text/x-shellscript" = "Helix.desktop";
+        "text/x-python" = "Helix.desktop";
+        "text/x-rust" = "Helix.desktop";
         "image/jpeg" = "org.nomacs.ImageLounge.desktop";
         "image/png" = "org.nomacs.ImageLounge.desktop";
         "image/webp" = "org.nomacs.ImageLounge.desktop";
@@ -138,6 +143,11 @@ in
     configFile = {
       "Code/User/settings.json".source = ../../../config/vscode/settings.json;
       "Code/User/keybindings.json".source = ../../../config/vscode/keybindings.json;
+    };
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
     };
   };
 }
