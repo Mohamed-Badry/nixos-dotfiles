@@ -1,7 +1,15 @@
-_: {
+{ pkgs, ... }: {
   programs = {
     btop.enable = true;
-    mpv.enable = true;
+    mpv = {
+      enable = true;
+      scripts = [ pkgs.mpvScripts.uosc ];
+      config = {
+        osc = false;
+        osd-bar = false;
+        border = false;
+      };
+    };
   };
 
   xdg.configFile = {
