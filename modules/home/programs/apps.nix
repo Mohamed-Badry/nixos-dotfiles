@@ -48,6 +48,16 @@ in
     pkgs.bottom
     pkgs.sem
     pkgs.tealdeer
+    pkgs.zip
+    pkgs.unzip
+    pkgs.unrar
+    pkgs.p7zip
+    pkgs.unar
+    pkgs.gnutar
+    pkgs.xz
+    pkgs.gzip
+    pkgs.bzip2
+    pkgs.zstd
   ];
 
   programs = {

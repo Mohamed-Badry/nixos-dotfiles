@@ -61,7 +61,7 @@
       text = ''
         [System]
         IconThemeName=Papirus-Dark
-        Terminal=${pkgs.wezterm}/bin/wezterm start -- %s
+        Terminal=${pkgs.wezterm}/bin/wezterm
 
         [Desktop]
         BgColor=#1f1d2e
