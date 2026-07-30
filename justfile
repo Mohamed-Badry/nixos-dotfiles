@@ -2,6 +2,9 @@ set dotenv-load := false
 
 host := "nixos"
 
+default:
+    @just --list
+
 check:
     nix flake check --no-build --all-systems
 
