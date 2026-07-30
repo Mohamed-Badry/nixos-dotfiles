@@ -37,6 +37,7 @@
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
+    blacklistedKernelModules = [ "mt7921e" ];
     kernelParams = [
       "quiet"
       "splash"

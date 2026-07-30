@@ -8,6 +8,7 @@ binds {
     Mod+D { spawn "noctalia-shell" "ipc" "call" "wallpaper" "toggle"; }
     Mod+W { toggle-overview; }
     Mod+B { spawn "zen"; }
+    Mod+Ctrl+B { spawn "launch-zen-vesktop"; }
     Mod+Q { close-window; }
     Mod+Shift+E { quit; }
     Mod+Escape { spawn "qylock-lock"; }
