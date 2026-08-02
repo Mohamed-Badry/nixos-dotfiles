@@ -14,4 +14,12 @@
       RemainAfterExit = true;
     };
   };
+
+  services.udev.extraHwdb = ''
+    evdev:name:Asus WMI hotkeys:dmi:bvn*:bvr*:bd*:svnASUS*:pn*:*
+      KEYBOARD_KEY_b2=kbdillumdown
+      KEYBOARD_KEY_00b2=kbdillumdown
+      KEYBOARD_KEY_b3=kbdillumup
+      KEYBOARD_KEY_00b3=kbdillumup
+  '';
 }

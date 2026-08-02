@@ -12,6 +12,9 @@ in
     scripts.smartPlayerctl
     scripts.toggleScratchpad
     scripts.obsToggleRecord
+    scripts.asusProfileSwitch
+    scripts.asusAuraSync
+    scripts.asusAuraMode
   ];
 
   xdg.configFile = {

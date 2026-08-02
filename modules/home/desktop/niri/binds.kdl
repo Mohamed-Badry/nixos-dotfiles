@@ -103,4 +103,8 @@ binds {
     XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     XF86MonBrightnessUp { spawn "brightnessctl" "set" "10%+"; }
     XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
+    XF86Launch4 { spawn "asus-profile-switch"; }
+    Mod+F5 { spawn "asus-profile-switch"; }
+    XF86KbdBrightnessDown { spawn "asus-aura-mode" "prev"; }
+    XF86KbdBrightnessUp { spawn "asus-aura-mode" "next"; }
 }

@@ -5,14 +5,25 @@
   ...
 }:
 let
+  scripts = pkgs.callPackage ../../../packages/scripts.nix { };
   settings = pkgs.writeText "noctalia-settings.json" (
-    builtins.replaceStrings [ "@HOME@" ] [ config.home.homeDirectory ] (
-      builtins.readFile ../../../config/noctalia/settings.json
-    )
+    builtins.replaceStrings
+      [
+        "@HOME@"
+        "@ASUS_AURA_SYNC@"
+      ]
+      [
+        config.home.homeDirectory
+        "${scripts.asusAuraSync}/bin/asus-aura-sync"
+      ]
+      (builtins.readFile ../../../config/noctalia/settings.json)
   );
 in
 {
-  home.packages = [ pkgs.noctalia-shell ];
+  home.packages = [
+    pkgs.noctalia-shell
+    scripts.asusAuraSync
+  ];
 
   home.activation.copyNoctaliaConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.config/noctalia"
