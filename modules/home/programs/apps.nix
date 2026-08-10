@@ -21,14 +21,14 @@ let
     text = ''
       # Spawn Zen
       zen &
-      
+
       # Wait for the window to appear
       sleep 2
-      
+
       # The biggest Mod+R cycle is 2/3 (66.7%). Mod++ (+10%) 3 times is +30%.
       # 66.7% + 30% = 96.7%
       niri msg action set-column-width "96.7%"
-      
+
       # Spawn Vesktop on the right side
       vesktop &
       sleep 2
@@ -83,12 +83,14 @@ in
 
   home.activation.installMailspringTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.config/Mailspring/packages/rose-pine"
-    cp -rf ${pkgs.fetchFromGitHub {
-      owner = "rose-pine";
-      repo = "mailspring";
-      rev = "9b8c7e41e43a510d350ce5465df915d61cc869da";
-      sha256 = "1g9nm22dnh6f36y3kvx435yv3kyig4h8vhniwpmx9qfivpccwi6s";
-    }}/* "$HOME/.config/Mailspring/packages/rose-pine/"
+    cp -rf ${
+      pkgs.fetchFromGitHub {
+        owner = "rose-pine";
+        repo = "mailspring";
+        rev = "9b8c7e41e43a510d350ce5465df915d61cc869da";
+        sha256 = "1g9nm22dnh6f36y3kvx435yv3kyig4h8vhniwpmx9qfivpccwi6s";
+      }
+    }/* "$HOME/.config/Mailspring/packages/rose-pine/"
     chmod -R u+w "$HOME/.config/Mailspring/packages/rose-pine"
   '';
 
@@ -161,13 +163,16 @@ in
         ];
         icon = "mailspring";
       };
-      
+
       helix = {
         name = "Helix";
         genericName = "Text Editor";
         exec = "${pkgs.wezterm}/bin/wezterm start -- hx %F";
         terminal = false;
-        categories = [ "Utility" "TextEditor" ];
+        categories = [
+          "Utility"
+          "TextEditor"
+        ];
         icon = "helix";
       };
     };

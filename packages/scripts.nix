@@ -323,7 +323,6 @@ in
         client.toggle_record()
       '';
 
-
   asusProfileSwitch = pkgs.writeShellScriptBin "asus-profile-switch" ''
     ${asusControlLib}
 
