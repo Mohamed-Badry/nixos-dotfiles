@@ -81,6 +81,17 @@ in
     pkgs.zstd
   ];
 
+  home.activation.installMailspringTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "$HOME/.config/Mailspring/packages/rose-pine"
+    cp -rf ${pkgs.fetchFromGitHub {
+      owner = "rose-pine";
+      repo = "mailspring";
+      rev = "9b8c7e41e43a510d350ce5465df915d61cc869da";
+      sha256 = "1g9nm22dnh6f36y3kvx435yv3kyig4h8vhniwpmx9qfivpccwi6s";
+    }}/* "$HOME/.config/Mailspring/packages/rose-pine/"
+    chmod -R u+w "$HOME/.config/Mailspring/packages/rose-pine"
+  '';
+
   programs = {
     obs-studio.enable = true;
     git = {
