@@ -198,9 +198,9 @@
                     "unreadBadgeColor": "primary"
                 },
                 {
-                    "deviceNativePath": "__default__",
-                    "displayMode": "icon-hover",
-                    "hideIfIdle": false,
+                    "deviceNativePath": "BAT1",
+                    "displayMode": "always",
+                    "hideIfIdle": true,
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
@@ -271,7 +271,7 @@
         "predefinedScheme": "Rose Pine",
         "schedulingMode": "off",
         "syncGsettings": true,
-        "useWallpaperColors": false
+        "useWallpaperColors": true
     },
     "controlCenter": {
         "cards": [

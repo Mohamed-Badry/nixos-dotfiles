@@ -6,5 +6,6 @@
     ./desktop/niri.nix
     ./services/keyd.nix
     ./services/sddm-qylock.nix
+    ./services/perfmode.nix
   ];
 }
