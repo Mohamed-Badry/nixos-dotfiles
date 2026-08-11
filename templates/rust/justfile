@@ -1,0 +1,22 @@
+default:
+    @just --list
+
+# Run the project
+run *ARGS:
+    cargo run {{ARGS}}
+
+# Run tests
+test:
+    cargo nextest run
+
+# Watch for changes and re-check
+watch:
+    cargo watch -x check
+
+# Lint
+check:
+    cargo clippy -- -D warnings
+
+# Format
+fmt:
+    cargo fmt

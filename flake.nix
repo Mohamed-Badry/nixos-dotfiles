@@ -134,5 +134,40 @@
           };
         }
       );
+
+      templates = {
+        python = {
+          path = ./templates/python;
+          description = "Python dev environment (uv + ruff + ty)";
+          welcomeText = ''
+            # Python environment ready
+            Run `direnv allow` to activate, then `just --list` for commands.
+          '';
+        };
+        web = {
+          path = ./templates/web;
+          description = "Web dev environment (Bun + SvelteKit + Biome)";
+          welcomeText = ''
+            # Web environment ready
+            Run `direnv allow` to activate, then `just --list` for commands.
+          '';
+        };
+        rust = {
+          path = ./templates/rust;
+          description = "Rust dev environment (stable toolchain + cargo extras)";
+          welcomeText = ''
+            # Rust environment ready
+            Run `direnv allow` to activate, then `just --list` for commands.
+          '';
+        };
+        typst = {
+          path = ./templates/typst;
+          description = "Typst document authoring (typst + tinymist)";
+          welcomeText = ''
+            # Typst environment ready
+            Run `direnv allow` to activate, then `just --list` for commands.
+          '';
+        };
+      };
     };
 }

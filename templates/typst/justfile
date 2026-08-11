@@ -1,0 +1,10 @@
+default:
+    @just --list
+
+# Compile document
+build FILE="main.typ":
+    typst compile {{FILE}}
+
+# Watch and recompile on changes
+watch FILE="main.typ":
+    typst watch {{FILE}}

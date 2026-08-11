@@ -1,0 +1,22 @@
+default:
+    @just --list
+
+# Install dependencies
+install:
+    bun install
+
+# Start dev server
+dev:
+    bun run dev
+
+# Build for production
+build:
+    bun run build
+
+# Lint and format
+check:
+    biome check .
+
+# Auto-fix lint issues
+fix:
+    biome check --fix .
