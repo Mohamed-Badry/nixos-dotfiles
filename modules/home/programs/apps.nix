@@ -82,16 +82,16 @@ in
   ];
 
   home.activation.installMailspringTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p "$HOME/.config/Mailspring/packages/rose-pine"
+    mkdir -p "$HOME/.config/Mailspring/packages/Catppuccin-Mocha/"
     cp -rf ${
       pkgs.fetchFromGitHub {
-        owner = "rose-pine";
+        owner = "catppuccin";
         repo = "mailspring";
-        rev = "9b8c7e41e43a510d350ce5465df915d61cc869da";
-        sha256 = "1g9nm22dnh6f36y3kvx435yv3kyig4h8vhniwpmx9qfivpccwi6s";
+        rev = "5c4e860812950759b1f1bf144871082844cd";
+        sha256 = "1wh6msrpi97gxr3wf27sl9zbmj141z4p6avfcymw47mfd21630hn";
       }
-    }/* "$HOME/.config/Mailspring/packages/rose-pine/"
-    chmod -R u+w "$HOME/.config/Mailspring/packages/rose-pine"
+    }/src/Catppuccin-Mocha/* "$HOME/.config/Mailspring/packages/Catppuccin-Mocha/"
+    chmod -R u+w "$HOME/.config/Mailspring/packages/Catppuccin-Mocha"
   '';
 
   programs = {
