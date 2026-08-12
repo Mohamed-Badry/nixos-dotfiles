@@ -58,6 +58,7 @@ in
     pkgs.vesktop
     pkgs.mailspring
     pkgs.seahorse
+    pkgs.pavucontrol
     pkgs.dua
     pkgs.skim
     pkgs.just

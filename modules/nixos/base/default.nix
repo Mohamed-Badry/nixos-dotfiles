@@ -29,4 +29,7 @@
   # Enable udisks2 and gvfs so file managers can auto-detect and mount disks
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  # Fix ALC256 combo jack headset microphone on ASUS laptops
+  boot.extraModprobeConfig = "options snd-hda-intel model=dell-headset-multi";
 }
