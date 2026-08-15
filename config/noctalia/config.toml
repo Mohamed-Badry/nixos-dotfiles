@@ -4,6 +4,10 @@
 font_family = "JetBrainsMono Nerd Font"
 clipboard_enabled = true
 
+[shell.screenshot]
+directory = "@HOME@/Pictures/Screenshots"
+remember_last_region = true
+
 [theme]
 mode = "dark"
 source = "wallpaper"
@@ -59,7 +63,28 @@ font_family = "JetBrainsMono Nerd Font"
 
 start = ["launcher", "clock", "sysmon", "active_window", "media"]
 center = ["workspaces"]
-end = ["keyboard_layout", "tray", "notifications", "battery", "blackbartblues/audio-switcher:widget", "brightness", "network", "control_center"]
+end = [
+  "group:g1",
+  "keyboard_layout",
+  "tray",
+  "notifications",
+  "battery",
+  "blackbartblues/audio-switcher:widget",
+  "brightness",
+  "network",
+  "control_center",
+]
+
+[[bar.main.capsule_group]]
+id = "g1"
+enabled = true
+accordion = false
+accordion_direction = "end"
+fill = "surface"
+foreground = "on_tertiary"
+opacity = 1.0
+padding = 8.0
+members = ["network_rx", "network_tx"]
 
 [widget.clock]
 format = "{:%I:%M %p %a, %b %d}"
@@ -74,7 +99,7 @@ visualization = "none"
 device = "BAT1"
 display_mode = "glyph"
 show_label = true
-hide_when_plugged = true
+hide_when_plugged = false
 
 [widget.tray]
 drawer = true
@@ -82,6 +107,9 @@ drawer = true
 [widget.keyboard_layout]
 show_glyph = false
 show_label = true
+
+[widget.network]
+show_label = false
 
 [hooks]
 started = "@ASUS_AURA_SYNC@"
