@@ -25,6 +25,9 @@ in
   home.packages = [
     noctaliaPkg
     scripts.asusAuraSync
+    pkgs.libpulse
+    pkgs.bluez
+    pkgs.coreutils
   ];
 
   home.activation.copyNoctaliaConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

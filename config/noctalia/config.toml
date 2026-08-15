@@ -1,13 +1,14 @@
 # Noctalia v5 Configuration
 
 [shell]
-font_family = "sans-serif"
+font_family = "JetBrainsMono Nerd Font"
 clipboard_enabled = true
 
 [theme]
 mode = "dark"
 source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
+builtin = "Rosé Pine"
 
 [wallpaper]
 enabled = true
@@ -21,13 +22,16 @@ background_opacity = 0.8
 radius = 12
 margin_ends = 4
 margin_edge = 4
+padding = 6
 widget_spacing = 6
+scale = 0.9
 capsule = true
 capsule_opacity = 1.0
+font_family = "JetBrainsMono Nerd Font"
 
 start = ["launcher", "clock", "sysmon", "active_window", "media"]
 center = ["workspaces"]
-end = ["keyboard_layout", "tray", "notification", "battery", "blackbartblues/audio-switcher:widget", "brightness", "network", "control_center"]
+end = ["keyboard_layout", "tray", "notifications", "battery", "blackbartblues/audio-switcher:widget", "brightness", "network", "control_center"]
 
 [widget.clock]
 format = "{:%I:%M %p %a, %b %d}"
