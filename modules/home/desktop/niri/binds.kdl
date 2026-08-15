@@ -77,7 +77,7 @@ binds {
     Mod+F { spawn "sh" "-c" "if niri msg -j windows | jq -e '.[] | select(.is_focused) | .is_floating' >/dev/null; then niri msg action toggle-window-floating; fi; niri msg action maximize-column"; }
     Mod+M { maximize-window-to-edges; }
     Mod+F11 { fullscreen-window; }
-    Mod+Shift+R { reset-window-height; }
+    Mod+Shift+R { switch-preset-column-width-back; }
     Mod+Y { toggle-window-floating; }
     Mod+Shift+Y { switch-focus-between-floating-and-tiling; }
     Mod+P { spawn "niri-float-sticky" "toggle"; }
