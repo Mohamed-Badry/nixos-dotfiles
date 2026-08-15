@@ -25,7 +25,7 @@ in
   home.packages = [
     noctaliaPkg
     scripts.asusAuraSync
-    pkgs.libpulse
+    pkgs.pulseaudio
     pkgs.bluez
     pkgs.coreutils
   ];
