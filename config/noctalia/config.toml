@@ -4,9 +4,17 @@
 font_family = "JetBrainsMono Nerd Font"
 clipboard_enabled = true
 
+[shell.panel]
+transparency_mode = "soft"
+wallpaper_position = "center"
+
 [shell.screenshot]
 directory = "@HOME@/Pictures/Screenshots"
 remember_last_region = true
+
+[backdrop]
+blur_intensity = 0.55
+tint_intensity = 0.4
 
 [theme]
 mode = "dark"
@@ -46,6 +54,23 @@ community_ids = [
 enabled = true
 fill_mode = "crop"
 directory = "@HOME@/Pictures/Wallpapers"
+transition = ["fade", "honeycomb", "stripes"]
+transition_on_startup = true
+
+[dock]
+enabled = true
+background_opacity = 1.0
+border = "secondary"
+concave_edge_corners = false
+icon_size = 35
+launcher_icon = "rocket"
+launcher_position = "end"
+main_axis_padding = 8
+margin_edge = 7
+reserve_space = false
+show_dots = true
+show_instance_count = false
+smart_auto_hide = true
 
 [bar.main]
 position = "top"
@@ -118,5 +143,8 @@ wallpaper_changed = ["@ASUS_AURA_SYNC@ \"$NOCTALIA_WALLPAPER_PATH\""]
 theme_mode_changed = ["@ASUS_AURA_SYNC@"]
 
 [plugins]
-enabled = ["blackbartblues/audio-switcher"]
+enabled = [
+  "blackbartblues/audio-switcher",
+  "kenn/keybind-cheatsheet",
+]
 auto_update = true

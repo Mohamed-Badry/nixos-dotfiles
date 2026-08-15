@@ -1,7 +1,7 @@
 binds {
-    Mod+Question { show-hotkey-overlay; }
-    Mod+Slash { show-hotkey-overlay; }
-    Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+Question { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
+    Mod+Slash { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
+    Mod+Shift+Slash { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
     Mod+Return { spawn "wezterm"; }
     Mod+T { spawn "wezterm"; }
     Mod+A { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
