@@ -36,7 +36,7 @@
       config.initial_cols = 120
       config.initial_rows = 35
       config.window_close_confirmation = 'NeverPrompt'
-      config.color_scheme = 'rose-pine'
+      config.color_scheme = 'Noctalia'
       config.default_prog = { '${pkgs.bash}/bin/bash' }
       return config
     '';

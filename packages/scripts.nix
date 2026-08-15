@@ -10,7 +10,6 @@ let
       imagemagick
       jq
       libnotify
-      noctalia-shell
       python3
     ]
   );
@@ -53,12 +52,18 @@ let
         }
 
         noctalia_color() {
-          key="$1"
-          colors_file="''${XDG_CONFIG_HOME:-$HOME/.config}/noctalia/colors.json"
-          [ -f "$colors_file" ] || return 1
-
-          color=$(jq -er --arg key "$key" '.[$key] // empty' "$colors_file" 2>/dev/null | head -n 1) || return 1
-          normalize_color "$color"
+          local color=""
+          if [ -f "$HOME/.config/niri/noctalia.kdl" ]; then
+            color=$(grep -m1 'active-color' "$HOME/.config/niri/noctalia.kdl" 2>/dev/null | sed -E 's/.*"#(.*)".*/\1/')
+          fi
+          if [ -z "$color" ] && [ -f "$HOME/.config/wezterm/colors/Noctalia.toml" ]; then
+            color=$(grep -m1 'bg_color' "$HOME/.config/wezterm/colors/Noctalia.toml" 2>/dev/null | sed -E 's/.*"#(.*)".*/\1/')
+          fi
+          if is_hex_color "''${color:-}"; then
+            normalize_color "$color"
+            return 0
+          fi
+          return 1
         }
 
         wallpaper_color() {
@@ -147,25 +152,7 @@ let
         notify_asus() {
           title="$1"
           body="$2"
-          type="''${3:-notice}"
-          payload=$(jq -nc \
-            --arg title "$title" \
-            --arg body "$body" \
-            --arg type "$type" \
-            '{title: $title, body: $body, type: $type, duration: 2500}')
-
-          if noctalia-shell ipc --any-display call toast send "$payload" >/dev/null 2>&1; then
-            log_asus "toast sent through noctalia: $title - $body"
-            return 0
-          fi
-
-          if notify-send -a "ASUS Control" "$title" "$body" >/dev/null 2>&1; then
-            log_asus "toast sent through notify-send: $title - $body"
-            return 0
-          fi
-
-          log_asus "toast failed: $title - $body"
-          return 0
+          notify-send -t 1200 -a "ASUS Control" "$title" "$body" >/dev/null 2>&1 || true
         }
 
         apply_aura() {
@@ -238,14 +225,14 @@ in
     if [ "$command" = switch ] || [ "$command" = cycle ]; then
       mapfile -t players < <(playerctl --list-all 2>/dev/null)
       count=''${#players[@]}
-      [ "$count" -gt 0 ] || { notify-send "Player Control" "No players found"; exit 0; }
+      [ "$count" -gt 0 ] || { notify-send -t 1200 "Player Control" "No players found"; exit 0; }
       current=$(cat "$state_file" 2>/dev/null || true)
       next=0
       for i in "''${!players[@]}"; do
         [ "''${players[$i]}" = "$current" ] && next=$(( (i + 1) % count ))
       done
       echo "''${players[$next]}" > "$state_file"
-      notify-send "Player Switched" "Active: ''${players[$next]}"
+      notify-send -t 1200 "Player Switched" "Active: ''${players[$next]}"
       exit 0
     fi
 
@@ -331,8 +318,6 @@ in
       exit 1
     fi
 
-    sleep 0.2
-
     profile=$(
       asusctl profile get 2>/dev/null \
         | sed -n 's/^Active profile:[[:space:]]*//p' \
@@ -369,10 +354,9 @@ in
     printf '%s\n' "$color" > "$color_file"
     printf '%s\n' "$secondary_color" > "$secondary_color_file"
 
-    if ! output=$(apply_aura "$mode" "$color" "$secondary_color" 2>&1); then
-      notify_asus "ASUS Aura" "$output" "error"
-      exit 1
-    fi
+    apply_aura "$mode" "$color" "$secondary_color" >/dev/null 2>&1 || true
+
+    niri msg action reload-config >/dev/null 2>&1 || true
   '';
 
   asusAuraMode = pkgs.writeShellScriptBin "asus-aura-mode" ''

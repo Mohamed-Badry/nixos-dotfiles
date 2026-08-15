@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   home.file.".inputrc".source = ../../../config/shell/inputrc;
 
@@ -133,8 +133,15 @@
     };
   };
 
+  home.activation.setupStarshipConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -f "$HOME/.config/starship.toml" ] || [ -L "$HOME/.config/starship.toml" ]; then
+      rm -f "$HOME/.config/starship.toml"
+      cp -f ${../../../config/terminal/starship.toml} "$HOME/.config/starship.toml"
+      chmod 644 "$HOME/.config/starship.toml"
+    fi
+  '';
+
   xdg.configFile = {
-    "starship.toml".source = ../../../config/terminal/starship.toml;
     "btop/btop.conf".source = ../../../config/btop/btop.conf;
     "fastfetch/config.jsonc".source = ../../../config/fastfetch/config.jsonc;
   };

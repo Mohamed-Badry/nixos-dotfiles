@@ -1,35 +1,26 @@
-# Rosé Pine Starship Theme
-# Matches WezTerm/Zellij/Helix "Rosé Pine" aesthetic
+# Noctalia Dynamic Starship Theme
+# Dynamically adapts to your wallpaper and Noctalia palette
 
-# Palette:
-# - Base: #191724
-# - Highlight Med: #403d52
-# - Surface: #212030
-# - Iris (Purple): #c4a7e7
-# - Rose (Pink): #ebbcba
-# - Pine (Teal): #31748f
-# - Foam (Cyan): #9ccfd8
-# - Gold (Yellow): #f6c177
-# - Love (Red): #eb6f92
+palette = "noctalia"
 
-format = "[](#c4a7e7)$os$username[](bg:#403d52 fg:#c4a7e7)$directory[](fg:#403d52 bg:#212030)$git_branch$git_status[](fg:#212030 bg:#191724)$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala$docker_context$python$nix_shell[](fg:#191724 bg:#ebbcba)$time[ ](fg:#ebbcba)"
+format = "[](mauve)$os$username[](bg:surface1 fg:mauve)$directory[](fg:surface1 bg:surface0)$git_branch$git_status[](fg:surface0 bg:base)$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala$docker_context$python$nix_shell[](fg:base bg:rosewater)$time[ ](fg:rosewater)"
 
 # Disable the blank line at the start of the prompt
 add_newline = true
 
 [username]
 show_always = true
-style_user = "bg:#c4a7e7 fg:#191724 bold"
-style_root = "bg:#c4a7e7 fg:#191724 bold"
+style_user = "bg:mauve fg:base bold"
+style_root = "bg:mauve fg:base bold"
 format = '[$user ]($style)'
 disabled = false
 
 [os]
-style = "bg:#c4a7e7 fg:#191724"
+style = "bg:mauve fg:base"
 disabled = true 
 
 [directory]
-style = "bg:#403d52 fg:#e0def4"
+style = "bg:surface1 fg:text"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -42,95 +33,129 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#212030 fg:#e0def4"
+style = "bg:surface0 fg:text"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#212030 fg:#e0def4"
+style = "bg:surface0 fg:text"
 format = '[$all_status$ahead_behind ]($style)'
 
 # Language Modules - Floating on the dark background
 [c]
 symbol = " "
-style = "bg:#191724 fg:#31748f"
+style = "bg:base fg:teal"
 format = '[ $symbol ($version) ]($style)'
 
 [cpp]
 symbol = " "
-style = "bg:#191724 fg:#31748f"
+style = "bg:base fg:teal"
 format = '[ $symbol ($version) ]($style)'
 
 [docker_context]
 symbol = " "
-style = "bg:#191724 fg:#ebbcba"
+style = "bg:base fg:rosewater"
 format = '[ $symbol $context ]($style)'
 
 [elixir]
 symbol = " "
-style = "bg:#191724 fg:#c4a7e7"
+style = "bg:base fg:mauve"
 format = '[ $symbol ($version) ]($style)'
 
 [elm]
 symbol = " "
-style = "bg:#191724 fg:#9ccfd8"
+style = "bg:base fg:sky"
 format = '[ $symbol ($version) ]($style)'
 
 [golang]
 symbol = " "
-style = "bg:#191724 fg:#9ccfd8"
+style = "bg:base fg:sky"
 format = '[ $symbol ($version) ]($style)'
 
 [gradle]
-style = "bg:#191724 fg:#f6c177"
+style = "bg:base fg:peach"
 format = '[ $symbol ($version) ]($style)'
 
 [haskell]
 symbol = " "
-style = "bg:#191724 fg:#c4a7e7"
+style = "bg:base fg:mauve"
 format = '[ $symbol ($version) ]($style)'
 
 [java]
 symbol = " "
-style = "bg:#191724 fg:#f6c177"
+style = "bg:base fg:peach"
 format = '[ $symbol ($version) ]($style)'
 
 [julia]
 symbol = " "
-style = "bg:#191724 fg:#c4a7e7"
+style = "bg:base fg:mauve"
 format = '[ $symbol ($version) ]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:#191724 fg:#31748f"
+style = "bg:base fg:teal"
 format = '[ $symbol ($version) ]($style)'
 
 [nim]
 symbol = "󰆥 "
-style = "bg:#191724 fg:#f6c177"
+style = "bg:base fg:peach"
 format = '[ $symbol ($version) ]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#191724 fg:#f6c177"
+style = "bg:base fg:peach"
 format = '[ $symbol ($version) ]($style)'
 
 [scala]
 symbol = " "
-style = "bg:#191724 fg:#f6c177"
+style = "bg:base fg:peach"
 format = '[ $symbol ($version) ]($style)'
 
 [python]
 format = '[ ${symbol}${virtualenv} ]($style)'
 symbol = "󰌠 "
-style = "bg:#191724 fg:#f6c177"
+style = "bg:base fg:peach"
 
 [nix_shell]
 symbol = " "
-style = "bg:#191724 fg:#9ccfd8"
+style = "bg:base fg:sky"
 format = '[ $symbol]($style)'
 
 [time]
 disabled = false
 time_format = "%I:%M %p" # 12-hour AM/PM Format
-style = "bg:#ebbcba fg:#191724"
+style = "bg:rosewater fg:base"
 format = '[ ♥ $time ]($style)'
+
+# >>> NOCTALIA STARSHIP PALETTE >>>
+[palettes.noctalia]
+rosewater = "#f2b7b7"
+flamingo  = "#ffb4ab"
+pink      = "#d9bedd"
+mauve     = "#d9bedd"
+maroon    = "#ffb4ab"
+peach     = "#ffb4ab"
+yellow    = "#bec7d2"
+teal      = "#b0c9e1"
+sky       = "#b0c9e1"
+sapphire  = "#b0c9e1"
+lavender  = "#d9bedd"
+blue      = "#b0c9e1"
+red       = "#ffb4ab"
+green     = "#b0c9e1"
+cyan      = "#b0c9e1"
+magenta   = "#d9bedd"
+white     = "#e3e2e4"
+black     = "#121315"
+text      = "#e3e2e4"
+subtext1  = "#e3e2e4"
+subtext0  = "#8d9197"
+overlay2  = "#8d9197"
+overlay1  = "#8d9197"
+overlay0  = "#43474c"
+surface2  = "#43474c"
+surface1  = "#2a2d31"
+surface0  = "#1a1c1e"
+base      = "#121315"
+mantle    = "#0c0d0f"
+crust     = "#070809"
+# <<< NOCTALIA STARSHIP PALETTE <<<

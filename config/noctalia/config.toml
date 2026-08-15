@@ -10,6 +10,34 @@ source = "wallpaper"
 wallpaper_scheme = "m3-rainbow"
 builtin = "Rosé Pine"
 
+[theme.templates]
+enable_builtin_templates = true
+builtin_ids = [
+  "btop",
+  "cava",
+  "gtk3",
+  "gtk4",
+  "helix",
+  "niri",
+  "qt",
+  "starship",
+  "wezterm",
+]
+enable_community_templates = true
+community_ids = [
+  "antigravity",
+  "bat",
+  "discord",
+  "fastfetch",
+  "heroiclauncher",
+  "obs",
+  "opencode",
+  "vscode",
+  "yazi",
+  "zed",
+  "zen-browser",
+]
+
 [wallpaper]
 enabled = true
 fill_mode = "crop"
@@ -37,9 +65,10 @@ end = ["keyboard_layout", "tray", "notifications", "battery", "blackbartblues/au
 format = "{:%I:%M %p %a, %b %d}"
 
 [widget.sysmon]
-cpu_usage = true
-cpu_temp = true
-memory_usage = true
+stat = "cpu_usage"
+show_glyph = true
+show_value = true
+visualization = "none"
 
 [widget.battery]
 device = "BAT1"
@@ -51,13 +80,14 @@ hide_when_plugged = true
 drawer = true
 
 [widget.keyboard_layout]
-show_icon = false
+show_glyph = false
 show_label = true
 
 [hooks]
 started = "@ASUS_AURA_SYNC@"
 colors_changed = ["@ASUS_AURA_SYNC@"]
 wallpaper_changed = ["@ASUS_AURA_SYNC@ \"$NOCTALIA_WALLPAPER_PATH\""]
+theme_mode_changed = ["@ASUS_AURA_SYNC@"]
 
 [plugins]
 enabled = ["blackbartblues/audio-switcher"]
