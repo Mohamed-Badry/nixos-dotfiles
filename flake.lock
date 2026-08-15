@@ -131,6 +131,26 @@
         "type": "github"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786757531,
+        "narHash": "sha256-bBnJQw1HvS8hD95x9MTTf0+ezEp+WpHGnDT85B7kuoY=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
+        "rev": "a9344637fe760ca0fb3dce2b2943197a538228f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "antigravity-nix": "antigravity-nix",
@@ -138,6 +158,7 @@
         "niri-float-sticky": "niri-float-sticky",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "noctalia": "noctalia",
         "zen-browser": "zen-browser"
       }
     },

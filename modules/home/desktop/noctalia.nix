@@ -2,11 +2,13 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 let
   scripts = pkgs.callPackage ../../../packages/scripts.nix { };
-  settings = pkgs.writeText "noctalia-settings.json" (
+  noctaliaPkg = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  configToml = pkgs.writeText "noctalia-config.toml" (
     builtins.replaceStrings
       [
         "@HOME@"
@@ -16,20 +18,18 @@ let
         config.home.homeDirectory
         "${scripts.asusAuraSync}/bin/asus-aura-sync"
       ]
-      (builtins.readFile ../../../config/noctalia/settings.json)
+      (builtins.readFile ../../../config/noctalia/config.toml)
   );
 in
 {
   home.packages = [
-    pkgs.noctalia-shell
+    noctaliaPkg
     scripts.asusAuraSync
   ];
 
   home.activation.copyNoctaliaConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.config/noctalia"
-    install -m 0644 ${../../../config/noctalia/colors.json} "$HOME/.config/noctalia/colors.json"
-    install -m 0644 ${../../../config/noctalia/plugins.json} "$HOME/.config/noctalia/plugins.json"
-    install -m 0644 ${settings} "$HOME/.config/noctalia/settings.json"
-    chmod u+w "$HOME"/.config/noctalia/*.json
+    install -m 0644 ${configToml} "$HOME/.config/noctalia/config.toml"
+    chmod u+w "$HOME"/.config/noctalia/config.toml
   '';
 }

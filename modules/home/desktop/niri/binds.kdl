@@ -4,15 +4,15 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Return { spawn "wezterm"; }
     Mod+T { spawn "wezterm"; }
-    Mod+A { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    Mod+D { spawn "noctalia-shell" "ipc" "call" "wallpaper" "toggle"; }
+    Mod+A { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+D { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
     Mod+W { toggle-overview; }
     Mod+B { spawn "zen"; }
     Mod+Ctrl+B { spawn "launch-zen-vesktop"; }
     Mod+Q { close-window; }
     Mod+Shift+E { quit; }
     Mod+Escape { spawn "qylock-lock"; }
-    Mod+Backspace { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Mod+Backspace { spawn "noctalia" "msg" "panel-toggle" "session"; }
     Mod+E { spawn "env" "QT_QPA_PLATFORMTHEME=qt6ct" "pcmanfm-qt"; }
 
     Mod+H { focus-column-left; }
@@ -82,7 +82,7 @@ binds {
     Mod+Shift+Y { switch-focus-between-floating-and-tiling; }
     Mod+P { spawn "niri-float-sticky" "toggle"; }
 
-    Mod+V { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
     Mod+Space { switch-layout "next"; }
     Mod+Shift+C { spawn "hyprpicker" "-a"; }
     Mod+Grave { spawn "toggle-scratchpad"; }

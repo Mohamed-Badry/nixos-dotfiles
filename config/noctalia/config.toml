@@ -1,0 +1,60 @@
+# Noctalia v5 Configuration
+
+[shell]
+font_family = "sans-serif"
+clipboard_enabled = true
+
+[theme]
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-rainbow"
+
+[wallpaper]
+enabled = true
+fill_mode = "crop"
+directory = "@HOME@/Pictures/Wallpapers"
+
+[bar.main]
+position = "top"
+thickness = 34
+background_opacity = 0.8
+radius = 12
+margin_ends = 4
+margin_edge = 4
+widget_spacing = 6
+capsule = true
+capsule_opacity = 1.0
+
+start = ["launcher", "clock", "sysmon", "active_window", "media"]
+center = ["workspaces"]
+end = ["keyboard_layout", "tray", "notification", "battery", "blackbartblues/audio-switcher:widget", "brightness", "network", "control_center"]
+
+[widget.clock]
+format = "{:%I:%M %p %a, %b %d}"
+
+[widget.sysmon]
+cpu_usage = true
+cpu_temp = true
+memory_usage = true
+
+[widget.battery]
+device = "BAT1"
+display_mode = "glyph"
+show_label = true
+hide_when_plugged = true
+
+[widget.tray]
+drawer = true
+
+[widget.keyboard_layout]
+show_icon = false
+show_label = true
+
+[hooks]
+started = "@ASUS_AURA_SYNC@"
+colors_changed = ["@ASUS_AURA_SYNC@"]
+wallpaper_changed = ["@ASUS_AURA_SYNC@ \"$NOCTALIA_WALLPAPER_PATH\""]
+
+[plugins]
+enabled = ["blackbartblues/audio-switcher"]
+auto_update = true
