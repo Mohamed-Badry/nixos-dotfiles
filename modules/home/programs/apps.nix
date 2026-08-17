@@ -56,8 +56,21 @@ in
     pkgs.slurp
     pkgs.satty
     pkgs.vesktop
-    pkgs.mailspring
+    (pkgs.symlinkJoin {
+      name = "mailspring";
+      paths = [ pkgs.mailspring ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/mailspring \
+          --add-flags "--password-store=gnome-libsecret"
+
+        rm -f $out/share/applications/Mailspring.desktop
+        substitute ${pkgs.mailspring}/share/applications/Mailspring.desktop $out/share/applications/Mailspring.desktop \
+          --replace-fail "${pkgs.mailspring}/bin/mailspring" "$out/bin/mailspring"
+      '';
+    })
     pkgs.seahorse
+    pkgs.libsecret
     pkgs.pavucontrol
     pkgs.dua
     pkgs.skim

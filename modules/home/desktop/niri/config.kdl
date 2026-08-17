@@ -31,7 +31,8 @@ layout {
 prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_RUNTIME_DIR" "DISPLAY"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_RUNTIME_DIR" "DISPLAY" "SSH_AUTH_SOCK" "GNOME_KEYRING_CONTROL"
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
 spawn-at-startup "noctalia"
 spawn-at-startup "niri-float-sticky"
 spawn-at-startup "env" "QT_QPA_PLATFORMTHEME=qt6ct" "pcmanfm-qt" "-d"
