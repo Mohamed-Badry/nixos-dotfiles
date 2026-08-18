@@ -146,5 +146,6 @@ theme_mode_changed = ["@ASUS_AURA_SYNC@"]
 enabled = [
   "blackbartblues/audio-switcher",
   "kenn/keybind-cheatsheet",
+  "noctalia/wallhaven"
 ]
 auto_update = true

@@ -6,6 +6,7 @@ binds {
     Mod+T { spawn "wezterm"; }
     Mod+A { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+D { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
+    Mod+Shift+D { spawn "noctalia" "msg" "panel-toggle" "noctalia/wallhaven:browser"; }
     Mod+W { toggle-overview; }
     Mod+B { spawn "zen"; }
     Mod+Ctrl+B { spawn "launch-zen-vesktop"; }
