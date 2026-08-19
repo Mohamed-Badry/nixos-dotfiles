@@ -36,7 +36,7 @@
       };
     };
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
     blacklistedKernelModules = [ "mt7921e" ];
     kernelParams = [
       "quiet"
