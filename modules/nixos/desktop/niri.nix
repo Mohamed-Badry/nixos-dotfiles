@@ -5,20 +5,25 @@
     enable32Bit = true;
   };
 
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us,ara";
-    desktopManager.xterm.enable = false;
-    excludePackages = [ pkgs.xterm ];
-  };
+  services = {
+    xserver = {
+      enable = true;
+      xkb.layout = "us,ara";
+      desktopManager.xterm.enable = false;
+      excludePackages = [ pkgs.xterm ];
+    };
 
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+    };
+
+    # Enable udisks2 and gvfs so file managers can auto-detect and mount disks
+    gvfs.enable = true;
+    udisks2.enable = true;
   };
 
   programs.niri.enable = true;

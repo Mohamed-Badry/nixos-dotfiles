@@ -22,4 +22,7 @@
       KEYBOARD_KEY_b3=kbdillumup
       KEYBOARD_KEY_00b3=kbdillumup
   '';
+
+  # Fix ALC256 combo jack headset microphone on ASUS laptops
+  boot.extraModprobeConfig = "options snd-hda-intel model=dell-headset-multi";
 }
