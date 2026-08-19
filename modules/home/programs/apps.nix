@@ -83,6 +83,7 @@ in
     pkgs.bottom
     pkgs.sem
     pkgs.tealdeer
+    pkgs.transmission_4-qt
     pkgs.zip
     pkgs.unzip
     pkgs.unrar

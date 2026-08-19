@@ -26,6 +26,8 @@
 
   system.stateVersion = "26.05";
 
+  services.cloudflare-warp.enable = true;
+
   # Enable udisks2 and gvfs so file managers can auto-detect and mount disks
   services.gvfs.enable = true;
   services.udisks2.enable = true;

@@ -23,6 +23,7 @@ in
     pkgs.wl-clipboard
     pkgs.libnotify
     pkgs.heroic
+    pkgs.cloudflare-warp
     pkgs.opencode
     perfmode
     inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
