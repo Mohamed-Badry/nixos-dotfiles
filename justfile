@@ -31,3 +31,8 @@ build:
 
 update:
     nix flake update
+
+clean:
+    sudo nix-env --delete-generations +5 -p /nix/var/nix/profiles/system
+    sudo nix-collect-garbage
+    nix-collect-garbage
