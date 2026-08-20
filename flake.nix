@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -60,12 +59,6 @@
           fullName ? username,
           email ? null,
         }:
-        let
-          pkgsUnstable = import inputs.nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-        in
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -75,7 +68,6 @@
               inputs
               hostname
               username
-              pkgsUnstable
               ;
           };
           modules = [
@@ -94,7 +86,6 @@
                     inputs
                     hostname
                     username
-                    pkgsUnstable
                     ;
                 };
                 users.${username} = import ./modules/home;

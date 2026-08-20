@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  pkgsUnstable,
   inputs,
   username,
   fullName ? username,
@@ -78,7 +77,6 @@ in
     pkgs.taplo
     pkgs.typst
     pkgs.tinymist
-    pkgsUnstable.netwatch
     pkgs.oxipng
     pkgs.bottom
     pkgs.sem

@@ -1,11 +1,11 @@
-# Security and secrets
+# Security
 
-No secrets should be committed to this repository.
+No secrets in this repo.
 
-Current secret-adjacent behavior:
+Things that touch credentials:
 
-- `obs-toggle-record` reads the OBS websocket password from `OBS_PASSWORD` or `~/.config/obs-studio/obs-websocket-password.txt`.
-- Git and Jujutsu identity are supplied from host metadata in `flake.nix`; no real email address is required by default.
-- Noctalia settings are rendered from a checked-in template and copied writable because Noctalia mutates its JSON settings at runtime.
+- `obs-toggle-record` reads the OBS WebSocket password from `$OBS_PASSWORD` or `~/.config/obs-studio/obs-websocket-password.txt`, not from the Nix store.
+- Desktop app credentials (Mailspring, browser, Git HTTPS) are stored in GNOME Keyring via the FreeDesktop Secret Service, auto-unlocked on login through PAM.
+- Git/Jujutsu identity comes from `flake.nix` host metadata, not a secret.
 
-If this configuration grows real secrets, use a dedicated Nix secret manager such as `sops-nix` or `agenix`, and keep encrypted secret material separate from host-independent modules.
+If you need declarative secret management, use [`sops-nix`](https://github.com/Mic92/sops-nix) or [`agenix`](https://github.com/ryantm/agenix).
