@@ -2,13 +2,13 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
-    address: "127.0.0.1:6600",
+    address: "~/.config/mpd/socket",
     volume_step: 5,
     scrolloff: 2,
     max_fps: 60,
     wrap_navigation: true,
     theme: "rose_pine",
-    cache_dir: Some("/tmp/rmpc/cache"),
+    cache_dir: Some("~/Music/Downloads"),
     lyrics_dir: "~/Music/lyrics",
     on_song_change: None,
     status_update_interval_ms: 1000,

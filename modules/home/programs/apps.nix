@@ -34,6 +34,17 @@ let
       niri msg action set-column-width "96.7%"
     '';
   };
+  wrappedYtDlp = pkgs.writeShellScriptBin "yt-dlp" ''
+    args=()
+    for arg in "$@"; do
+      if [ "$arg" = "bestaudio" ]; then
+        args+=("bestaudio/best")
+      else
+        args+=("$arg")
+      fi
+    done
+    exec "${pkgs.yt-dlp}/bin/yt-dlp" "''${args[@]}"
+  '';
 in
 {
   home.packages = [
@@ -92,7 +103,17 @@ in
     pkgs.gzip
     pkgs.bzip2
     pkgs.zstd
+    pkgs.ffmpeg
+    (pkgs.python3.withPackages (ps: [ ps.mutagen ]))
   ];
+
+  programs.yt-dlp = {
+    enable = true;
+    package = wrappedYtDlp;
+    settings = {
+      extractor-args = "youtube:player_client=android,web";
+    };
+  };
 
   home.activation.installMailspringTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.config/Mailspring/packages/Catppuccin-Mocha/"
