@@ -25,11 +25,8 @@
         autosens: true,
         sensitivity: 130,
         input: (
-            method: Fifo,
-            source: "/tmp/mpd.fifo",
-            sample_rate: 44100,
-            channels: 2,
-            samble_bits: 16,
+            method: Pipewire,
+            source: "auto",
         ),
         smoothing: (
             noise_reduction: 25,
