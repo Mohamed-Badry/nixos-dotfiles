@@ -148,4 +148,4 @@ enabled = [
   "kenn/keybind-cheatsheet",
   "noctalia/wallhaven"
 ]
-auto_update = true
+auto_update = "all"
