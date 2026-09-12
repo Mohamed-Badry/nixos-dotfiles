@@ -43,7 +43,7 @@ nix develop
 
 | Command | What it does |
 | --- | --- |
-| `just check` | `nix flake check --no-build` |
+| `just check` | `nix flake check --no-build --all-systems` |
 | `just fmt` | `nix fmt` |
 | `just lint` | `statix check .` |
 | `just build` | build toplevel without switching |
@@ -55,7 +55,9 @@ nix develop
 
 ## Inputs
 
-Only `nixos-26.05`. All third-party flake inputs follow it directly so the whole system evaluates against one package tree.
+Tracks `nixos-26.05`. Third-party flake inputs follow it so the system evaluates against one unified package tree, with the exception of `noctalia`, which tracks `noctalia/cachix` independently to leverage prebuilt binaries from Cachix and skip local compilation.
+
+Binary cache substituters and keys for Noctalia are configured in `flake.nix` (`nixConfig`) and `modules/nixos/base/default.nix` (`nix.settings`), with `@wheel` included in `trusted-users`.
 
 ## Reusing on another machine
 
@@ -63,15 +65,20 @@ Everything under `hosts/nixos/` is machine-specific. Replace before using:
 
 - `hardware-configuration.nix` - regenerate with `nixos-generate-config`
 - `storage.nix` - Btrfs subvolume names and disk UUIDs
-- `boot.nix` - GRUB has a hardcoded PopOS entry tied to this machine's EFI UUID
+- `boot.nix` - GRUB has a hardcoded PopOS entry tied to this machine's EFI UUID, and blacklists `mt7921e`
 - `hardware/nvidia.nix` - PRIME bus IDs, get them with `lspci`
+- `hardware/asus.nix` - ASUS TUF/ROG specific quirks (fan policy, asusd, audio jack quirk); omit if non-ASUS
 - host metadata in `flake.nix` (`username`, `fullName`, `email`)
 
-`modules/` is reusable. `hosts/` is not.
+`modules/` is reusable across machines, with one exception:
+- `modules/home/services/mpd.nix` points `musicDirectory` and the `~/Music` link to `/media/${username}/grind/Music` (adjust to your music path if not using that Btrfs subvolume).
 
 ## Notes
 
 - Kernel is `pkgs.linuxPackages` (stable) to avoid out-of-tree NVIDIA module build failures on newer kernels.
+- 32-bit graphics (`hardware.graphics.enable32Bit = true`) is enabled for 32-bit Wine/Proton games.
+- MPD listens on a UNIX domain socket (`~/.config/mpd/socket`) for RMPC, Cava visualizer, and yt-dlp integration.
 - Git and Jujutsu identity come from `flake.nix` and are rendered read-only. Change them there.
 - `system.stateVersion` and `home.stateVersion` are pinned. Don't bump them when the channel updates.
 - Cloudflare WARP needs `warp-cli register` once after first switch to activate.
+- Noctalia uses the `noctalia.cachix.org` binary cache. Running `just switch` applies `trusted-users` so unprivileged commands (`just build`) can substitute prebuilt binaries directly.
