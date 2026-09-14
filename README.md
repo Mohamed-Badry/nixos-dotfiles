@@ -20,8 +20,8 @@ Personal NixOS flake. Single host (`nixos`, `x86_64-linux`) running a Wayland de
 ├── modules/
 │   ├── nixos/                  system-level modules
 │   │   ├── base/               nix settings, core packages
-│   │   ├── desktop/            Niri compositor, PipeWire, GVFS
-│   │   └── services/           keyd, perfmode, SDDM, Cloudflare WARP
+│   │   ├── desktop/            Niri compositor, portals, GVFS
+│   │   └── services/           PipeWire, keyd, perfmode, SDDM, Cloudflare WARP
 │   └── home/                   Home Manager modules
 │       ├── desktop/            Niri config, Noctalia bar
 │       ├── programs/           shell, terminal, apps, media

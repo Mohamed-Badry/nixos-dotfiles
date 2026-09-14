@@ -13,14 +13,6 @@
       excludePackages = [ pkgs.xterm ];
     };
 
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
-
     # Enable udisks2 and gvfs so file managers can auto-detect and mount disks
     gvfs.enable = true;
     udisks2.enable = true;
