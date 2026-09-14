@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   qt = {
     enable = true;
@@ -57,19 +62,8 @@
       icon_theme=Papirus-Dark
       style=kvantum
     '';
-    "pcmanfm-qt/default/settings.conf" = {
-      text = ''
-        [System]
-        IconThemeName=Papirus-Dark
-        Terminal=${pkgs.wezterm}/bin/wezterm
-
-        [Desktop]
-        BgColor=#1f1d2e
-        FgColor=#e0def4
-        ShadowColor=#000000
-      '';
-      force = true;
-    };
+    "pcmanfm-qt/default/settings.conf".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/pcmanfm-qt/settings.conf";
     "Kvantum/kvantum.kvconfig".text = ''
       [General]
       theme=rose-pine-iris

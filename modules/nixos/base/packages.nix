@@ -13,6 +13,8 @@ let
   };
 in
 {
+  programs.nix-index-database.comma.enable = true;
+
   environment.systemPackages = [
     pkgs.vim
     pkgs.wget

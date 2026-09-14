@@ -37,6 +37,7 @@
         "...." = "cd ../../..";
         "....." = "cd ../../../..";
         bd = "cd \"$OLDPWD\"";
+        p = "ps aux | rg";
       };
       initExtra = ''
         shopt -s histappend checkwinsize
@@ -149,7 +150,6 @@
   '';
 
   xdg.configFile = {
-    "btop/btop.conf".source = ../../../config/btop/btop.conf;
     "fastfetch/config.jsonc".source = ../../../config/fastfetch/config.jsonc;
   };
 }

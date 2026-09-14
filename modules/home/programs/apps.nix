@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   inputs,
@@ -232,14 +233,16 @@ in
       };
     };
 
-    configFile = {
-      "Code/User/settings.json".source = ../../../config/vscode/settings.json;
-      "Code/User/keybindings.json".source = ../../../config/vscode/keybindings.json;
-    };
-
     userDirs = {
       enable = true;
       createDirectories = true;
+    };
+
+    configFile = {
+      "Code/User/settings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/vscode/settings.json";
+      "Code/User/keybindings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/vscode/keybindings.json";
     };
   };
 }

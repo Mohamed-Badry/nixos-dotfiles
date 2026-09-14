@@ -32,6 +32,11 @@
     };
 
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -77,6 +82,7 @@
           modules = [
             ./hosts/${hostname}
             ./modules/nixos
+            inputs.nix-index-database.nixosModules.nix-index
             home-manager.nixosModules.home-manager
             {
               home-manager = {

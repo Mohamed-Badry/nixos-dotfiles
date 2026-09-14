@@ -123,4 +123,5 @@
   // Ensures Pylance indexes your uv environment correctly to find all the minitorch modules
   "python.analysis.indexing": true,
   "extensions.autoUpdate": "off",
+  "markdown-preview-enhanced.previewTheme": "github-dark.css",
 }
