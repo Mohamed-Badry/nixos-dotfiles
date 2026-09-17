@@ -3,3 +3,7 @@ result-*
 .direnv/
 *.swp
 
+# Espanso private / secret match files
+config/espanso/match/secrets.yml
+config/espanso/match/*.secret.yml
+

@@ -1,0 +1,37 @@
+# Espanso match definitions
+# Documentation: https://espanso.org/docs/matches/basics/
+
+matches:
+  # Quick symbols
+  - trigger: ":shrug"
+    replace: "¯\\_(ツ)_/¯"
+
+  # Dynamic date snippets
+  - trigger: ":date"
+    replace: "{{today}}"
+    vars:
+      - name: today
+        type: date
+        params:
+          format: "%Y-%m-%d"
+
+  - trigger: ":now"
+    replace: "{{now}}"
+    vars:
+      - name: now
+        type: date
+        params:
+          format: "%Y-%m-%d %H:%M:%S"
+
+  # Cursor placement ($|$ marks where your cursor ends up)
+  - trigger: ":fn"
+    replace: "const $|$ = () => {}"
+
+  # Shell command expansion
+  - trigger: ":myip"
+    replace: "{{ip}}"
+    vars:
+      - name: ip
+        type: shell
+        params:
+          cmd: "curl -s ifconfig.me"

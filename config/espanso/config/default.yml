@@ -1,0 +1,12 @@
+# Espanso configuration for Wayland
+# Documentation: https://espanso.org/docs/configuration/basics/
+
+# Automatically reload when config files change (hot-reloading)
+auto_restart: true
+
+# Set keyboard layout for Wayland event mapping
+keyboard_layout:
+  layout: "us"
+
+# Double-tap ALT to toggle Espanso on/off
+toggle_key: ALT

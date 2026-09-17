@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./espanso.nix
     ./keyd.nix
     ./perfmode.nix
     ./pipewire.nix

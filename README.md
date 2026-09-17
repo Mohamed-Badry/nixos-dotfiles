@@ -21,11 +21,11 @@ Personal NixOS flake. Single host (`nixos`, `x86_64-linux`) running a Wayland de
 │   ├── nixos/                  system-level modules
 │   │   ├── base/               nix settings, core packages
 │   │   ├── desktop/            Niri compositor, portals, GVFS
-│   │   └── services/           PipeWire, keyd, perfmode, Podman, SDDM, Cloudflare WARP
+│   │   └── services/           PipeWire, keyd, perfmode, Podman, Espanso, SDDM, Cloudflare WARP
 │   └── home/                   Home Manager modules
 │       ├── desktop/            Niri config, Noctalia bar
 │       ├── programs/           shell, terminal, apps, media
-│       ├── services/           MPD
+│       ├── services/           MPD, Espanso
 │       └── theme/              GTK/icon theme
 ├── packages/                   local derivations (Plymouth theme, qylock, scripts)
 ├── config/                     app config files linked by Home Manager
