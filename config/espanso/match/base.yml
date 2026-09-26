@@ -23,10 +23,6 @@ matches:
         params:
           format: "%Y-%m-%d %H:%M:%S"
 
-  # Cursor placement ($|$ marks where your cursor ends up)
-  - trigger: ":fn"
-    replace: "const $|$ = () => {}"
-
   # Shell command expansion
   - trigger: ":myip"
     replace: "{{ip}}"
