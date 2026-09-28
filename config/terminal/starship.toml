@@ -3,7 +3,7 @@
 
 palette = "noctalia"
 
-format = "[](mauve)$os$username[](bg:surface1 fg:mauve)$directory[](fg:surface1 bg:surface0)$git_branch$git_status[](fg:surface0 bg:base)$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala$docker_context$python$nix_shell[](fg:base bg:rosewater)$time[ ](fg:rosewater)"
+format = "[](mauve)$os$username[](bg:surface1 fg:mauve)$directory[](fg:surface1 bg:surface0)${custom.jj}[](fg:surface0 bg:base)$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala$docker_context$python$nix_shell[](fg:base bg:rosewater)$time[ ](fg:rosewater)"
 
 # Disable the blank line at the start of the prompt
 add_newline = true
@@ -32,13 +32,22 @@ truncation_symbol = "…/"
 "Pictures" = " "
 
 [git_branch]
+disabled = true
 symbol = ""
 style = "bg:surface0 fg:text"
 format = '[ $symbol $branch ]($style)'
+ignore_branches = ["HEAD"]
 
 [git_status]
+disabled = true
 style = "bg:surface0 fg:text"
 format = '[$all_status$ahead_behind ]($style)'
+
+[custom.jj]
+command = "jj --no-pager log -r @ --no-graph -T 'coalesce(bookmarks, change_id.shortest(8)) ++ if(empty, \"\", \"*\") ++ if(conflict, \"!\")'"
+when = "jj root"
+style = "bg:surface0 fg:text"
+format = '[  $output ]($style)'
 
 # Language Modules - Floating on the dark background
 [c]

@@ -3,8 +3,18 @@
 //
 
 keybinds clear-defaults=true {
+    normal {
+        bind "enter" {
+            WriteChars "\u{000D}";
+            MessagePlugin "autolock" {};
+        }
+    }
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Alt z" {
+            MessagePlugin "autolock" { payload "disable"; };
+            SwitchToMode "normal";
+        }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -155,6 +165,9 @@ keybinds clear-defaults=true {
         bind "Alt j" { MoveFocus "down"; }
         bind "Alt k" { MoveFocus "up"; }
         bind "Alt l" { MoveFocusOrTab "right"; }
+        bind "Alt Shift z" {
+            MessagePlugin "autolock" { payload "enable"; };
+        }
         // bind "Alt n" { NewPane; }
         // bind "Alt o" { MoveTab "right"; }
     }
@@ -255,6 +268,11 @@ keybinds clear-defaults=true {
 // changing these requires a restart to take effect
 plugins {
     about location="zellij:about"
+    autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
+        triggers "hx|helix|antigravity|agy|codex|nvim|vim|git|fzf"
+        reaction_seconds "0.3"
+        print_to_log false
+    }
     compact-bar location="zellij:compact-bar" {
         tooltip "F2"
     }
@@ -273,9 +291,8 @@ plugins {
 }
 
 // Plugins to load in the background when a new session starts
-// eg. "file:/path/to/my-plugin.wasm"
-// eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    autolock
 }
 web_client {
     font "monospace"
@@ -286,7 +303,7 @@ web_client {
 //   - true
 //   - false (Default)
 // 
-// simplified_ui true
+simplified_ui false
  
 // Choose the theme that is specified in the themes section.
 // Default: default
@@ -310,7 +327,7 @@ theme "rose-pine"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-default_layout "compact"
+default_layout "default"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -320,7 +337,7 @@ default_layout "compact"
 // The folder in which Zellij will look for themes
 // (Requires restart)
 // 
-theme_dir "@ZELLIJ_THEME_DIR@"
+theme_dir "/home/crim/.config/zellij/themes"
  
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
@@ -336,7 +353,7 @@ theme_dir "@ZELLIJ_THEME_DIR@"
 //   - true (default, enabled)
 //   - false
 // 
-// pane_frames false
+pane_frames false
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

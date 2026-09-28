@@ -47,12 +47,16 @@
     "helix/languages.toml".source = ../../../config/terminal/helix/languages.toml;
     "helix/themes/cosmic_red.toml".source = ../../../config/terminal/helix/themes/cosmic_red.toml;
 
-    "zellij/config.kdl".text =
-      lib.replaceStrings [ "@ZELLIJ_THEME_DIR@" ] [ "${config.xdg.configHome}/zellij/themes" ]
-        (builtins.readFile ../../../config/terminal/zellij/config.kdl);
-    "zellij/themes/cosmic_red.kdl".source = ../../../config/terminal/zellij/themes/cosmic_red.kdl;
-    "zellij/themes/rose-pine.kdl".source = ../../../config/terminal/zellij/themes/rose-pine.kdl;
-    "zellij/layouts/svelte_dev.kdl".source = ../../../config/terminal/zellij/layouts/svelte_dev.kdl;
-    "zellij/layouts/zj_dev.kdl".source = ../../../config/terminal/zellij/layouts/zj_dev.kdl;
+    "zellij/config.kdl".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/terminal/zellij/config.kdl";
+    "zellij/themes".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/terminal/zellij/themes";
+    "zellij/layouts".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/terminal/zellij/layouts";
+    "zellij/plugins/zjstatus.wasm".source = pkgs.zellijPlugins.zjstatus;
+    "zellij/plugins/zellij-autolock.wasm".source = pkgs.fetchurl {
+      url = "https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm";
+      sha256 = "194fgd421w2j77jbpnq994y2ma03qzdlz932cxfhfznrpw3mdjb9";
+    };
   };
 }

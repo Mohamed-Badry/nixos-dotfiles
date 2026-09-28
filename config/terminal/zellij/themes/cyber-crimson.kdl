@@ -1,0 +1,15 @@
+themes {
+    cyber-crimson {
+        fg "#e2e8f0"
+        bg "#0a0a0f"
+        black "#181824"
+        red "#ff3366"
+        green "#00f0ff"
+        yellow "#ffd200"
+        blue "#7000ff"
+        magenta "#d800ff"
+        cyan "#00f0ff"
+        white "#ffffff"
+        orange "#ff6b00"
+    }
+}

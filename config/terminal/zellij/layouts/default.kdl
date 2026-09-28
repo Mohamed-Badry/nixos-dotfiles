@@ -5,7 +5,7 @@ layout {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
                 format_left   "{mode}#[bg=#26233a,fg=#e0def4,bold] 󰆍 {session} #[bg=#191724,fg=#26233a]"
                 format_center "{tabs}"
-                format_right  "{command_jj}#[fg=#26233a,bg=#191724]#[bg=#26233a,fg=#e0def4,bold] 󰌌 F2 #[fg=#9ccfd8]Options "
+                format_right  "{command_jj}#[fg=#26233a,bg=#191724]#[bg=#26233a,fg=#e0def4,bold] 󰌌 F2 #[fg=#9ccfd8]Options "
                 format_space  ""
 
                 border_enabled  "false"
@@ -30,34 +30,11 @@ layout {
                 tab_separator           " "
 
                 command_jj_command     "/home/crim/dotfiles/config/terminal/zellij/scripts/jj-status.sh"
-                command_jj_format      "#[fg=#31748f,bg=#191724]#[bg=#31748f,fg=#191724,bold]  {stdout} #[fg=#191724,bg=#31748f]"
+                command_jj_format      "#[fg=#31748f,bg=#191724]#[bg=#31748f,fg=#191724,bold]  {stdout} #[fg=#191724,bg=#31748f]"
                 command_jj_interval    "2"
                 command_jj_rendermode  "static"
                 command_jj_hideonemptystdout "true"
             }
-        }
-    }
-
-    // Tab 1: Main
-    tab name="Main" focus=true {
-        pane split_direction="horizontal" {
-            pane name="Main"
-            pane name="Other" size="50%"
-        }
-    }
-
-    // Tab 2: Gemini
-    tab name="Gemini" {
-        pane name="Gemini"
-    }
-
-    // Tab 3: Editor
-    tab name="Editor" {
-        pane split_direction="horizontal" {
-            pane command="hx" name="Helix" {
-                args "."
-            }
-            pane command="yazi" name="File Manager" size="50%"
         }
     }
 }
