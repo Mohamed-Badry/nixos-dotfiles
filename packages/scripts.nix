@@ -152,7 +152,7 @@ let
         notify_asus() {
           title="$1"
           body="$2"
-          notify-send -t 1200 -a "ASUS Control" "$title" "$body" >/dev/null 2>&1 || true
+          notify-send -u critical -t 1200 -a "ASUS Control" "$title" "$body" >/dev/null 2>&1 || true
         }
 
         apply_aura() {
@@ -225,14 +225,14 @@ in
     if [ "$command" = switch ] || [ "$command" = cycle ]; then
       mapfile -t players < <(playerctl --list-all 2>/dev/null)
       count=''${#players[@]}
-      [ "$count" -gt 0 ] || { notify-send -t 1200 "Player Control" "No players found"; exit 0; }
+      [ "$count" -gt 0 ] || { notify-send -u critical -t 1200 "Player Control" "No players found"; exit 0; }
       current=$(cat "$state_file" 2>/dev/null || true)
       next=0
       for i in "''${!players[@]}"; do
         [ "''${players[$i]}" = "$current" ] && next=$(( (i + 1) % count ))
       done
       echo "''${players[$next]}" > "$state_file"
-      notify-send -t 1200 "Player Switched" "Active: ''${players[$next]}"
+      notify-send -u critical -t 1200 "Player Switched" "Active: ''${players[$next]}"
       exit 0
     fi
 

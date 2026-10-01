@@ -37,7 +37,7 @@ Personal NixOS flake. Single host (`nixos`, `x86_64-linux`) running a Wayland de
 
 Enter the dev shell to get `just`, `nixfmt`, `nil`, and `statix`:
 
-```bash
+```shell
 nix develop
 ```
 

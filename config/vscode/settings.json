@@ -58,7 +58,7 @@
   "workbench.settings.editor": "json",
 
   // Terminal
-  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.linux": "fish",
   "terminal.integrated.cwd": "${workspaceFolder}",
   "terminal.integrated.fontLigatures.enabled": true,
 
