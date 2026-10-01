@@ -35,4 +35,12 @@
   };
 
   system.stateVersion = "26.05";
+
+  systemd.settings.Manager = {
+        DefaultTimeoutStopSec=10;
+  };
+  
+  systemd.user.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
 }
