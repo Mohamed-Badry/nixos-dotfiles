@@ -31,6 +31,7 @@ in
     pkgs.heroic
     pkgs.cloudflare-warp
     pkgs.opencode
+    pkgs.rtk
     perfmode
     inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
   ];
