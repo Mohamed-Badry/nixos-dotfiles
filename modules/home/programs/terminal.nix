@@ -37,7 +37,7 @@
       config.initial_rows = 35
       config.window_close_confirmation = 'NeverPrompt'
       config.color_scheme = 'Noctalia'
-      config.default_prog = { '${pkgs.bash}/bin/bash' }
+      config.default_prog = { '${pkgs.fish}/bin/fish' }
       return config
     '';
   };

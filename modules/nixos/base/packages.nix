@@ -17,6 +17,7 @@ in
   programs.nix-index.enableBashIntegration = false;
   programs.nix-index.enableZshIntegration = false;
   programs.nix-index.enableFishIntegration = false;
+  programs.fish.enable = true;
 
   environment.systemPackages = [
     pkgs.vim
