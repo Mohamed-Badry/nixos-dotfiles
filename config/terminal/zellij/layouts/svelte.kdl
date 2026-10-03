@@ -43,23 +43,37 @@ layout {
     // Tab 1: Main
     tab name="Main" focus=true {
         pane split_direction="horizontal" {
-            pane name="Main"
+            pane name="Main" size="50%"
             pane name="Other" size="50%"
         }
     }
 
-    // Tab 2: Gemini
-    tab name="Gemini" {
-        pane name="Gemini"
+    // Tab 2: Editor (Svelte + Bun)
+    tab name="Editor" {
+        pane split_direction="vertical" {
+            // Left: Helix
+            pane command="fish" name="Helix" size="70%" {
+                args "-c" "hx .; exec fish"
+            }
+
+            // Right: The Bun Stack
+            pane split_direction="horizontal" {
+                // Top Right: The Dev Server
+                pane command="fish" name="Server" {
+                    args "-c" "bun run dev -- --open; exec fish"
+                }
+                
+                // Bottom Right: Quick Terminal
+                pane name="Shell"
+            }
+        }
     }
 
-    // Tab 3: Editor
-    tab name="Editor" {
+    // Tab 3: Agents
+    tab name="Agents" {
         pane split_direction="horizontal" {
-            pane command="hx" name="Helix" {
-                args "."
-            }
-            pane command="yazi" name="File Manager" size="50%"
+            pane name="Gemini"
+            pane name="Codex" size="50%"
         }
     }
 }

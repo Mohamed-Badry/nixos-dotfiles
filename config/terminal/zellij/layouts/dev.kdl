@@ -39,4 +39,32 @@ layout {
             }
         }
     }
+
+    // Tab 1: Main
+    tab name="Main" focus=true {
+        pane split_direction="horizontal" {
+            pane name="Main"
+            pane name="Other" size="50%"
+        }
+    }
+
+    // Tab 2: Agents
+    tab name="Agents" {
+        pane split_direction="horizontal" {
+            pane name="Gemini"
+            pane name="Codex" size="50%"
+        }
+    }
+
+    // Tab 3: Editor
+    tab name="Editor" {
+        pane split_direction="horizontal" {
+            pane command="fish" name="Helix" {
+                args "-c" "hx .; exec fish"
+            }
+            pane command="fish" name="File Manager" size="50%" {
+                args "-c" "yazi; exec fish"
+            }
+        }
+    }
 }
