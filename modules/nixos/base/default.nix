@@ -43,4 +43,10 @@
   systemd.user.extraConfig = ''
     DefaultTimeoutStopSec=10s
   '';
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
 }
