@@ -354,6 +354,7 @@ theme_dir "/home/crim/.config/zellij/themes"
 //   - false
 // 
 pane_frames false
+stacked_pane_list false
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
