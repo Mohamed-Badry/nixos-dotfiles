@@ -1,8 +1,20 @@
-# NixOS configuration
+<div align="center">
+  <h2>NixOS | Niri | Noctalia</h2>
+</div>
 
-Personal NixOS flake. Single host (`nixos`, `x86_64-linux`) running a Wayland desktop on Niri, SDDM, and PipeWire, managed with Home Manager.
+### Details
 
-## Layout
+- [NixOS](https://nixos.org/)
+- [Niri](https://github.com/YaLTeR/niri)
+- [Noctalia](https://github.com/Noctalia/noctalia)
+- [WezTerm](https://wezfurlong.org/wezterm/)
+- [Fish](https://fishshell.com/)
+- [Zellij](https://zellij.dev/)
+- [Helix](https://helix-editor.com/) 
+- [MPD](https://www.musicpd.org/) + [RMPC](https://github.com/mierak/rmpc) + [Cava](https://github.com/karlstav/cava)
+- [Yazi](https://github.com/sxyazi/yazi) & [PCManFM-Qt](https://github.com/lxqt/pcmanfm-qt)
+
+### Layout
 
 ```
 .
@@ -33,7 +45,7 @@ Personal NixOS flake. Single host (`nixos`, `x86_64-linux`) running a Wayland de
 └── templates/                  dev shells for Python, Rust, web, Typst
 ```
 
-## Commands
+### Commands
 
 Enter the dev shell to get `just`, `nixfmt`, `nil`, and `statix`:
 
@@ -53,13 +65,13 @@ nix develop
 | `just update` | `nix flake update` |
 | `just clean` | keep last 5 generations, run GC |
 
-## Inputs
+### Inputs
 
 Tracks `nixos-26.05`. Third-party flake inputs follow it so the system evaluates against one unified package tree, with the exception of `noctalia`, which tracks `noctalia/cachix` independently to leverage prebuilt binaries from Cachix and skip local compilation.
 
 Binary cache substituters and keys for Noctalia are configured in `flake.nix` (`nixConfig`) and `modules/nixos/base/default.nix` (`nix.settings`), with `@wheel` included in `trusted-users`.
 
-## Reusing on another machine
+### Reusing on another machine
 
 Everything under `hosts/nixos/` is machine-specific. Replace before using:
 
@@ -73,7 +85,7 @@ Everything under `hosts/nixos/` is machine-specific. Replace before using:
 `modules/` is reusable across machines, with one exception:
 - `modules/home/services/mpd.nix` points `musicDirectory` and the `~/Music` link to `/media/${username}/grind/Music` (adjust to your music path if not using that Btrfs subvolume).
 
-## Notes
+### Notes
 
 - Kernel is `pkgs.linuxPackages` (stable) to avoid out-of-tree NVIDIA module build failures on newer kernels.
 - 32-bit graphics (`hardware.graphics.enable32Bit = true`) is enabled for 32-bit Wine/Proton games.
