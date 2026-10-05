@@ -35,4 +35,8 @@
       ];
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "L+ /home/${username}/Music - - - - /media/${username}/grind/Music"
+  ];
 }

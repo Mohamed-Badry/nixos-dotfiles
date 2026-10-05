@@ -7,14 +7,13 @@
 }:
 {
   home.packages = [ pkgs.rmpc ];
-  home.file."Music".source = config.lib.file.mkOutOfStoreSymlink "/media/${username}/grind/Music";
 
   xdg.configFile."rmpc".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/rmpc";
 
   services.mpd = {
     enable = true;
-    musicDirectory = "/media/${username}/grind/Music";
+    musicDirectory = "${config.home.homeDirectory}/Music";
     dataDir = "${config.home.homeDirectory}/.config/mpd";
     extraConfig = ''
       restore_paused "yes"
@@ -26,6 +25,9 @@
     '';
   };
   services.mpd-mpris.enable = true;
+
+  systemd.user.services.mpd.Unit.Wants = [ "mpd-mpris.service" ];
+  systemd.user.services.mpd-mpris.Unit.PartOf = [ "mpd.service" ];
 
   home.sessionVariables = {
     MPD_HOST = lib.mkForce "${config.home.homeDirectory}/.config/mpd/socket";

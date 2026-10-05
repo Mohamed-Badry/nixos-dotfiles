@@ -82,8 +82,7 @@ Everything under `hosts/nixos/` is machine-specific. Replace before using:
 - `hardware/asus.nix` - ASUS TUF/ROG specific quirks (fan policy, asusd, audio jack quirk); omit if non-ASUS
 - host metadata in `flake.nix` (`username`, `fullName`, `email`)
 
-`modules/` is reusable across machines, with one exception:
-- `modules/home/services/mpd.nix` points `musicDirectory` and the `~/Music` link to `/media/${username}/grind/Music` (adjust to your music path if not using that Btrfs subvolume).
+`modules/` is completely reusable across machines without modification.
 
 ### Notes
 
