@@ -269,7 +269,7 @@ in
     }:$PATH"
     window_json=$(niri msg -j windows | jq -r '.[] | select(.app_id == "scratchpad")' 2>/dev/null)
       if [ -z "$window_json" ]; then
-        wezterm start --class scratchpad -- zellij --layout zj_dev attach -c scratchpad
+        wezterm start --class scratchpad -- zellij --layout dev attach -c scratchpad
       else
         window_id=$(printf '%s' "$window_json" | jq -r '.id')
         focused=$(printf '%s' "$window_json" | jq -r '.is_focused')
