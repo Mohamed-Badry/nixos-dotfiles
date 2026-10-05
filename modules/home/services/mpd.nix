@@ -26,9 +26,10 @@
   };
   services.mpd-mpris.enable = true;
 
-  systemd.user.services.mpd.Unit.Wants = [ "mpd-mpris.service" ];
-  systemd.user.services.mpd-mpris.Unit.PartOf = [ "mpd.service" ];
-
+  systemd.user.services = {
+    mpd.Unit.Wants = [ "mpd-mpris.service" ];
+    mpd-mpris.Unit.PartOf = [ "mpd.service" ];
+  };
   home.sessionVariables = {
     MPD_HOST = lib.mkForce "${config.home.homeDirectory}/.config/mpd/socket";
     MPD_PORT = lib.mkForce "";

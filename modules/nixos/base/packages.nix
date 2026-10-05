@@ -13,11 +13,15 @@ let
   };
 in
 {
-  programs.nix-index-database.comma.enable = true;
-  programs.nix-index.enableBashIntegration = false;
-  programs.nix-index.enableZshIntegration = false;
-  programs.nix-index.enableFishIntegration = false;
-  programs.fish.enable = true;
+  programs = {
+    nix-index-database.comma.enable = true;
+    nix-index = {
+      enableBashIntegration = false;
+      enableFishIntegration = false;
+      enableZshIntegration = false;
+    };
+    fish.enable = true;
+  };
 
   environment.systemPackages = [
     pkgs.vim

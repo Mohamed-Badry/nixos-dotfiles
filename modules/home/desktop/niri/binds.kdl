@@ -91,7 +91,7 @@ binds {
     Print { screenshot; }
     Alt+Print { screenshot-window; }
     Ctrl+Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | wl-copy"; }
-    Mod+Shift+Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty --filename -"; }
+    Mod+Shift+Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty --filename - --fullscreen"; }
     Mod+Ctrl+Print { spawn "obs-toggle-record"; }
 
     Mod+Z { spawn "smart-playerctl" "previous"; }
