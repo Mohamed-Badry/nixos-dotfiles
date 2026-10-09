@@ -172,6 +172,7 @@
   '';
 
   xdg.configFile = {
-    "fastfetch/config.jsonc".source = ../../../config/fastfetch/config.jsonc;
+    "fastfetch/config.jsonc".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/fastfetch/config.jsonc";
   };
 }
