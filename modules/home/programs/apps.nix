@@ -236,6 +236,7 @@ in
     userDirs = {
       enable = true;
       createDirectories = true;
+      projects = "${config.home.homeDirectory}/projects";
     };
 
     configFile = {
