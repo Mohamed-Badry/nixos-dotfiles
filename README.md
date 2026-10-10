@@ -1,8 +1,10 @@
 <div align="center">
   <h2>NixOS | Niri | Noctalia</h2>
+  <br/><br/>
+  <img src="assets/screenshots/terminal.png" alt="Desktop Preview" width="100%"/>
 </div>
 
-### Details
+### Stuff
 
 - [NixOS](https://nixos.org/)
 - [Niri](https://github.com/YaLTeR/niri)
@@ -13,6 +15,14 @@
 - [Helix](https://helix-editor.com/) 
 - [MPD](https://www.musicpd.org/) + [RMPC](https://github.com/mierak/rmpc) + [Cava](https://github.com/karlstav/cava)
 - [Yazi](https://github.com/sxyazi/yazi) & [PCManFM-Qt](https://github.com/lxqt/pcmanfm-qt)
+
+### Keybinds
+
+`Mod + /` for the keymap. 
+
+<p align="center">
+  <img src="assets/screenshots/keybinds.png" alt="Niri Keymap Cheatsheet" width="100%"/>
+</p>
 
 ### Layout
 
@@ -41,7 +51,7 @@
 │       └── theme/              GTK/icon theme
 ├── packages/                   local derivations (Plymouth theme, qylock, scripts)
 ├── config/                     app config files linked by Home Manager
-├── assets/                     binary theme media (SDDM, Plymouth)
+├── assets/                     binary theme media (SDDM, Plymouth, screenshots)
 └── templates/                  dev shells for Python, Rust, web, Typst
 ```
 
