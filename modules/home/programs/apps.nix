@@ -210,11 +210,45 @@ in
         ];
         icon = "helix";
       };
+
+      zen-pdf = {
+        name = "Zen Browser";
+        genericName = "Web Browser";
+        exec = "zen --new-window %U";
+        terminal = false;
+        categories = [
+          "Network"
+          "WebBrowser"
+        ];
+        mimeType = [ "application/pdf" ];
+        icon = "zen";
+      };
+
+      sioyek = {
+        name = "Sioyek";
+        genericName = "PDF Viewer";
+        comment = "PDF viewer for reading research papers and technical books";
+        exec = "sioyek --new-instance %f";
+        terminal = false;
+        categories = [
+          "Development"
+          "Viewer"
+        ];
+        mimeType = [ "application/pdf" ];
+        icon = "sioyek-icon-linux";
+      };
     };
 
     mimeApps = {
       enable = true;
+      associations.added = {
+        "application/pdf" = [
+          "sioyek.desktop"
+          "zen-pdf.desktop"
+        ];
+      };
       defaultApplications = {
+        "application/pdf" = "sioyek.desktop";
         "inode/directory" = "pcmanfm-qt.desktop";
         "text/plain" = "helix.desktop";
         "text/markdown" = "helix.desktop";
