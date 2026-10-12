@@ -48,9 +48,7 @@
             "s":       Stop,
             "]":       NextTrack,
             "[":       PreviousTrack,
-            "<Right>": NextTab,
             "<Tab>":   NextTab,
-            "<Left>":  PreviousTab,
             "<S-Tab>": PreviousTab,
             "1":       SwitchToTab("Queue"),
             "2":       SwitchToTab("Queue (Mini)"),
@@ -64,6 +62,8 @@
             "b":       SeekBack,
         },
         navigation: {
+            "<Right>":     Right,
+            "<Left>":      Left,
             "<S-Up>":      PaneUp,
             "<S-Down>":    PaneDown,
             "<S-Left>":    PaneLeft,
