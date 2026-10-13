@@ -41,16 +41,28 @@
 
   xdg.portal = {
     enable = true;
+    lxqt = {
+      enable = true;
+      styles = [
+        pkgs.kdePackages.qtstyleplugin-kvantum
+      ];
+    };
     extraPortals = [
       pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
     ];
     config = {
-      common.default = [ "gtk" ];
-      niri.default = [
-        "gnome"
-        "gtk"
-      ];
+      common = {
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "lxqt" "gtk" ];
+      };
+      niri = {
+        default = [
+          "gnome"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "lxqt" "gtk" ];
+      };
     };
   };
 }
