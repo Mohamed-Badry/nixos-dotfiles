@@ -34,10 +34,11 @@ in
     pkgs.libnotify
     pkgs.heroic
     pkgs.cloudflare-warp
-    pkgs.opencode
-    pkgs.rtk
     perfmode
-    inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-cli
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.antigravity-cli
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.rtk
   ];
 
   environment.pathsToLink = [ "/share/bash-completion" ];

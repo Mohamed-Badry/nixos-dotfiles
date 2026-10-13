@@ -269,7 +269,7 @@ keybinds clear-defaults=true {
 plugins {
     about location="zellij:about"
     autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
-        triggers "hx|helix|antigravity|agy|codex|nvim|vim|git|fzf"
+        triggers "hx|helix|antigravity|agy|codex|opencode|opencode2|rtk|nvim|vim|git|fzf"
         reaction_seconds "0.3"
         print_to_log false
     }

@@ -26,6 +26,7 @@
         "cd.." = "cd ..";
         bd = "cd \"$OLDPWD\"";
         p = "ps aux | rg";
+        opencode = "opencode2";
       };
       interactiveShellInit = ''
         set -gx LS_COLORS "$LS_COLORS:ow=01;34:tw=01;34:"
