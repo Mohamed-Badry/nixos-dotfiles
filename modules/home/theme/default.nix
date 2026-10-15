@@ -21,6 +21,13 @@
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
+    gtk3.extraConfig = {
+      gtk-recent-files-enabled = false;
+      gtk-recent-files-max-age = 0;
+    };
+    gtk4.extraConfig = {
+      gtk-recent-files-enabled = false;
+    };
   };
 
   home.pointerCursor = {

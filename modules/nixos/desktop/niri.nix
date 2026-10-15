@@ -18,6 +18,9 @@
     udisks2.enable = true;
   };
 
+  systemd.user.services.xdg-desktop-portal-gnome.wantedBy = [ "graphical-session.target" ];
+  systemd.user.services.xdg-desktop-portal-gtk.wantedBy = [ "graphical-session.target" ];
+
   programs.niri.enable = true;
 
   environment.sessionVariables = {
@@ -41,21 +44,14 @@
 
   xdg.portal = {
     enable = true;
-    lxqt = {
-      enable = true;
-      styles = [
-        pkgs.kdePackages.qtstyleplugin-kvantum
-      ];
-    };
     extraPortals = [
       pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
     ];
     config = {
       common = {
-        default = [ "gtk" ];
-        "org.freedesktop.impl.portal.FileChooser" = [
-          "lxqt"
+        default = [
+          "gnome"
           "gtk"
         ];
       };
@@ -64,10 +60,7 @@
           "gnome"
           "gtk"
         ];
-        "org.freedesktop.impl.portal.FileChooser" = [
-          "lxqt"
-          "gtk"
-        ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gnome" ];
       };
     };
   };

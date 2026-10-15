@@ -55,6 +55,8 @@ window-rule {
 }
 
 window-rule {
-    match app-id="xdg-desktop-portal-lxqt"
+    match app-id="xdg-desktop-portal-gnome"
+    match app-id="org.gnome.Portal"
+    match app-id="xdg-desktop-portal-gtk"
     open-floating true
 }
