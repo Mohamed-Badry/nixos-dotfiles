@@ -337,7 +337,7 @@ default_layout "dev"
 // The folder in which Zellij will look for themes
 // (Requires restart)
 // 
-theme_dir "/home/crim/.config/zellij/themes"
+// theme_dir "/path/to/my/theme_dir"
  
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could

@@ -6,9 +6,7 @@
   ...
 }:
 let
-  scripts = pkgs.callPackage ../../../packages/scripts.nix { };
-  noctaliaPkg = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  configToml = pkgs.writeText "noctalia-config.toml" (
+  configContent =
     builtins.replaceStrings
       [
         "@HOME@"
@@ -16,23 +14,45 @@ let
       ]
       [
         config.home.homeDirectory
-        "${scripts.asusAuraSync}/bin/asus-aura-sync"
+        "${pkgs.myPkgs.asus-aura-sync}/bin/asus-aura-sync"
       ]
-      (builtins.readFile ../../../config/noctalia/config.toml)
-  );
+      (builtins.readFile ../../../config/noctalia/config.toml);
 in
 {
+  imports = [
+    inputs.noctalia.homeModules.default
+  ];
+
+  programs.noctalia = {
+    enable = true;
+    package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    checkConfig = true;
+    systemd.enable = true;
+    settings = configContent;
+  };
+
   home.packages = [
-    noctaliaPkg
-    scripts.asusAuraSync
+    pkgs.myPkgs.asus-aura-sync
     pkgs.pulseaudio
     pkgs.bluez
     pkgs.coreutils
   ];
 
-  home.activation.copyNoctaliaConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.seedNoctaliaConfigs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.config/noctalia"
-    install -m 0644 ${configToml} "$HOME/.config/noctalia/config.toml"
-    chmod u+w "$HOME"/.config/noctalia/config.toml
+    if [ ! -f "$HOME/.config/noctalia/settings.json" ]; then
+      sed "s|@HOME@|$HOME|g; s|@ASUS_AURA_SYNC@|asus-aura-sync|g" ${../../../config/noctalia/settings.json} > "$HOME/.config/noctalia/settings.json"
+      chmod 0644 "$HOME/.config/noctalia/settings.json"
+    else
+      sed -i "s|@HOME@|$HOME|g; s|@ASUS_AURA_SYNC@|asus-aura-sync|g" "$HOME/.config/noctalia/settings.json"
+    fi
+    if [ ! -f "$HOME/.config/noctalia/colors.json" ]; then
+      cp -f ${../../../config/noctalia/colors.json} "$HOME/.config/noctalia/colors.json"
+      chmod 0644 "$HOME/.config/noctalia/colors.json"
+    fi
+    if [ ! -f "$HOME/.config/noctalia/plugins.json" ]; then
+      cp -f ${../../../config/noctalia/plugins.json} "$HOME/.config/noctalia/plugins.json"
+      chmod 0644 "$HOME/.config/noctalia/plugins.json"
+    fi
   '';
 }

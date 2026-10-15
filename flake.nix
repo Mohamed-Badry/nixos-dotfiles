@@ -81,6 +81,9 @@
               ;
           };
           modules = [
+            {
+              nixpkgs.overlays = [ (import ./overlays) ];
+            }
             ./hosts/${hostname}
             ./modules/nixos
             inputs.nix-index-database.nixosModules.nix-index
@@ -108,22 +111,11 @@
     {
       nixosConfigurations = nixpkgs.lib.mapAttrs mkHost hosts;
 
-      formatter = forAllSystems (
-        system:
-        let
-          pkgs = pkgsFor system;
-        in
-        pkgs.writeShellApplication {
-          name = "format-nix";
-          runtimeInputs = [
-            pkgs.findutils
-            pkgs.nixfmt
-          ];
-          text = ''
-            find . -type f -name '*.nix' -print0 | xargs -0 -r nixfmt
-          '';
-        }
-      );
+      packages = forAllSystems (system: import ./packages { pkgs = pkgsFor system; });
+
+      overlays.default = import ./overlays;
+
+      formatter = forAllSystems (system: (pkgsFor system).nixfmt);
 
       devShells = forAllSystems (
         system:

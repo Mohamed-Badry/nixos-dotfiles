@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -24,6 +23,10 @@
   programs.wezterm = {
     enable = true;
   };
+
+  home.packages = [
+    pkgs.myPkgs.jj-status
+  ];
 
   xdg.configFile = {
     "wezterm/wezterm.lua".source =

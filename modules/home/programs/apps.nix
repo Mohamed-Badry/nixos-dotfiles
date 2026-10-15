@@ -1,55 +1,12 @@
 {
-  config,
   lib,
   pkgs,
   inputs,
-  username,
-  fullName ? username,
-  email ? null,
   ...
 }:
-let
-  vcsUser = {
-    name = fullName;
-  }
-  // lib.optionalAttrs (email != null) {
-    inherit email;
-  };
-  launch-zen-vesktop = pkgs.writeShellApplication {
-    name = "launch-zen-vesktop";
-    runtimeInputs = [ pkgs.niri ];
-    text = ''
-      # Spawn Zen
-      zen &
-
-      # Wait for the window to appear
-      sleep 2
-
-      # The biggest Mod+R cycle is 2/3 (66.7%). Mod++ (+10%) 3 times is +30%.
-      # 66.7% + 30% = 96.7%
-      niri msg action set-column-width "96.7%"
-
-      # Spawn Vesktop on the right side
-      vesktop &
-      sleep 2
-      niri msg action set-column-width "96.7%"
-    '';
-  };
-  wrappedYtDlp = pkgs.writeShellScriptBin "yt-dlp" ''
-    args=()
-    for arg in "$@"; do
-      if [ "$arg" = "bestaudio" ]; then
-        args+=("bestaudio/best")
-      else
-        args+=("$arg")
-      fi
-    done
-    exec "${pkgs.yt-dlp}/bin/yt-dlp" "''${args[@]}"
-  '';
-in
 {
   home.packages = [
-    launch-zen-vesktop
+    pkgs.myPkgs.launch-zen-vesktop
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.cava
     pkgs.pcmanfm-qt
@@ -67,19 +24,7 @@ in
     pkgs.slurp
     pkgs.satty
     pkgs.vesktop
-    (pkgs.symlinkJoin {
-      name = "mailspring";
-      paths = [ pkgs.mailspring ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/mailspring \
-          --add-flags "--password-store=gnome-libsecret"
-
-        rm -f $out/share/applications/Mailspring.desktop
-        substitute ${pkgs.mailspring}/share/applications/Mailspring.desktop $out/share/applications/Mailspring.desktop \
-          --replace-fail "${pkgs.mailspring}/bin/mailspring" "$out/bin/mailspring"
-      '';
-    })
+    pkgs.myPkgs.mailspring-wrapped
     pkgs.seahorse
     pkgs.libsecret
     pkgs.pavucontrol
@@ -108,11 +53,20 @@ in
     (pkgs.python3.withPackages (ps: [ ps.mutagen ]))
   ];
 
-  programs.yt-dlp = {
-    enable = true;
-    package = wrappedYtDlp;
-    settings = {
-      extractor-args = "youtube:player_client=android,web";
+  programs = {
+    yt-dlp = {
+      enable = true;
+      package = pkgs.myPkgs.yt-dlp-wrapped;
+      settings = {
+        extractor-args = "youtube:player_client=android,web";
+      };
+    };
+
+    obs-studio.enable = true;
+
+    vscode = {
+      enable = true;
+      profiles.default.extensions = [ pkgs.vscode-extensions.mvllow.rose-pine ];
     };
   };
 
@@ -128,156 +82,4 @@ in
     }/src/Catppuccin-Mocha/* "$HOME/.config/Mailspring/packages/Catppuccin-Mocha/"
     chmod -R u+w "$HOME/.config/Mailspring/packages/Catppuccin-Mocha"
   '';
-
-  programs = {
-    obs-studio.enable = true;
-    git = {
-      enable = true;
-      settings = {
-        user = vcsUser;
-        init.defaultBranch = "main";
-        core.editor = "hx";
-        pull.rebase = true;
-      };
-    };
-    jujutsu = {
-      enable = true;
-      settings = {
-        user = vcsUser;
-        ui = {
-          default-command = "log";
-          editor = "hx";
-        };
-      };
-    };
-    vscode = {
-      enable = true;
-      profiles.default.extensions = [ pkgs.vscode-extensions.mvllow.rose-pine ];
-    };
-    fuzzel = {
-      enable = true;
-      settings = {
-        main = {
-          font = "JetBrainsMono Nerd Font:size=12";
-          fields = "name,generic,comment,categories,filename";
-          terminal = "${pkgs.wezterm}/bin/wezterm";
-          prompt = "❯ ";
-          width = 45;
-          lines = 15;
-          horizontal-pad = 20;
-          vertical-pad = 15;
-          inner-pad = 8;
-        };
-        colors = {
-          background = "191724f2";
-          text = "e0def4ff";
-          match = "eb6f92ff";
-          selection = "2a2837ff";
-          selection-text = "e0def4ff";
-          selection-match = "f6c177ff";
-          border = "c4a7e7ff";
-        };
-        border = {
-          width = 2;
-          radius = 8;
-        };
-      };
-    };
-  };
-
-  xdg = {
-    desktopEntries = {
-      mailspring = {
-        name = "Mailspring";
-        genericName = "Mail Client";
-        exec = "mailspring --password-store=gnome-libsecret %U";
-        terminal = false;
-        categories = [
-          "Network"
-          "Email"
-        ];
-        icon = "mailspring";
-      };
-
-      helix = {
-        name = "Helix";
-        genericName = "Text Editor";
-        exec = "${pkgs.wezterm}/bin/wezterm start -- hx %F";
-        terminal = false;
-        categories = [
-          "Utility"
-          "TextEditor"
-        ];
-        icon = "helix";
-      };
-
-      zen-pdf = {
-        name = "Zen Browser";
-        genericName = "Web Browser";
-        exec = "zen --new-window %U";
-        terminal = false;
-        categories = [
-          "Network"
-          "WebBrowser"
-        ];
-        mimeType = [ "application/pdf" ];
-        icon = "zen";
-      };
-
-      sioyek = {
-        name = "Sioyek";
-        genericName = "PDF Viewer";
-        comment = "PDF viewer for reading research papers and technical books";
-        exec = "sioyek --new-instance %f";
-        terminal = false;
-        categories = [
-          "Development"
-          "Viewer"
-        ];
-        mimeType = [ "application/pdf" ];
-        icon = "sioyek-icon-linux";
-      };
-    };
-
-    mimeApps = {
-      enable = true;
-      associations.added = {
-        "application/pdf" = [
-          "sioyek.desktop"
-          "zen-pdf.desktop"
-        ];
-      };
-      defaultApplications = {
-        "application/pdf" = "sioyek.desktop";
-        "inode/directory" = "pcmanfm-qt.desktop";
-        "text/plain" = "helix.desktop";
-        "text/markdown" = "helix.desktop";
-        "application/json" = "helix.desktop";
-        "text/x-shellscript" = "helix.desktop";
-        "text/x-python" = "helix.desktop";
-        "text/x-rust" = "helix.desktop";
-        "image/jpeg" = "org.nomacs.ImageLounge.desktop";
-        "image/png" = "org.nomacs.ImageLounge.desktop";
-        "image/webp" = "org.nomacs.ImageLounge.desktop";
-        "x-scheme-handler/http" = "zen.desktop";
-        "x-scheme-handler/https" = "zen.desktop";
-        "text/html" = "zen.desktop";
-        "x-scheme-handler/discord" = "vesktop.desktop";
-        "x-scheme-handler/mailto" = "Mailspring.desktop";
-      };
-    };
-
-    userDirs = {
-      enable = true;
-      createDirectories = true;
-      projects = "${config.home.homeDirectory}/projects";
-    };
-
-    configFile = {
-      "Code/User/settings.json".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/vscode/settings.json";
-      "Code/User/keybindings.json".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/vscode/keybindings.json";
-    };
-  };
 }

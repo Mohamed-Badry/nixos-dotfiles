@@ -1,6 +1,5 @@
 { pkgs, lib, ... }:
 let
-  qylock = pkgs.callPackage ../../../packages/qylock.nix { };
   gstreamerPlugins = with pkgs.gst_all_1; [
     gstreamer
     gst-plugins-base
@@ -14,7 +13,7 @@ in
   boot.plymouth = {
     enable = true;
     theme = "hexa_retro";
-    themePackages = [ (pkgs.callPackage ../../../packages/plymouth-theme.nix { }) ];
+    themePackages = [ pkgs.myPkgs.plymouth-theme ];
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -32,7 +31,7 @@ in
       lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" gstreamerPlugins
     }";
     extraPackages = [
-      qylock.sddmTheme
+      pkgs.myPkgs.qylock-sddm-theme
       pkgs.kdePackages.qt5compat
       pkgs.kdePackages.qtmultimedia
       pkgs.kdePackages.qtsvg
@@ -41,7 +40,7 @@ in
   };
 
   environment.systemPackages = [
-    qylock.lock
-    qylock.sddmTheme
+    pkgs.myPkgs.qylock-lock
+    pkgs.myPkgs.qylock-sddm-theme
   ];
 }

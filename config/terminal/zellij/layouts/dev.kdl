@@ -31,7 +31,7 @@ layout {
                 tab_active_sync         "#[fg=#9ccfd8,bold]● {index}: {name} <> "
                 tab_separator           " "
 
-                command_jj_command     "/home/crim/dotfiles/config/terminal/zellij/scripts/jj-status.sh"
+                command_jj_command     "jj-status"
                 command_jj_format      "#[fg=#31748f,bg=#191724]#[bg=#31748f,fg=#191724,bold]  {stdout} #[fg=#191724,bg=#31748f]"
                 command_jj_interval    "2"
                 command_jj_rendermode  "static"

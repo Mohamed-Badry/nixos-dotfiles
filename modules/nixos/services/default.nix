@@ -1,9 +1,7 @@
-{ ... }:
-{
+_: {
   imports = [
     ./espanso.nix
     ./keyd.nix
-    ./perfmode.nix
     ./pipewire.nix
     ./podman.nix
     ./sddm-qylock.nix

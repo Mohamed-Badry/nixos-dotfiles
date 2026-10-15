@@ -440,16 +440,16 @@
         "telemetryEnabled": false
     },
     "hooks": {
-        "colorGeneration": "@ASUS_AURA_SYNC@",
-        "darkModeChange": "@ASUS_AURA_SYNC@",
+        "colorGeneration": "asus-aura-sync",
+        "darkModeChange": "asus-aura-sync",
         "enabled": true,
         "performanceModeDisabled": "",
         "performanceModeEnabled": "",
         "screenLock": "",
         "screenUnlock": "",
         "session": "",
-        "startup": "@ASUS_AURA_SYNC@",
-        "wallpaperChange": "@ASUS_AURA_SYNC@ \"$1\" \"$2\" \"$3\""
+        "startup": "asus-aura-sync",
+        "wallpaperChange": "asus-aura-sync \"$1\" \"$2\" \"$3\""
     },
     "idle": {
         "customCommands": "[]",

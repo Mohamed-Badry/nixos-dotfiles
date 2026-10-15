@@ -3,6 +3,7 @@
   imports = [
     ./desktop/niri.nix
     ./desktop/noctalia.nix
+    ./programs/vcs.nix
     ./programs/shell.nix
     ./programs/terminal.nix
     ./programs/apps.nix
@@ -10,6 +11,7 @@
     ./services/espanso.nix
     ./services/mpd.nix
     ./theme/default.nix
+    ./xdg
   ];
 
   home = {

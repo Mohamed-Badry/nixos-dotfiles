@@ -28,31 +28,47 @@
 
 ```
 .
-├── flake.nix                   entry point: inputs, host metadata, nixosSystem call
+├── flake.nix                      entry point: inputs, host metadata, nixosConfigurations, packages, overlays
 ├── flake.lock
-├── justfile                    common maintenance commands
+├── justfile                       common maintenance commands
+├── overlays/
+│   └── default.nix                overlay injecting pkgs.myPkgs into nixpkgs
 ├── hosts/
-│   └── nixos/                  machine-specific facts (disk UUIDs, bus IDs, etc.)
-│       ├── boot.nix            bootloader, kernel
-│       ├── storage.nix         filesystems, Btrfs subvolumes
-│       ├── user.nix            user account creation
+│   └── nixos/                     machine-specific facts (disk UUIDs, bus IDs, etc.)
+│       ├── boot.nix               GRUB bootloader, Sekiro theme, dual-boot Pop!_OS entry
+│       ├── storage.nix            filesystems, Btrfs subvolumes
+│       ├── user.nix               user account creation
 │       └── hardware/
-│           ├── nvidia.nix      NVIDIA PRIME offload setup
-│           └── asus.nix        board-specific quirks (audio, etc.)
+│           ├── nvidia.nix         NVIDIA PRIME offload setup
+│           └── asus.nix           ASUS quirks (asusd daemon, mt7921e Wi-Fi blacklist, ALC256 audio jack)
 ├── modules/
-│   ├── nixos/                  system-level modules
-│   │   ├── base/               nix settings, core packages
-│   │   ├── desktop/            Niri compositor, portals, GVFS
-│   │   └── services/           PipeWire, keyd, perfmode, Podman, Espanso, SDDM, Cloudflare WARP
-│   └── home/                   Home Manager modules
-│       ├── desktop/            Niri config, Noctalia bar
-│       ├── programs/           shell, terminal, apps, media
-│       ├── services/           MPD, Espanso
-│       └── theme/              GTK/icon theme
-├── packages/                   local derivations (Plymouth theme, qylock, scripts)
-├── config/                     app config files linked by Home Manager
-├── assets/                     binary theme media (SDDM, Plymouth, screenshots)
-└── templates/                  dev shells for Python, Rust, web, Typst
+│   ├── nixos/                     system-level modules
+│   │   ├── base/                  nix settings, core packages
+│   │   ├── desktop/               Niri compositor, portals (GNOME/GTK), GVFS
+│   │   └── services/              PipeWire, keyd, Podman, Espanso, SDDM, Cloudflare WARP
+│   └── home/                      Home Manager modules
+│       ├── desktop/               Niri config, official Noctalia HM module
+│       ├── programs/              shell, terminal, apps, media, vcs (Git & Jujutsu)
+│       ├── services/              MPD, Espanso
+│       ├── theme/                 GTK (Rosé Pine) / Qt (Kvantum) / cursor theme
+│       └── xdg/                   desktop entries, MIME associations, userDirs
+├── packages/                      granular local derivations (exposed as flake packages & pkgs.myPkgs)
+│   ├── default.nix                callPackage aggregator for all local derivations
+│   ├── plymouth-theme.nix         Hexa-retro Plymouth theme
+│   ├── qylock.nix                 Quickshell lockscreen & SDDM theme
+│   ├── perfmode/                  perfmode utility package
+│   ├── mailspring/                Mailspring wrapped with gnome-libsecret
+│   └── scripts/                   standalone utility scripts
+│       ├── smart-playerctl.nix    smart MPRIS player switcher (bypasses DND)
+│       ├── toggle-scratchpad.nix  Niri scratchpad toggle
+│       ├── obs-toggle-record.nix  OBS websocket recording toggle
+│       ├── launch-zen-vesktop.nix tiled Zen + Vesktop launcher
+│       ├── yt-dlp-wrapped.nix     audio extraction wrapper
+│       ├── jj-status.nix          Jujutsu terminal status indicator
+│       └── asus/                  ASUS laptop power profile & Aura RGB tools
+├── config/                        app config files linked by Home Manager
+├── assets/                        binary theme media (SDDM, Plymouth, screenshots)
+└── templates/                     dev shells for Python, Rust, web, Typst
 ```
 
 ### Commands
@@ -75,11 +91,12 @@ nix develop
 | `just update` | `nix flake update` |
 | `just clean` | keep last 5 generations, run GC |
 
+
 ### Inputs
 
-Tracks `nixos-26.05`. Third-party flake inputs follow it so the system evaluates against one unified package tree, with the exception of `noctalia`, which tracks `noctalia/cachix` independently to leverage prebuilt binaries from Cachix and skip local compilation.
+Tracks `nixos-26.05`. Third-party flake inputs follow it so the system evaluates against one unified package tree, with the exception of `noctalia` and `llm-agents`, which track their respective upstream branches independently to leverage prebuilt binary caches (`noctalia.cachix.org` and `cache.numtide.com`) and avoid local compilation.
 
-Binary cache substituters and keys for Noctalia are configured in `flake.nix` (`nixConfig`) and `modules/nixos/base/default.nix` (`nix.settings`), with `@wheel` included in `trusted-users`.
+Binary cache substituters and keys are configured in `flake.nix` (`nixConfig`) and `modules/nixos/base/default.nix` (`nix.settings`), with `@wheel` included in `trusted-users`.
 
 ### Reusing on another machine
 
@@ -87,19 +104,21 @@ Everything under `hosts/nixos/` is machine-specific. Replace before using:
 
 - `hardware-configuration.nix` - regenerate with `nixos-generate-config`
 - `storage.nix` - Btrfs subvolume names and disk UUIDs
-- `boot.nix` - GRUB has a hardcoded PopOS entry tied to this machine's EFI UUID, and blacklists `mt7921e`
+- `boot.nix` - GRUB has a hardcoded Pop!_OS entry tied to this machine's EFI UUID
 - `hardware/nvidia.nix` - PRIME bus IDs, get them with `lspci`
-- `hardware/asus.nix` - ASUS TUF/ROG specific quirks (fan policy, asusd, audio jack quirk); omit if non-ASUS
+- `hardware/asus.nix` - ASUS TUF/ROG specific quirks (`asusd`, `mt7921e` blacklist, audio jack quirk); omit if non-ASUS
 - host metadata in `flake.nix` (`username`, `fullName`, `email`)
 
-`modules/` is completely reusable across machines without modification.
+`modules/` and `packages/` are completely reusable across machines without modification. No usernames or paths are hardcoded, Noctalia dynamically substitutes `@HOME@` on activation.
 
 ### Notes
 
 - Kernel is `pkgs.linuxPackages` (stable) to avoid out-of-tree NVIDIA module build failures on newer kernels.
 - 32-bit graphics (`hardware.graphics.enable32Bit = true`) is enabled for 32-bit Wine/Proton games.
+- The file chooser uses the modern GTK4 / Libadwaita GNOME portal (`xdg-desktop-portal-gnome`), pre-warmed via systemd user services for instant (<100ms) launch without cold-start delays. GTK recent file scanning is disabled to prevent disk freezes.
+- Desktop scripts (`smart-playerctl`, `asus-profile-switch`, `asus-aura-mode`) send critical priority notifications configured to bypass Noctalia's Do Not Disturb mode.
 - MPD listens on a UNIX domain socket (`~/.config/mpd/socket`) for RMPC, Cava visualizer, and yt-dlp integration.
-- Git and Jujutsu identity come from `flake.nix` and are rendered read-only. Change them there.
+- Git and Jujutsu identity come from `flake.nix` and are rendered read-only in `modules/home/programs/vcs.nix`.
 - `system.stateVersion` and `home.stateVersion` are pinned. Don't bump them when the channel updates.
 - Cloudflare WARP needs `warp-cli register` once after first switch to activate.
-- Noctalia uses the `noctalia.cachix.org` binary cache. Running `just switch` applies `trusted-users` so unprivileged commands (`just build`) can substitute prebuilt binaries directly.
+- Running `just switch` applies `trusted-users` so unprivileged commands (`just build`) can substitute prebuilt binaries directly from Cachix.

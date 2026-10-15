@@ -1,7 +1,9 @@
-{ pkgs, inputs, ... }:
-let
-  scripts = pkgs.callPackage ../../../packages/scripts.nix { };
-in
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 {
   home.packages = [
     pkgs.brightnessctl
@@ -9,13 +11,20 @@ in
     pkgs.jq
     pkgs.playerctl
     inputs.niri-float-sticky.packages.${pkgs.stdenv.hostPlatform.system}.default
-    scripts.smartPlayerctl
-    scripts.toggleScratchpad
-    scripts.obsToggleRecord
-    scripts.asusProfileSwitch
-    scripts.asusAuraSync
-    scripts.asusAuraMode
+    pkgs.myPkgs.smart-playerctl
+    pkgs.myPkgs.toggle-scratchpad
+    pkgs.myPkgs.obs-toggle-record
+    pkgs.myPkgs.asus-profile-switch
+    pkgs.myPkgs.asus-aura-sync
+    pkgs.myPkgs.asus-aura-mode
   ];
+
+  home.activation.seedNiriNoctaliaKdl = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    if [ ! -f "$HOME/.config/niri/noctalia.kdl" ]; then
+      mkdir -p "$HOME/.config/niri"
+      touch "$HOME/.config/niri/noctalia.kdl"
+    fi
+  '';
 
   xdg.configFile = {
     "niri/config.kdl".source = ./niri/config.kdl;

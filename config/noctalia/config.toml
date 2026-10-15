@@ -149,3 +149,14 @@ enabled = [
   "noctalia/wallhaven"
 ]
 auto_update = "all"
+
+[notification.filter.system]
+match = "system"
+bypass_dnd = true
+show_toast = true
+
+[notification.filter.asus_control]
+match = "ASUS Control"
+bypass_dnd = true
+show_toast = true
+

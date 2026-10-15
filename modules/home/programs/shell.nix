@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -165,11 +164,10 @@
   };
 
   home.activation.setupStarshipConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    if [ ! -f "$HOME/.config/starship.toml" ] || [ -L "$HOME/.config/starship.toml" ]; then
-      rm -f "$HOME/.config/starship.toml"
-      cp -f ${../../../config/terminal/starship.toml} "$HOME/.config/starship.toml"
-      chmod 644 "$HOME/.config/starship.toml"
-    fi
+    mkdir -p "$HOME/.config"
+    rm -f "$HOME/.config/starship.toml"
+    cp -f ${../../../config/terminal/starship.toml} "$HOME/.config/starship.toml"
+    chmod 0644 "$HOME/.config/starship.toml"
   '';
 
   xdg.configFile = {

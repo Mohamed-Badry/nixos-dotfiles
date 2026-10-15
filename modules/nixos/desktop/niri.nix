@@ -54,14 +54,20 @@
     config = {
       common = {
         default = [ "gtk" ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "lxqt" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [
+          "lxqt"
+          "gtk"
+        ];
       };
       niri = {
         default = [
           "gnome"
           "gtk"
         ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "lxqt" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [
+          "lxqt"
+          "gtk"
+        ];
       };
     };
   };
