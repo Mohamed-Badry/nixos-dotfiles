@@ -14,7 +14,7 @@
 - [Zellij](https://zellij.dev/)
 - [Helix](https://helix-editor.com/) 
 - [MPD](https://www.musicpd.org/) + [RMPC](https://github.com/mierak/rmpc) + [Cava](https://github.com/karlstav/cava)
-- [Yazi](https://github.com/sxyazi/yazi) & [PCManFM-Qt](https://github.com/lxqt/pcmanfm-qt)
+- [Yazi](https://github.com/sxyazi/yazi) & [Thunar](https://docs.xfce.org/xfce/thunar/start)
 
 ### Keybinds
 

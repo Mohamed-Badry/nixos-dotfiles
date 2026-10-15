@@ -35,7 +35,7 @@ spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPL
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
 spawn-at-startup "noctalia"
 spawn-at-startup "niri-float-sticky"
-spawn-at-startup "env" "QT_QPA_PLATFORMTHEME=qt6ct" "pcmanfm-qt" "-d"
+spawn-at-startup "thunar" "--daemon"
 spawn-at-startup "vesktop" "--start-minimized"
 
 layer-rule {
@@ -60,3 +60,22 @@ window-rule {
     match app-id="xdg-desktop-portal-gtk"
     open-floating true
 }
+
+window-rule {
+    match app-id="(?i)^thunar$"
+    geometry-corner-radius 12
+    clip-to-geometry true
+    opacity 0.92
+    background-effect {
+        blur true
+    }
+}
+
+window-rule {
+    match app-id="(?i)^thunar$" title="^File Operation Progress$"
+    match app-id="(?i)^thunar$" title="^Confirm to replace files$"
+    match app-id="(?i)^thunar$" title=".*Preferences$"
+    match app-id="(?i)^thunar$" title=".*Properties$"
+    open-floating true
+}
+

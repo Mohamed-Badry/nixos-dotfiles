@@ -14,7 +14,7 @@ binds {
     Mod+Shift+E { quit; }
     Mod+Escape { spawn "qylock-lock"; }
     Mod+Backspace { spawn "noctalia" "msg" "panel-toggle" "session"; }
-    Mod+E { spawn "env" "QT_QPA_PLATFORMTHEME=qt6ct" "pcmanfm-qt"; }
+    Mod+E { spawn "thunar"; }
     Mod+I { spawn "noctalia" "msg" "settings-toggle"; }
 
     Mod+H { focus-column-left; }

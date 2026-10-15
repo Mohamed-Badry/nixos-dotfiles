@@ -54,5 +54,9 @@ in
       cp -f ${../../../config/noctalia/plugins.json} "$HOME/.config/noctalia/plugins.json"
       chmod 0644 "$HOME/.config/noctalia/plugins.json"
     fi
+    mkdir -p "$HOME/.config/gtk-3.0"
+    if [ ! -f "$HOME/.config/gtk-3.0/noctalia.css" ]; then
+      touch "$HOME/.config/gtk-3.0/noctalia.css"
+    fi
   '';
 }

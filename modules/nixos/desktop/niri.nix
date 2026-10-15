@@ -16,6 +16,15 @@
     # Enable udisks2 and gvfs so file managers can auto-detect and mount disks
     gvfs.enable = true;
     udisks2.enable = true;
+    tumbler.enable = true;
+  };
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
   };
 
   systemd.user.services.xdg-desktop-portal-gnome.wantedBy = [ "graphical-session.target" ];

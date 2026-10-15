@@ -68,7 +68,7 @@
       };
       defaultApplications = {
         "application/pdf" = "sioyek.desktop";
-        "inode/directory" = "pcmanfm-qt.desktop";
+        "inode/directory" = "thunar.desktop";
         "text/plain" = "helix.desktop";
         "text/markdown" = "helix.desktop";
         "application/json" = "helix.desktop";
