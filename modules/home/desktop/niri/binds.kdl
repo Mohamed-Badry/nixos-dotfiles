@@ -1,113 +1,124 @@
 binds {
-    Mod+Question { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
-    Mod+Slash { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
-    Mod+Shift+Slash { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
-    Mod+Return { spawn "wezterm"; }
-    Mod+T { spawn "wezterm"; }
-    Mod+A { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
-    Mod+D { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
-    Mod+Shift+D { spawn "noctalia" "msg" "panel-toggle" "noctalia/wallhaven:browser"; }
-    Mod+W { toggle-overview; }
-    Mod+B { spawn "zen"; }
-    Mod+Ctrl+B { spawn "launch-zen-vesktop"; }
-    Mod+Q { close-window; }
-    Mod+Shift+E { quit; }
-    Mod+Escape { spawn "qylock-lock"; }
-    Mod+Backspace { spawn "noctalia" "msg" "panel-toggle" "session"; }
-    Mod+E { spawn "thunar"; }
-    Mod+I { spawn "noctalia" "msg" "settings-toggle"; }
+    // #"Applications & Panels"
+    Mod+Question hotkey-overlay-title="Keybind Cheatsheet" { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
+    Mod+Slash hotkey-overlay-title="Keybind Cheatsheet" { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
+    Mod+Shift+Slash hotkey-overlay-title="Keybind Cheatsheet" { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
+    Mod+Return hotkey-overlay-title="Terminal (WezTerm)" { spawn "wezterm"; }
+    Mod+T hotkey-overlay-title="Terminal (WezTerm)" { spawn "wezterm"; }
+    Mod+A hotkey-overlay-title="Application Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+D hotkey-overlay-title="Wallpaper Picker" { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
+    Mod+Shift+D hotkey-overlay-title="Wallhaven Browser" { spawn "noctalia" "msg" "panel-toggle" "noctalia/wallhaven:browser"; }
+    Mod+B hotkey-overlay-title="Zen Browser" { spawn "zen"; }
+    Mod+Ctrl+B hotkey-overlay-title="Zen + Vesktop (Tiled)" { spawn "launch-zen-vesktop"; }
+    Mod+E hotkey-overlay-title="File Manager (Thunar)" { spawn "thunar"; }
+    Mod+I hotkey-overlay-title="Noctalia Settings" { spawn "noctalia" "msg" "settings-toggle"; }
+    Mod+V hotkey-overlay-title="Clipboard History" { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+    Mod+Shift+C hotkey-overlay-title="Color Picker" { spawn "hyprpicker" "-a"; }
+    Mod+Grave hotkey-overlay-title="Toggle Scratchpad" { spawn "toggle-scratchpad"; }
+    Mod+Ctrl+S hotkey-overlay-title="Launch Workspace Apps" { spawn "autostart-apps"; }
 
-    Mod+H { focus-column-left; }
-    Mod+L { focus-column-right; }
-    Mod+J { focus-window-or-workspace-down; }
-    Mod+K { focus-window-or-workspace-up; }
-    Mod+Left { focus-column-left; }
-    Mod+Right { focus-column-right; }
-    Mod+Down { focus-window-or-workspace-down; }
-    Mod+Up { focus-window-or-workspace-up; }
+    // #"Session & System"
+    Mod+Escape hotkey-overlay-title="Lock Screen" { spawn "qylock-lock"; }
+    Mod+Backspace hotkey-overlay-title="Session & Power Menu" { spawn "noctalia" "msg" "panel-toggle" "session"; }
+    Mod+Shift+E hotkey-overlay-title="Quit Niri" { quit; }
+    Mod+Space hotkey-overlay-title="Switch Keyboard Layout" { switch-layout "next"; }
 
-    Mod+Shift+H { move-column-left; }
-    Mod+Shift+L { move-column-right; }
-    Mod+Shift+J { move-window-to-workspace-down; }
-    Mod+Shift+K { move-window-to-workspace-up; }
-    Mod+Shift+Left { move-column-left; }
-    Mod+Shift+Right { move-column-right; }
-    Mod+Shift+Down { move-window-to-workspace-down; }
-    Mod+Shift+Up { move-window-to-workspace-up; }
+    // #"Navigation"
+    Mod+H hotkey-overlay-title="Focus Column Left" { focus-column-left; }
+    Mod+L hotkey-overlay-title="Focus Column Right" { focus-column-right; }
+    Mod+J hotkey-overlay-title="Focus Window / Workspace Down" { focus-window-or-workspace-down; }
+    Mod+K hotkey-overlay-title="Focus Window / Workspace Up" { focus-window-or-workspace-up; }
+    Mod+Left hotkey-overlay-title="Focus Column Left" { focus-column-left; }
+    Mod+Right hotkey-overlay-title="Focus Column Right" { focus-column-right; }
+    Mod+Down hotkey-overlay-title="Focus Window / Workspace Down" { focus-window-or-workspace-down; }
+    Mod+Up hotkey-overlay-title="Focus Window / Workspace Up" { focus-window-or-workspace-up; }
 
-    Mod+Alt+J { move-window-down; }
-    Mod+Alt+K { move-window-up; }
-    Mod+Alt+Down { move-window-down; }
-    Mod+Alt+Up { move-window-up; }
+    // #"Window & Column Movement"
+    Mod+Shift+H hotkey-overlay-title="Move Column Left" { move-column-left; }
+    Mod+Shift+L hotkey-overlay-title="Move Column Right" { move-column-right; }
+    Mod+Shift+J hotkey-overlay-title="Move Window to Workspace Down" { move-window-to-workspace-down; }
+    Mod+Shift+K hotkey-overlay-title="Move Window to Workspace Up" { move-window-to-workspace-up; }
+    Mod+Shift+Left hotkey-overlay-title="Move Column Left" { move-column-left; }
+    Mod+Shift+Right hotkey-overlay-title="Move Column Right" { move-column-right; }
+    Mod+Shift+Down hotkey-overlay-title="Move Window to Workspace Down" { move-window-to-workspace-down; }
+    Mod+Shift+Up hotkey-overlay-title="Move Window to Workspace Up" { move-window-to-workspace-up; }
 
-    Mod+Alt+H { consume-or-expel-window-left; }
-    Mod+Alt+L { consume-or-expel-window-right; }
-    Mod+Alt+Left { consume-or-expel-window-left; }
-    Mod+Alt+Right { consume-or-expel-window-right; }
+    Mod+Alt+J hotkey-overlay-title="Move Window Down" { move-window-down; }
+    Mod+Alt+K hotkey-overlay-title="Move Window Up" { move-window-up; }
+    Mod+Alt+Down hotkey-overlay-title="Move Window Down" { move-window-down; }
+    Mod+Alt+Up hotkey-overlay-title="Move Window Up" { move-window-up; }
 
-    Mod+Ctrl+J { focus-workspace-down; }
-    Mod+Ctrl+K { focus-workspace-up; }
-    Mod+Ctrl+Down { focus-workspace-down; }
-    Mod+Ctrl+Up { focus-workspace-up; }
-    Mod+Ctrl+Shift+J { spawn "niri" "msg" "action" "move-window-to-workspace-down" "--focus" "false"; }
-    Mod+Ctrl+Shift+K { spawn "niri" "msg" "action" "move-window-to-workspace-up" "--focus" "false"; }
-    Mod+Ctrl+Shift+Down { spawn "niri" "msg" "action" "move-window-to-workspace-down" "--focus" "false"; }
-    Mod+Ctrl+Shift+Up { spawn "niri" "msg" "action" "move-window-to-workspace-up" "--focus" "false"; }
+    Mod+Alt+H hotkey-overlay-title="Consume / Expel Window Left" { consume-or-expel-window-left; }
+    Mod+Alt+L hotkey-overlay-title="Consume / Expel Window Right" { consume-or-expel-window-right; }
+    Mod+Alt+Left hotkey-overlay-title="Consume / Expel Window Left" { consume-or-expel-window-left; }
+    Mod+Alt+Right hotkey-overlay-title="Consume / Expel Window Right" { consume-or-expel-window-right; }
 
-    Mod+1 { focus-workspace "comms"; }
-    Mod+2 { focus-workspace "web"; }
-    Mod+3 { focus-workspace "mail"; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Shift+1 { move-column-to-workspace "comms"; }
-    Mod+Shift+2 { move-column-to-workspace "web"; }
-    Mod+Shift+3 { move-column-to-workspace "mail"; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
-    Mod+Shift+6 { move-column-to-workspace 6; }
-    Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
-    Mod+Ctrl+S { spawn "autostart-apps"; }
+    // #"Workspaces"
+    Mod+Ctrl+J hotkey-overlay-title="Focus Workspace Down" { focus-workspace-down; }
+    Mod+Ctrl+K hotkey-overlay-title="Focus Workspace Up" { focus-workspace-up; }
+    Mod+Ctrl+Down hotkey-overlay-title="Focus Workspace Down" { focus-workspace-down; }
+    Mod+Ctrl+Up hotkey-overlay-title="Focus Workspace Up" { focus-workspace-up; }
+    Mod+Ctrl+Shift+J hotkey-overlay-title="Move Window Down (Silent)" { spawn "niri" "msg" "action" "move-window-to-workspace-down" "--focus" "false"; }
+    Mod+Ctrl+Shift+K hotkey-overlay-title="Move Window Up (Silent)" { spawn "niri" "msg" "action" "move-window-to-workspace-up" "--focus" "false"; }
+    Mod+Ctrl+Shift+Down hotkey-overlay-title="Move Window Down (Silent)" { spawn "niri" "msg" "action" "move-window-to-workspace-down" "--focus" "false"; }
+    Mod+Ctrl+Shift+Up hotkey-overlay-title="Move Window Up (Silent)" { spawn "niri" "msg" "action" "move-window-to-workspace-up" "--focus" "false"; }
 
-    Mod+R { switch-preset-column-width; }
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
-    Mod+F { spawn "sh" "-c" "if niri msg -j windows | jq -e '.[] | select(.is_focused) | .is_floating' >/dev/null; then niri msg action toggle-window-floating; fi; niri msg action maximize-column"; }
-    Mod+M { maximize-window-to-edges; }
-    Mod+F11 { fullscreen-window; }
-    Mod+Shift+R { switch-preset-column-width-back; }
-    Mod+Y { toggle-window-floating; }
-    Mod+Shift+Y { switch-focus-between-floating-and-tiling; }
-    Mod+P { spawn "niri-float-sticky" "toggle"; }
+    Mod+1 hotkey-overlay-title="Focus Comms Workspace" { focus-workspace "comms"; }
+    Mod+2 hotkey-overlay-title="Focus Web Workspace" { focus-workspace "web"; }
+    Mod+3 hotkey-overlay-title="Focus Mail Workspace" { focus-workspace "mail"; }
+    Mod+4 hotkey-overlay-title="Focus Workspace 4" { focus-workspace 4; }
+    Mod+5 hotkey-overlay-title="Focus Workspace 5" { focus-workspace 5; }
+    Mod+6 hotkey-overlay-title="Focus Workspace 6" { focus-workspace 6; }
+    Mod+7 hotkey-overlay-title="Focus Workspace 7" { focus-workspace 7; }
+    Mod+8 hotkey-overlay-title="Focus Workspace 8" { focus-workspace 8; }
+    Mod+9 hotkey-overlay-title="Focus Workspace 9" { focus-workspace 9; }
+    Mod+Shift+1 hotkey-overlay-title="Move to Comms Workspace" { move-column-to-workspace "comms"; }
+    Mod+Shift+2 hotkey-overlay-title="Move to Web Workspace" { move-column-to-workspace "web"; }
+    Mod+Shift+3 hotkey-overlay-title="Move to Mail Workspace" { move-column-to-workspace "mail"; }
+    Mod+Shift+4 hotkey-overlay-title="Move to Workspace 4" { move-column-to-workspace 4; }
+    Mod+Shift+5 hotkey-overlay-title="Move to Workspace 5" { move-column-to-workspace 5; }
+    Mod+Shift+6 hotkey-overlay-title="Move to Workspace 6" { move-column-to-workspace 6; }
+    Mod+Shift+7 hotkey-overlay-title="Move to Workspace 7" { move-column-to-workspace 7; }
+    Mod+Shift+8 hotkey-overlay-title="Move to Workspace 8" { move-column-to-workspace 8; }
+    Mod+Shift+9 hotkey-overlay-title="Move to Workspace 9" { move-column-to-workspace 9; }
 
-    Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
-    Mod+Space { switch-layout "next"; }
-    Mod+Shift+C { spawn "hyprpicker" "-a"; }
-    Mod+Grave { spawn "toggle-scratchpad"; }
-    Print { screenshot; }
-    Alt+Print { screenshot-window; }
-    Ctrl+Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | wl-copy"; }
-    Mod+Shift+Print { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty --filename - --fullscreen"; }
-    Mod+Ctrl+Print { spawn "obs-toggle-record"; }
+    // #"Layout & Sizing"
+    Mod+W hotkey-overlay-title="Toggle Overview" { toggle-overview; }
+    Mod+Q hotkey-overlay-title="Close Window" { close-window; }
+    Mod+R hotkey-overlay-title="Cycle Column Width Preset" { switch-preset-column-width; }
+    Mod+Shift+R hotkey-overlay-title="Cycle Column Width Preset (Back)" { switch-preset-column-width-back; }
+    Mod+Minus hotkey-overlay-title="Shrink Column Width" { set-column-width "-10%"; }
+    Mod+Equal hotkey-overlay-title="Expand Column Width" { set-column-width "+10%"; }
+    Mod+F hotkey-overlay-title="Maximize Column / Unfloat" { spawn "sh" "-c" "if niri msg -j windows | jq -e '.[] | select(.is_focused) | .is_floating' >/dev/null; then niri msg action toggle-window-floating; fi; niri msg action maximize-column"; }
+    Mod+M hotkey-overlay-title="Maximize Window to Edges" { maximize-window-to-edges; }
+    Mod+F11 hotkey-overlay-title="Toggle Fullscreen" { fullscreen-window; }
+    Mod+Y hotkey-overlay-title="Toggle Floating Window" { toggle-window-floating; }
+    Mod+Shift+Y hotkey-overlay-title="Switch Focus (Floating / Tiling)" { switch-focus-between-floating-and-tiling; }
+    Mod+P hotkey-overlay-title="Toggle Sticky Floating Window" { spawn "niri-float-sticky" "toggle"; }
 
-    Mod+Z { spawn "smart-playerctl" "previous"; }
-    Mod+X { spawn "smart-playerctl" "play-pause"; }
-    Mod+C { spawn "smart-playerctl" "next"; }
-    Mod+Shift+X { spawn "smart-playerctl" "cycle"; }
+    // #"Screenshots & Recording"
+    Print hotkey-overlay-title="Screenshot Full Screen" { screenshot; }
+    Alt+Print hotkey-overlay-title="Screenshot Focused Window" { screenshot-window; }
+    Ctrl+Print hotkey-overlay-title="Copy Snipping Area to Clipboard" { spawn "sh" "-c" "grim -g \"$(slurp)\" - | wl-copy"; }
+    Mod+Shift+Print hotkey-overlay-title="Snip & Annotate (Satty)" { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty --filename - --fullscreen"; }
+    Mod+Ctrl+Print hotkey-overlay-title="Toggle OBS Recording" { spawn "obs-toggle-record"; }
 
-    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
-    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
-    XF86MonBrightnessUp { spawn "brightnessctl" "set" "10%+"; }
-    XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
-    XF86Launch4 { spawn "asus-profile-switch"; }
-    Mod+F5 { spawn "asus-profile-switch"; }
-    XF86KbdBrightnessDown { spawn "asus-aura-mode" "prev"; }
-    XF86KbdBrightnessUp { spawn "asus-aura-mode" "next"; }
+    // #"Media & Audio"
+    Mod+Z hotkey-overlay-title="Previous Track" { spawn "smart-playerctl" "previous"; }
+    Mod+X hotkey-overlay-title="Play / Pause" { spawn "smart-playerctl" "play-pause"; }
+    Mod+C hotkey-overlay-title="Next Track" { spawn "smart-playerctl" "next"; }
+    Mod+Shift+X hotkey-overlay-title="Cycle Active MPRIS Player" { spawn "smart-playerctl" "cycle"; }
+
+    XF86AudioRaiseVolume hotkey-overlay-title="Volume +5%" { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume hotkey-overlay-title="Volume -5%" { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute hotkey-overlay-title="Mute Audio" { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute hotkey-overlay-title="Mute Microphone" { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    // #"Hardware Controls"
+    XF86MonBrightnessUp hotkey-overlay-title="Brightness +10%" { spawn "brightnessctl" "set" "10%+"; }
+    XF86MonBrightnessDown hotkey-overlay-title="Brightness -10%" { spawn "brightnessctl" "set" "10%-"; }
+    XF86Launch4 hotkey-overlay-title="Switch ASUS Power Profile" { spawn "asus-profile-switch"; }
+    Mod+F5 hotkey-overlay-title="Switch ASUS Power Profile" { spawn "asus-profile-switch"; }
+    XF86KbdBrightnessDown hotkey-overlay-title="Previous Aura RGB Mode" { spawn "asus-aura-mode" "prev"; }
+    XF86KbdBrightnessUp hotkey-overlay-title="Next Aura RGB Mode" { spawn "asus-aura-mode" "next"; }
 }
