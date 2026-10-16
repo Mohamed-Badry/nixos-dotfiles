@@ -66,6 +66,11 @@
 
         # Disable the default Fish greeting
         set -g fish_greeting ""
+
+        # Load Noctalia dynamic fzf theme if present
+        if test -f "$HOME/.config/fzf/themes/noctalia.fish"
+            source "$HOME/.config/fzf/themes/noctalia.fish"
+        end
       '';
       functions = {
         cd = ''

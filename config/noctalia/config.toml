@@ -39,14 +39,20 @@ enable_community_templates = true
 community_ids = [
   "antigravity",
   "bat",
+  "codex",
   "discord",
   "fastfetch",
+  "fzf",
   "heroiclauncher",
+  "mailspring",
   "obs",
   "opencode",
+  "papirus-icons",
+  "sioyek",
   "vscode",
   "yazi",
   "zed",
+  "zellij",
   "zen-browser",
 ]
 

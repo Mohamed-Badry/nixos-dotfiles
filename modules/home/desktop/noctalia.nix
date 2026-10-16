@@ -58,5 +58,10 @@ in
     if [ ! -f "$HOME/.config/gtk-3.0/noctalia.css" ]; then
       touch "$HOME/.config/gtk-3.0/noctalia.css"
     fi
+    mkdir -p "$HOME/.config/sioyek"
+    if [ ! -f "$HOME/.config/sioyek/prefs_user.config" ]; then
+      touch "$HOME/.config/sioyek/prefs_user.config"
+    fi
+    mkdir -p "$HOME/.codex/themes"
   '';
 }
