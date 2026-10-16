@@ -24,6 +24,7 @@
     pkgs.slurp
     pkgs.satty
     pkgs.vesktop
+    pkgs.myPkgs.zapfast
     pkgs.myPkgs.mailspring-wrapped
     pkgs.seahorse
     pkgs.libsecret

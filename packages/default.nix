@@ -19,4 +19,5 @@ in
   asus-profile-switch = callPackage ./scripts/asus/profile-switch.nix { };
   asus-aura-sync = callPackage ./scripts/asus/aura-sync.nix { };
   asus-aura-mode = callPackage ./scripts/asus/aura-mode.nix { };
+  zapfast = callPackage ./zapfast { };
 }

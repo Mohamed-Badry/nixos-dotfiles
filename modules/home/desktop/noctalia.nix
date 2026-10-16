@@ -63,5 +63,6 @@ in
       touch "$HOME/.config/sioyek/prefs_user.config"
     fi
     mkdir -p "$HOME/.codex/themes"
+    mkdir -p "$HOME/.config/zapfast"
   '';
 }
