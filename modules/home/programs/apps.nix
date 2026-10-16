@@ -23,7 +23,7 @@
     pkgs.grim
     pkgs.slurp
     pkgs.satty
-    pkgs.vesktop
+    pkgs.myPkgs.vesktop-wrapped
     pkgs.myPkgs.zapfast
     pkgs.myPkgs.mailspring-wrapped
     pkgs.seahorse

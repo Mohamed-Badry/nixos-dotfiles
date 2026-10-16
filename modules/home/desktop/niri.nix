@@ -17,6 +17,7 @@
     pkgs.myPkgs.asus-profile-switch
     pkgs.myPkgs.asus-aura-sync
     pkgs.myPkgs.asus-aura-mode
+    pkgs.myPkgs.autostart-apps
   ];
 
   home.activation.seedNiriNoctaliaKdl = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

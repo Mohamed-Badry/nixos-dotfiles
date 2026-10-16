@@ -28,6 +28,10 @@ layout {
     }
 }
 
+workspace "mail"
+workspace "web"
+workspace "comms"
+
 prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
@@ -77,5 +81,30 @@ window-rule {
     match app-id="(?i)^thunar$" title=".*Preferences$"
     match app-id="(?i)^thunar$" title=".*Properties$"
     open-floating true
+}
+
+window-rule {
+    match app-id="zapfast"
+    match app-id="vesktop"
+    open-on-workspace "comms"
+    default-column-width {
+        proportion 0.967
+    }
+}
+
+window-rule {
+    match app-id="zen"
+    open-on-workspace "web"
+    default-column-width {
+        proportion 0.967
+    }
+}
+
+window-rule {
+    match app-id="(?i)mailspring"
+    open-on-workspace "mail"
+    default-column-width {
+        proportion 0.967
+    }
 }
 

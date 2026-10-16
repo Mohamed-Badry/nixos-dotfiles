@@ -12,6 +12,8 @@
   libxcursor,
   libxi,
   libxrandr,
+  niri,
+  jq,
 }:
 let
   version = "0.19.0";
@@ -48,12 +50,23 @@ stdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
 
-    install -Dm755 zapfast $out/bin/zapfast
+    install -Dm755 zapfast $out/bin/.zapfast-unwrapped
     install -Dm644 packaging/applications/zapfast.desktop $out/share/applications/zapfast.desktop
     install -Dm644 packaging/icons/zapfast.svg $out/share/icons/hicolor/scalable/apps/zapfast.svg
 
-    wrapProgram $out/bin/zapfast \
+    wrapProgram $out/bin/.zapfast-unwrapped \
       --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeLibs}
+
+    cat << WRAPPER > $out/bin/zapfast
+#!/usr/bin/env bash
+win_id=\$(${niri}/bin/niri msg -j windows 2>/dev/null | ${jq}/bin/jq -r '.[] | select(.app_id == "zapfast") | .id' | head -n1)
+if [ -n "\$win_id" ]; then
+  exec ${niri}/bin/niri msg action focus-window --id "\$win_id"
+else
+  exec "$out/bin/.zapfast-unwrapped" "\$@"
+fi
+WRAPPER
+    chmod +x $out/bin/zapfast
 
     runHook postInstall
   '';

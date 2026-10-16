@@ -20,4 +20,6 @@ in
   asus-aura-sync = callPackage ./scripts/asus/aura-sync.nix { };
   asus-aura-mode = callPackage ./scripts/asus/aura-mode.nix { };
   zapfast = callPackage ./zapfast { };
+  autostart-apps = callPackage ./scripts/autostart-apps.nix { };
+  vesktop-wrapped = callPackage ./vesktop { };
 }
