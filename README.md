@@ -58,6 +58,7 @@
 │   ├── qylock.nix                 Quickshell lockscreen & SDDM theme
 │   ├── perfmode/                  perfmode utility package
 │   ├── mailspring/                Mailspring wrapped with gnome-libsecret
+│   ├── zapfast/                   pre-compiled ZapFast WhatsApp client
 │   └── scripts/                   standalone utility scripts
 │       ├── smart-playerctl.nix    smart MPRIS player switcher (bypasses DND)
 │       ├── toggle-scratchpad.nix  Niri scratchpad toggle
@@ -115,10 +116,22 @@ Everything under `hosts/nixos/` is machine-specific. Replace before using:
 
 - Kernel is `pkgs.linuxPackages` (stable) to avoid out-of-tree NVIDIA module build failures on newer kernels.
 - 32-bit graphics (`hardware.graphics.enable32Bit = true`) is enabled for 32-bit Wine/Proton games.
-- The file chooser uses the modern GTK4 / Libadwaita GNOME portal (`xdg-desktop-portal-gnome`), pre-warmed via systemd user services for instant (<100ms) launch without cold-start delays. GTK recent file scanning is disabled to prevent disk freezes.
+- The file chooser uses the GTK portal (`xdg-desktop-portal-gtk`), pre-warmed via systemd user services for instant (<100ms) launch without cold-start delays. GTK recent file scanning is disabled to prevent disk freezes.
 - Desktop scripts (`smart-playerctl`, `asus-profile-switch`, `asus-aura-mode`) send critical priority notifications configured to bypass Noctalia's Do Not Disturb mode.
 - MPD listens on a UNIX domain socket (`~/.config/mpd/socket`) for RMPC, Cava visualizer, and yt-dlp integration.
 - Git and Jujutsu identity come from `flake.nix` and are rendered read-only in `modules/home/programs/vcs.nix`.
 - `system.stateVersion` and `home.stateVersion` are pinned. Don't bump them when the channel updates.
 - Cloudflare WARP needs `warp-cli register` once after first switch to activate.
 - Running `just switch` applies `trusted-users` so unprivileged commands (`just build`) can substitute prebuilt binaries directly from Cachix.
+
+### Manually Pinned Packages
+
+While `just update` (`nix flake update`) keeps `nixpkgs` and all flake inputs up to date, the following functional packages are pinned directly in code and require manual version bumps when upstream releases an update:
+
+| Package | Location | Description | How to Update |
+| :--- | :--- | :--- | :--- |
+| **ZapFast** | [`packages/zapfast/default.nix`](packages/zapfast/default.nix) | Native WhatsApp client (pre-compiled binary) | Bump `version` and update the release tarball hash |
+| **Zellij Autolock** | [`modules/home/programs/terminal.nix`](modules/home/programs/terminal.nix) | Auto-lock plugin for Zellij in nested CLI tools | Bump release version URL and sha256 |
+| **perfmode** | [`packages/perfmode/default.nix`](packages/perfmode/default.nix) | Lightweight power profile daemon | Bump Codeberg commit hash and tarball hash |
+| **qylock** | [`packages/qylock.nix`](packages/qylock.nix) | Quickshell lockscreen & SDDM theme | Bump Git commit revision and hash |
+
