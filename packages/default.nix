@@ -23,4 +23,5 @@ in
   autostart-apps = callPackage ./scripts/autostart-apps.nix { };
   vesktop-wrapped = callPackage ./vesktop { };
   focus-zen = callPackage ./scripts/focus-zen.nix { };
+  niri-toggle-scroll-mode = callPackage ./scripts/niri-toggle-scroll-mode.nix { };
 }

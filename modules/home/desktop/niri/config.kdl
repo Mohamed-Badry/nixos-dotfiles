@@ -1,6 +1,7 @@
 include "theme.kdl"
 include "noctalia.kdl"
 include "binds.kdl"
+include "scroll-mode.kdl"
 
 input {
     keyboard {

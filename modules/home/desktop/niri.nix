@@ -19,12 +19,21 @@
     pkgs.myPkgs.asus-aura-mode
     pkgs.myPkgs.autostart-apps
     pkgs.myPkgs.focus-zen
+    pkgs.myPkgs.niri-toggle-scroll-mode
   ];
 
   home.activation.seedNiriNoctaliaKdl = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -f "$HOME/.config/niri/noctalia.kdl" ]; then
       mkdir -p "$HOME/.config/niri"
       touch "$HOME/.config/niri/noctalia.kdl"
+    fi
+    if [ ! -f "$HOME/.config/niri/scroll-mode.kdl" ]; then
+      mkdir -p "$HOME/.config/niri"
+      cat <<'EOF' > "$HOME/.config/niri/scroll-mode.kdl"
+layout {
+    center-focused-column "never"
+}
+EOF
     fi
   '';
 
