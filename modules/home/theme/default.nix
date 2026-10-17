@@ -166,7 +166,7 @@
   xfconf.settings = {
     thunar = {
       "last-menubar-visible" = false;
-      "last-statusbar-visible" = false;
+      "last-statusbar-visible" = true;
       "last-location-bar" = "ThunarLocationButtons";
       "misc-single-click" = false;
       "misc-show-delete-action" = true;
