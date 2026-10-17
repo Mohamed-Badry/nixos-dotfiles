@@ -18,6 +18,7 @@
     pkgs.myPkgs.asus-aura-sync
     pkgs.myPkgs.asus-aura-mode
     pkgs.myPkgs.autostart-apps
+    pkgs.myPkgs.focus-zen
   ];
 
   home.activation.seedNiriNoctaliaKdl = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

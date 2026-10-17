@@ -22,4 +22,5 @@ in
   zapfast = callPackage ./zapfast { };
   autostart-apps = callPackage ./scripts/autostart-apps.nix { };
   vesktop-wrapped = callPackage ./vesktop { };
+  focus-zen = callPackage ./scripts/focus-zen.nix { };
 }

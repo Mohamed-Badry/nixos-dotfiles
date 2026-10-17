@@ -8,7 +8,8 @@ binds {
     Mod+A hotkey-overlay-title="Application Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+D hotkey-overlay-title="Wallpaper Picker" { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
     Mod+Shift+D hotkey-overlay-title="Wallhaven Browser" { spawn "noctalia" "msg" "panel-toggle" "noctalia/wallhaven:browser"; }
-    Mod+B hotkey-overlay-title="Zen Browser" { spawn "zen"; }
+    Mod+B hotkey-overlay-title="Focus / Launch Zen" { spawn "focus-zen"; }
+    Mod+Shift+B hotkey-overlay-title="New Zen Window" { spawn "zen" "--new-window"; }
     Mod+Ctrl+B hotkey-overlay-title="Zen + Vesktop (Tiled)" { spawn "launch-zen-vesktop"; }
     Mod+E hotkey-overlay-title="File Manager (Thunar)" { spawn "thunar"; }
     Mod+I hotkey-overlay-title="Noctalia Settings" { spawn "noctalia" "msg" "settings-toggle"; }
