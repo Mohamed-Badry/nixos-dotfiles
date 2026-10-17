@@ -29,9 +29,8 @@ layout {
     }
 }
 
-workspace "mail"
-workspace "web"
 workspace "comms"
+workspace "web"
 
 prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -103,7 +102,6 @@ window-rule {
 
 window-rule {
     match app-id="(?i)mailspring"
-    open-on-workspace "mail"
     default-column-width {
         proportion 0.967
     }

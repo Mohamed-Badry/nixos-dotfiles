@@ -19,6 +19,8 @@
     pkgs.myPkgs.asus-aura-mode
     pkgs.myPkgs.autostart-apps
     pkgs.myPkgs.focus-zen
+    pkgs.myPkgs.focus-mail
+    pkgs.myPkgs.raise-or-run
     pkgs.myPkgs.niri-toggle-scroll-mode
   ];
 

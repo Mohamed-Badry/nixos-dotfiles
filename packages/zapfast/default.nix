@@ -12,8 +12,7 @@
   libxcursor,
   libxi,
   libxrandr,
-  niri,
-  jq,
+  raise-or-run,
 }:
 let
   version = "0.19.0";
@@ -59,12 +58,7 @@ stdenv.mkDerivation {
 
     cat << WRAPPER > $out/bin/zapfast
 #!/usr/bin/env bash
-win_id=\$(${niri}/bin/niri msg -j windows 2>/dev/null | ${jq}/bin/jq -r '.[] | select(.app_id == "zapfast") | .id' | head -n1)
-if [ -n "\$win_id" ]; then
-  exec ${niri}/bin/niri msg action focus-window --id "\$win_id"
-else
-  exec "$out/bin/.zapfast-unwrapped" "\$@"
-fi
+exec ${raise-or-run}/bin/raise-or-run zapfast "$out/bin/.zapfast-unwrapped" "\$@"
 WRAPPER
     chmod +x $out/bin/zapfast
 

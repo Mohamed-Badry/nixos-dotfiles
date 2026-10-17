@@ -2,17 +2,11 @@
   symlinkJoin,
   vesktop,
   writeShellScript,
-  niri,
-  jq,
+  raise-or-run,
 }:
 let
   wrapper = writeShellScript "vesktop" ''
-    win_id=$(${niri}/bin/niri msg -j windows 2>/dev/null | ${jq}/bin/jq -r '.[] | select(.app_id == "vesktop") | .id' | head -n1)
-    if [ -n "$win_id" ]; then
-      exec ${niri}/bin/niri msg action focus-window --id "$win_id"
-    else
-      exec ${vesktop}/bin/vesktop "$@"
-    fi
+    exec ${raise-or-run}/bin/raise-or-run vesktop ${vesktop}/bin/vesktop "$@"
   '';
 in
 symlinkJoin {

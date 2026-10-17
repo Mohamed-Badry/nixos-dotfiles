@@ -2,17 +2,11 @@
   symlinkJoin,
   mailspring,
   writeShellScript,
-  niri,
-  jq,
+  raise-or-run,
 }:
 let
   wrapper = writeShellScript "mailspring" ''
-    win_id=$(${niri}/bin/niri msg -j windows 2>/dev/null | ${jq}/bin/jq -r '.[] | select(.app_id | test("(?i)mailspring")) | .id' | head -n1)
-    if [ -n "$win_id" ]; then
-      exec ${niri}/bin/niri msg action focus-window --id "$win_id"
-    else
-      exec ${mailspring}/bin/mailspring --password-store=gnome-libsecret "$@"
-    fi
+    exec ${raise-or-run}/bin/raise-or-run mailspring ${mailspring}/bin/mailspring --password-store=gnome-libsecret "$@"
   '';
 in
 symlinkJoin {
