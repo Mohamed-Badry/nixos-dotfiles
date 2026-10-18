@@ -65,6 +65,16 @@ writeShellScriptBin "raise-or-run" ''
       exec niri msg action focus-window --id "$win_id"
     fi
   else
+    (
+      for _ in $(seq 1 60); do
+        sleep 0.05
+        new_win_id=$(niri msg -j windows 2>/dev/null | jq -r --arg id "$app_id" '.[] | select((.app_id // "" | ascii_downcase) == ($id | ascii_downcase)) | .id' | head -n1)
+        if [ -n "$new_win_id" ]; then
+          niri msg action focus-window --id "$new_win_id" 2>/dev/null || true
+          exit 0
+        fi
+      done
+    ) &
     exec "$@"
   fi
 ''

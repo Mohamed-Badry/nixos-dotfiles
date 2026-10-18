@@ -87,6 +87,7 @@ window-rule {
     match app-id="zapfast"
     match app-id="vesktop"
     open-on-workspace "comms"
+    open-focused true
     default-column-width {
         proportion 0.967
     }
@@ -95,6 +96,7 @@ window-rule {
 window-rule {
     match app-id="zen"
     open-on-workspace "web"
+    open-focused true
     default-column-width {
         proportion 0.967
     }
