@@ -115,7 +115,7 @@
 
       overlays.default = import ./overlays;
 
-      formatter = forAllSystems (system: (pkgsFor system).nixfmt);
+      formatter = forAllSystems (system: (pkgsFor system).nixfmt-tree);
 
       devShells = forAllSystems (
         system:

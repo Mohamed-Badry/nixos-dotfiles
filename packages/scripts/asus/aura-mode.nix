@@ -65,4 +65,3 @@ writeShellScriptBin "asus-aura-mode" ''
 
   notify_asus "ASUS Aura" "$(aura_mode_body "$mode" "$color")"
 ''
-

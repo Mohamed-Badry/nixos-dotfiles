@@ -56,10 +56,7 @@ stdenv.mkDerivation {
     wrapProgram $out/bin/.zapfast-unwrapped \
       --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeLibs}
 
-    cat << WRAPPER > $out/bin/zapfast
-#!/usr/bin/env bash
-exec ${raise-or-run}/bin/raise-or-run zapfast "$out/bin/.zapfast-unwrapped" "\$@"
-WRAPPER
+    printf '#!/usr/bin/env bash\nexec %s zapfast "$out/bin/.zapfast-unwrapped" "$@"\n' "${raise-or-run}/bin/raise-or-run" > $out/bin/zapfast
     chmod +x $out/bin/zapfast
 
     runHook postInstall
@@ -68,7 +65,10 @@ WRAPPER
   meta = {
     description = "Fast native WhatsApp client";
     homepage = "https://zapfast.rocks";
-    license = with lib.licenses; [ mit gpl2Only ];
+    license = with lib.licenses; [
+      mit
+      gpl2Only
+    ];
     mainProgram = "zapfast";
     platforms = [ "x86_64-linux" ];
   };

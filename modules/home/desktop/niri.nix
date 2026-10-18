@@ -31,11 +31,7 @@
     fi
     if [ ! -f "$HOME/.config/niri/scroll-mode.kdl" ]; then
       mkdir -p "$HOME/.config/niri"
-      cat <<'EOF' > "$HOME/.config/niri/scroll-mode.kdl"
-layout {
-    center-focused-column "never"
-}
-EOF
+      printf 'layout {\n    center-focused-column "never"\n}\n' > "$HOME/.config/niri/scroll-mode.kdl"
     fi
   '';
 

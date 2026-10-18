@@ -6,7 +6,13 @@
   coreutils,
 }:
 writeShellScriptBin "raise-or-run" ''
-  export PATH="${lib.makeBinPath [ niri jq coreutils ]}:$PATH"
+  export PATH="${
+    lib.makeBinPath [
+      niri
+      jq
+      coreutils
+    ]
+  }:$PATH"
 
   minimize_method="auto"
 
