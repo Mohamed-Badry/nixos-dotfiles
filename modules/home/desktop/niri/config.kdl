@@ -35,6 +35,14 @@ workspace "web"
 prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
+hotkey-overlay {
+    skip-at-startup
+}
+
+output "eDP-1" {
+    backdrop-color "#191724"
+}
+
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_RUNTIME_DIR" "DISPLAY" "SSH_AUTH_SOCK" "GNOME_KEYRING_CONTROL"
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
 spawn-at-startup "noctalia"

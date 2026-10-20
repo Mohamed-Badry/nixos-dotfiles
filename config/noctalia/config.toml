@@ -62,7 +62,7 @@ enabled = true
 fill_mode = "crop"
 directory = "@HOME@/Pictures/Wallpapers"
 transition = ["fade", "honeycomb", "stripes"]
-transition_on_startup = true
+transition_on_startup = false
 
 [dock]
 enabled = true
