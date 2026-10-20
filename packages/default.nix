@@ -26,5 +26,4 @@ in
   vesktop-wrapped = callPackage ./vesktop { inherit raise-or-run; };
   focus-zen = callPackage ./scripts/focus-zen.nix { inherit raise-or-run; };
   focus-mail = callPackage ./scripts/focus-mail.nix { inherit raise-or-run; };
-  niri-toggle-scroll-mode = callPackage ./scripts/niri-toggle-scroll-mode.nix { };
 }

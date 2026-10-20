@@ -97,7 +97,8 @@ binds {
     Mod+Y hotkey-overlay-title="Toggle Floating Window" { toggle-window-floating; }
     Mod+Shift+Y hotkey-overlay-title="Switch Focus (Floating / Tiling)" { switch-focus-between-floating-and-tiling; }
     Mod+P hotkey-overlay-title="Toggle Sticky Floating Window" { spawn "niri-float-sticky" "toggle"; }
-    Mod+Backslash hotkey-overlay-title="Toggle Centering Mode" { spawn "niri-toggle-scroll-mode"; }
+    Mod+Backslash hotkey-overlay-title="Center Column" { center-column; }
+    Mod+Ctrl+Backslash hotkey-overlay-title="Center Visible Columns" { center-visible-columns; }
 
     // #"Screenshots & Recording"
     Print hotkey-overlay-title="Screenshot Full Screen" { screenshot; }

@@ -21,17 +21,12 @@
     pkgs.myPkgs.focus-zen
     pkgs.myPkgs.focus-mail
     pkgs.myPkgs.raise-or-run
-    pkgs.myPkgs.niri-toggle-scroll-mode
   ];
 
   home.activation.seedNiriNoctaliaKdl = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -f "$HOME/.config/niri/noctalia.kdl" ]; then
       mkdir -p "$HOME/.config/niri"
       touch "$HOME/.config/niri/noctalia.kdl"
-    fi
-    if [ ! -f "$HOME/.config/niri/scroll-mode.kdl" ]; then
-      mkdir -p "$HOME/.config/niri"
-      printf 'layout {\n    center-focused-column "never"\n}\n' > "$HOME/.config/niri/scroll-mode.kdl"
     fi
   '';
 
