@@ -7,6 +7,7 @@
     ./programs/shell.nix
     ./programs/terminal.nix
     ./programs/apps.nix
+    ./programs/thunar.nix
     ./programs/media.nix
     ./services/espanso.nix
     ./services/mpd.nix
