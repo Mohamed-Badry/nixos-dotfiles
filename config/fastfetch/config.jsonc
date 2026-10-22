@@ -4,21 +4,21 @@
     "source": "$(find \"${XDG_CONFIG_HOME:-$HOME/.config}/fastfetch/pngs/\" -name \"*.png\" | sort -R | head -1)",
     "height": 18,
     "color": {
-      "1": "#cb63f7",
-      "2": "#fab363"
+      "1": "#ebbc63",
+      "2": "#63cfd8"
     }
   },
   "display": {
     "separator": " : ",
     "color": {
-      "keys": "#cba6f7",
-      "title": "#fab387"
+      "keys": "#ebbcba",
+      "title": "#9ccfd8"
     },
     "percent": {
       "color": {
-        "green": "#94e2d5",
-        "yellow": "#bb8af4",
-        "red": "#f38ba8"
+        "green": "#31748f",
+        "yellow": "#e99996",
+        "red": "#eb6f92"
       }
     }
   },
