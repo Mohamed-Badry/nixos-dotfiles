@@ -56,7 +56,7 @@ stdenv.mkDerivation {
     wrapProgram $out/bin/.zapfast-unwrapped \
       --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeLibs}
 
-    printf '#!/usr/bin/env bash\nexec %s zapfast "%s/bin/.zapfast-unwrapped" "$@"\n' "${raise-or-run}/bin/raise-or-run" "$out" > $out/bin/zapfast
+    printf '#!/usr/bin/env bash\nif [ "$#" -gt 0 ]; then\n  exec "%s/bin/.zapfast-unwrapped" "$@"\nfi\nexec %s zapfast "%s/bin/.zapfast-unwrapped"\n' "$out" "${raise-or-run}/bin/raise-or-run" "$out" > $out/bin/zapfast
     chmod +x $out/bin/zapfast
 
     runHook postInstall
