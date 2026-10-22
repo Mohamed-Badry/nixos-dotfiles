@@ -71,6 +71,11 @@
     };
   };
 
+  xdg.configFile."satty/config.toml".text = ''
+    [general]
+    output-filename = "~/Pictures/Screenshots/%Y-%m/satty-%Y%m%d-%H%M%S.png"
+  '';
+
   home.activation.installMailspringTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p "$HOME/.config/Mailspring/packages/Catppuccin-Mocha/"
     cp -rf ${

@@ -104,7 +104,7 @@ binds {
     Print hotkey-overlay-title="Screenshot Full Screen" { screenshot; }
     Alt+Print hotkey-overlay-title="Screenshot Focused Window" { screenshot-window; }
     Ctrl+Print hotkey-overlay-title="Copy Snipping Area to Clipboard" { spawn "sh" "-c" "grim -g \"$(slurp)\" - | wl-copy"; }
-    Mod+Shift+Print hotkey-overlay-title="Snip & Annotate (Satty)" { spawn "sh" "-c" "grim -g \"$(slurp)\" - | satty --filename - --fullscreen"; }
+    Mod+Shift+Print hotkey-overlay-title="Snip & Annotate (Satty)" { spawn "sh" "-c" "dir=\"$HOME/Pictures/Screenshots/$(date +%Y-%m)\" && mkdir -p \"$dir\" && grim -g \"$(slurp)\" - | satty --filename - --fullscreen --output-filename \"$dir/satty-%Y%m%d-%H%M%S.png\""; }
     Mod+Ctrl+Print hotkey-overlay-title="Toggle OBS Recording" { spawn "obs-toggle-record"; }
 
     // #"Media & Audio"

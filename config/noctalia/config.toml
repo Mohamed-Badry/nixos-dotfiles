@@ -10,6 +10,7 @@ wallpaper_position = "center"
 
 [shell.screenshot]
 directory = "@HOME@/Pictures/Screenshots"
+filename_pattern = "%Y-%m/screenshot_%Y%m%d_%H%M%S"
 remember_last_region = true
 
 [backdrop]
