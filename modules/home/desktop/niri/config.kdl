@@ -96,6 +96,10 @@ window-rule {
     match app-id="(?i)^thunar$" title="^Confirm to replace files$"
     match app-id="(?i)^thunar$" title=".*Preferences$"
     match app-id="(?i)^thunar$" title=".*Properties$"
+    match app-id="(?i)^thunar$" title="^Rename \".*\"$"
+    match app-id="(?i)^thunar$" title=".*Rename Multiple Files.*"
+    match app-id="(?i)^thunar$" title="^Bulk Rename.*"
+    match app-id="(?i)^thunar$" title="^Rename Launcher Options$"
     open-floating true
 }
 
