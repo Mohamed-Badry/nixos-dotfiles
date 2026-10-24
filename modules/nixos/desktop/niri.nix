@@ -47,6 +47,7 @@
     ];
     fontconfig.defaultFonts.monospace = [
       "JetBrainsMono Nerd Font"
+      "DejaVu Sans Mono"
       "Kawkab Mono"
     ];
   };
