@@ -44,8 +44,8 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/terminal/zellij/layouts";
     "zellij/plugins/zjstatus.wasm".source = pkgs.zellijPlugins.zjstatus;
     "zellij/plugins/zellij-autolock.wasm".source = pkgs.fetchurl {
-      url = "https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm";
-      sha256 = "194fgd421w2j77jbpnq994y2ma03qzdlz932cxfhfznrpw3mdjb9";
+      url = "https://github.com/fresh2dev/zellij-autolock/releases/download/0.3.0/zellij-autolock.wasm";
+      sha256 = "00mbb5ipr2szsknwf2ygf4cs4vg8k0d9s9qb93dfz0arg0dhfzi1";
     };
   };
 }

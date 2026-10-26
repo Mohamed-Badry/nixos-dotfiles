@@ -5,8 +5,8 @@ config.bidi_enabled = true
 config.bidi_direction = 'AutoLeftToRight'
 config.font = wezterm.font_with_fallback {
   'JetBrainsMono Nerd Font',
-  'DejaVu Sans Mono',
   'Kawkab Mono',
+  'DejaVu Sans Mono',
 }
 config.font_size = 12.0
 config.window_background_opacity = 0.85

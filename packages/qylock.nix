@@ -2,12 +2,12 @@
 let
   src = pkgs.fetchgit {
     url = "https://github.com/Darkkal44/qylock.git";
-    rev = "db61a972b4b23728d9944a906e70029ca8a5899d";
+    rev = "f6561e2ceae33f26e5e660742a5df2f725cbe514";
     sparseCheckout = [
       "themes/sword"
       "quickshell-lockscreen"
     ];
-    hash = "sha256-SDghYrgiDvHBOWwHRKPiy4TRemJZ+X9nhmaaew5OM90=";
+    hash = "sha256-CHDVHvXI5uO546+jr94uWFUXH5b2S22PVYWXFhOCw48=";
   };
 
   swordVideo = pkgs.runCommand "sword-lockscreen-video.mp4" { } ''
@@ -72,7 +72,7 @@ in
 rec {
   sddmTheme = pkgs.stdenvNoCC.mkDerivation {
     pname = "qylock-sddm-themes";
-    version = "db61a972";
+    version = "f6561e2c";
     inherit src;
     dontBuild = true;
     installPhase = ''
@@ -89,7 +89,7 @@ rec {
 
   lock = pkgs.stdenvNoCC.mkDerivation {
     pname = "qylock-lock";
-    version = "db61a972";
+    version = "f6561e2c";
     inherit src;
     nativeBuildInputs = [ pkgs.makeWrapper ];
     dontBuild = true;

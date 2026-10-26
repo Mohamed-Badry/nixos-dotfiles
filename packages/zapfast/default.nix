@@ -13,9 +13,10 @@
   libxi,
   libxrandr,
   raise-or-run,
+  pipewire,
 }:
 let
-  version = "0.19.0";
+  version = "0.20.1";
   runtimeLibs = [
     alsa-lib
     libxkbcommon
@@ -25,6 +26,7 @@ let
     libxcursor
     libxi
     libxrandr
+    pipewire
   ];
 in
 stdenv.mkDerivation {
@@ -33,7 +35,7 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/crmne/zapfast/releases/download/v${version}/zapfast-v${version}-x86_64-unknown-linux-gnu.tar.gz";
-    hash = "sha256-DKx8fdoTJiZcmhbcxWK6bQe9C4rl1TTzUpt4Z2ADZmM=";
+    hash = "sha256-5ZQ7wiGdDzEdThYTIiuA4y77Ko3C0pz/XZLUJKiNsTI=";
   };
 
   nativeBuildInputs = [
@@ -44,6 +46,7 @@ stdenv.mkDerivation {
   buildInputs = [
     stdenv.cc.cc.lib
     alsa-lib
+    pipewire
   ];
 
   installPhase = ''
