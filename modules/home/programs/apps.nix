@@ -8,6 +8,7 @@
   home.packages = [
     pkgs.myPkgs.launch-zen-vesktop
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pkgs.ungoogled-chromium
     pkgs.cava
     pkgs.pcmanfm-qt
     pkgs.qt6.qtsvg
