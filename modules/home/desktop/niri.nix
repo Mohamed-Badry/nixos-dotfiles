@@ -33,6 +33,7 @@
   xdg.configFile = {
     "niri/config.kdl".source = ./niri/config.kdl;
     "niri/theme.kdl".source = ./niri/theme.kdl;
+    "niri/animations.kdl".source = ./niri/animations.kdl;
     "niri/binds.kdl".source = ./niri/binds.kdl;
   };
 }

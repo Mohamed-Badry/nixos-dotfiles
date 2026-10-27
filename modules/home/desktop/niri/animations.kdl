@@ -1,0 +1,123 @@
+// =============================================================================
+// Niri Animations & Shaders Configuration
+// Preset: Attempt 1 (Liquid Ripple) with Refined Spring Damping
+// =============================================================================
+
+animations {
+    // -------------------------------------------------------------------------
+    // Window Open: Liquid Ripple Wave
+    // Window blooms up from 75% scale while a noticeable water ripple travels
+    // outward across the window surface before settling crystal-clear.
+    // -------------------------------------------------------------------------
+    window-open {
+        duration-ms 380
+        curve "ease-out-cubic"
+
+        custom-shader r"
+            vec4 open_color(vec3 coords_geo, vec3 size_geo) {
+                float p = niri_clamped_progress;
+
+                // Smooth cubic deceleration (fast pop, smooth finish)
+                float ease = 1.0 - pow(1.0 - p, 3.0);
+
+                // Distinct scale travel from 75% -> 100%
+                float scale = 0.75 + 0.25 * ease;
+                vec2 center = vec2(0.5, 0.5);
+                vec2 uv = (coords_geo.xy - center) / scale + center;
+
+                // Noticeable liquid ripple wave propagating outwards
+                vec2 dir = uv - center;
+                float dist = length(dir);
+                float wave = sin(p * dist * 35.0 - p * 22.0);
+                float ripple_intensity = (1.0 - p) * (1.0 - p) * 0.06;
+                uv += dir * wave * ripple_intensity;
+
+                vec3 tc = niri_geo_to_tex * vec3(uv, 1.0);
+                vec4 color = texture2D(niri_tex, tc.st);
+
+                // Alpha fade in
+                float alpha = smoothstep(0.0, 0.35, p);
+                return color * alpha;
+            }
+        "
+    }
+
+    // -------------------------------------------------------------------------
+    // Window Close: Liquid Dissolve & Collapse
+    // Window contracts down toward 75% scale with a departing ripple and fade.
+    // -------------------------------------------------------------------------
+    window-close {
+        duration-ms 260
+        curve "ease-out-cubic"
+
+        custom-shader r"
+            vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+                float p = niri_clamped_progress;
+                float ease = p * p;
+
+                // Scale down (100% -> 75%)
+                float scale = 1.0 - 0.25 * ease;
+                vec2 center = vec2(0.5, 0.5);
+                vec2 uv = (coords_geo.xy - center) / scale + center;
+
+                // Liquid ripple on collapse
+                vec2 dir = uv - center;
+                float dist = length(dir);
+                float wave = sin((1.0 - p) * dist * 35.0 - (1.0 - p) * 22.0);
+                float ripple_intensity = p * p * 0.05;
+                uv += dir * wave * ripple_intensity;
+
+                vec3 tc = niri_geo_to_tex * vec3(uv, 1.0);
+                vec4 color = texture2D(niri_tex, tc.st);
+
+                float alpha = smoothstep(1.0, 0.15, p);
+                return color * alpha;
+            }
+        "
+    }
+
+    // -------------------------------------------------------------------------
+    // Window Resize: Basic Clean Spring (Zero Shaders, Solid Default)
+    // -------------------------------------------------------------------------
+    window-resize {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    // -------------------------------------------------------------------------
+    // Motion Springs (Refined Damping)
+    // -------------------------------------------------------------------------
+
+    // Window swapping (Mod+Shift+H/L): refined damping, settles with a single tactile cushion
+    window-movement {
+        spring damping-ratio=0.88 stiffness=750 epsilon=0.0001
+    }
+
+    // Horizontal ribbon camera pan (Mod+H/L): near-critical with a subtle micro-cushion
+    horizontal-view-movement {
+        spring damping-ratio=0.92 stiffness=800 epsilon=0.0001
+    }
+
+    // Vertical workspace switching
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
+
+    // Overview mode (Mod+W): clean arrival with very slight cushion
+    overview-open-close {
+        spring damping-ratio=0.92 stiffness=850 epsilon=0.0001
+    }
+
+    // Overlays
+    screenshot-ui-open {
+        duration-ms 180
+        curve "ease-out-quad"
+    }
+
+    config-notification-open-close {
+        spring damping-ratio=0.75 stiffness=850 epsilon=0.001
+    }
+
+    exit-confirmation-open-close {
+        spring damping-ratio=0.80 stiffness=650 epsilon=0.01
+    }
+}
