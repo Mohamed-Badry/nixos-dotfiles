@@ -58,9 +58,6 @@ in
     if [ ! -f "$HOME/.config/gtk-3.0/noctalia.css" ]; then
       touch "$HOME/.config/gtk-3.0/noctalia.css"
     fi
-    if [ ! -f "$HOME/.config/gtk-3.0/noctalia-thunar.css" ]; then
-      touch "$HOME/.config/gtk-3.0/noctalia-thunar.css"
-    fi
     mkdir -p "$HOME/.config/sioyek"
     if [ ! -f "$HOME/.config/sioyek/prefs_user.config" ]; then
       touch "$HOME/.config/sioyek/prefs_user.config"

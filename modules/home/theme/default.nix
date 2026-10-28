@@ -27,7 +27,6 @@
     };
     gtk3.extraCss = ''
       @import url("noctalia.css");
-      @import url("noctalia-thunar.css");
     '';
     gtk4.extraConfig = {
       gtk-recent-files-enabled = false;

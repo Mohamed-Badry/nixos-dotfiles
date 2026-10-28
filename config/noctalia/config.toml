@@ -50,6 +50,7 @@ community_ids = [
   "opencode",
   "papirus-icons",
   "sioyek",
+  "thunar",
   "vscode",
   "yazi",
   "zapfast",
@@ -57,9 +58,6 @@ community_ids = [
   "zellij",
   "zen-browser",
 ]
-[theme.templates.user.thunar]
-input_path = "@HOME@/dotfiles/config/noctalia/templates/thunar.css"
-output_path = "$XDG_CONFIG_HOME/gtk-3.0/noctalia-thunar.css"
 
 [wallpaper]
 enabled = true
