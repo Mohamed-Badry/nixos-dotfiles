@@ -40,6 +40,13 @@
     pkgs.bottom
     pkgs.sem
     pkgs.tealdeer
+    pkgs.gcc
+    pkgs.rustc
+    pkgs.cargo
+    pkgs.rustfmt
+    pkgs.clippy
+    pkgs.rust-script
+    pkgs.uv
     pkgs.transmission_4-qt
     pkgs.zip
     pkgs.unzip
