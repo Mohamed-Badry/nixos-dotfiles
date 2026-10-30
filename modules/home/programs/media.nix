@@ -13,6 +13,8 @@
         osc = false;
         osd-bar = false;
         border = false;
+        gpu-api = "opengl";
+        hwdec = "auto-safe";
       };
     };
   };

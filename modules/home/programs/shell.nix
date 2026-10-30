@@ -22,6 +22,7 @@
         cp = "cp -i";
         mv = "mv -i";
         open = "xdg-open";
+        dopen = "detach xdg-open";
         "cd.." = "cd ..";
         bd = "cd \"$OLDPWD\"";
         p = "ps aux | rg";

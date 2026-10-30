@@ -78,6 +78,17 @@
         "image/jpeg" = "org.nomacs.ImageLounge.desktop";
         "image/png" = "org.nomacs.ImageLounge.desktop";
         "image/webp" = "org.nomacs.ImageLounge.desktop";
+        "video/mp4" = "mpv.desktop";
+        "video/x-matroska" = "mpv.desktop";
+        "video/webm" = "mpv.desktop";
+        "video/quicktime" = "mpv.desktop";
+        "video/x-msvideo" = "mpv.desktop";
+        "video/x-flv" = "mpv.desktop";
+        "video/mpeg" = "mpv.desktop";
+        "audio/mpeg" = "mpv.desktop";
+        "audio/flac" = "mpv.desktop";
+        "audio/x-wav" = "mpv.desktop";
+        "audio/ogg" = "mpv.desktop";
         "x-scheme-handler/http" = "zen.desktop";
         "x-scheme-handler/https" = "zen.desktop";
         "text/html" = "zen.desktop";
