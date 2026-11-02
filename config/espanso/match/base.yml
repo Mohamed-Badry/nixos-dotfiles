@@ -31,3 +31,7 @@ matches:
         type: shell
         params:
           cmd: "curl -s ifconfig.me"
+
+  # hidden forced rtl symbol
+  - trigger: ":rtl"
+    replace: "؜"
