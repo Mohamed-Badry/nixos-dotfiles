@@ -179,5 +179,11 @@
   xdg.configFile = {
     "fastfetch/config.jsonc".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config/fastfetch/config.jsonc";
+    "fish/completions/cargo.fish".text = ''
+      # Nixpkgs generates an experimental dynamic CARGO_COMPLETE hook in vendor_completions.d
+      # which is rejected by stable Cargo and errors out. Sourcing Fish's bundled completion
+      # restores full, rich subcommands, flags, and workspace completions.
+      source $__fish_data_dir/completions/cargo.fish
+    '';
   };
 }
