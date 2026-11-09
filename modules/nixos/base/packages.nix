@@ -11,6 +11,7 @@
   };
 
   environment.systemPackages = [
+    pkgs.android-tools
     pkgs.vim
     pkgs.wget
     pkgs.curl
