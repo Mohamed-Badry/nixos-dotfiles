@@ -77,9 +77,9 @@ window-rule {
 window-rule {
     match app-id="org.wezfurlong.wezterm"
     match app-id="scratchpad"
-    background-effect {
-        blur true
-    }
+    // background-effect {
+    //     blur true
+    // }
 }
 
 window-rule {
