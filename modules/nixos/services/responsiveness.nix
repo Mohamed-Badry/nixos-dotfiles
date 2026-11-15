@@ -47,7 +47,6 @@ in
         "mold"
         "python.*"
         "nix"
-        "nix-daemon"
         "nix-store"
         "ffmpeg"
         "podman"
@@ -88,6 +87,13 @@ in
     enable = true;
     package = pkgs.ananicy-cpp;
     rulesProvider = pkgs.ananicy-rules-cachyos;
+
+    # Systemd slices manage cgroup CPU/IO weights; cgroup_load causes invalid
+    # writes to unified cgroup v2 root /sys/fs/cgroup/cgroup.procs.
+    settings = {
+      cgroup_load = false;
+      apply_cgroup = false;
+    };
 
     extraTypes = [
       {
@@ -185,8 +191,30 @@ in
     ];
   };
 
-  # Allow PipeWire and WirePlumber to obtain realtime scheduling priority.
-  security.rtkit.enable = true;
+  # Grant PipeWire/WirePlumber native realtime priority via PAM limits instead
+  # of rtkit-daemon: apps using fastframe_audio::realtime (e.g. zapfast) hook
+  # into RTKit and get SIGKILLed by the 200ms RLIMIT_RTTIME watchdog on audio
+  # output. Requires a fresh session login to propagate to user@1000.service.
+  security.pam.loginLimits = [
+    {
+      domain = "@audio";
+      type = "-";
+      item = "rtprio";
+      value = "95";
+    }
+    {
+      domain = "@audio";
+      type = "-";
+      item = "nice";
+      value = "-15";
+    }
+    {
+      domain = "@audio";
+      type = "-";
+      item = "memlock";
+      value = "unlimited";
+    }
+  ];
 
   # Keep Nix builds and rebuilds from starving desktop input/display.
   nix = {
@@ -201,7 +229,7 @@ in
       Nice = 15;
       CPUWeight = 20;
       IOWeight = 20;
-      OOMScoreAdjust = 500;
+      OOMScoreAdjust = 100;
     };
 
     # Prioritize core Wayland session/audio slices over apps and background jobs.
