@@ -15,6 +15,7 @@
     pkgs.qt6.qtimageformats
     pkgs.nomacs
     pkgs.sioyek
+    pkgs.readest
     pkgs.qt6Packages.qt6ct
     pkgs.libsForQt5.qt5ct
     pkgs.kdePackages.breeze
