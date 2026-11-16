@@ -5,11 +5,13 @@
   raise-or-run,
   jq,
   coreutils,
+  gawk,
 }:
 let
   wrapper = writeShellScript "vesktop" ''
     CONFIG_DIR="$HOME/.config/vesktop/settings"
     CONFIG="$CONFIG_DIR/settings.json"
+    QUICK_CSS="$CONFIG_DIR/quickCss.css"
 
     mkdir -p "$CONFIG_DIR"
     if [ ! -f "$CONFIG" ]; then
@@ -24,7 +26,8 @@ let
 
     ${jq}/bin/jq \
       --argjson start "$START_MS" \
-      '.plugins.CustomRPC = (.plugins.CustomRPC // {}) * {
+      '.useQuickCss = true
+      | .plugins.CustomRPC = (.plugins.CustomRPC // {}) * {
         "enabled": true,
         "enablePresence": true,
         "type": 0,
@@ -38,6 +41,30 @@ let
         "timestampMode": 3,
         "startTime": $start
       }' "$CONFIG" > "$CONFIG.tmp" && mv "$CONFIG.tmp" "$CONFIG"
+
+    if [ -f "$QUICK_CSS" ]; then
+      ${gawk}/bin/awk '
+        /\/\* vesktop-font-fallback:start \*\// { skip = 1; next }
+        /\/\* vesktop-font-fallback:end \*\// { skip = 0; next }
+        !skip { print }
+      ' "$QUICK_CSS" > "$QUICK_CSS.tmp"
+      # Collapse trailing blank lines left behind when stripping an older block.
+      ${gawk}/bin/awk '{ lines[NR] = $0 } /[^[:space:]]/ { last = NR } END { for (i = 1; i <= last; i++) print lines[i] }' \
+        "$QUICK_CSS.tmp" > "$QUICK_CSS.clean"
+      rm -f "$QUICK_CSS.tmp"
+      mv "$QUICK_CSS.clean" "$QUICK_CSS.tmp"
+    else
+      : > "$QUICK_CSS.tmp"
+    fi
+
+    cat >> "$QUICK_CSS.tmp" <<'EOF'
+    /* vesktop-font-fallback:start */
+    :root body {
+      --font: 'figtree';
+    }
+    /* vesktop-font-fallback:end */
+    EOF
+    mv "$QUICK_CSS.tmp" "$QUICK_CSS"
 
     exec ${raise-or-run}/bin/raise-or-run vesktop ${vesktop}/bin/vesktop "$@"
   '';
