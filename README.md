@@ -12,13 +12,13 @@
 - [WezTerm](https://wezfurlong.org/wezterm/)
 - [Fish](https://fishshell.com/)
 - [Zellij](https://zellij.dev/)
-- [Helix](https://helix-editor.com/) 
+- [Helix](https://helix-editor.com/)
 - [MPD](https://www.musicpd.org/) + [RMPC](https://github.com/mierak/rmpc) + [Cava](https://github.com/karlstav/cava)
 - [Yazi](https://github.com/sxyazi/yazi) & [Thunar](https://docs.xfce.org/xfce/thunar/start)
 
 ### Keybinds
 
-`Mod + /` for the keymap. 
+`Mod + /` for the keymap.
 
 <p align="center">
   <img src="assets/screenshots/keybinds.png" alt="Niri Keymap Cheatsheet" width="100%"/>
@@ -28,57 +28,20 @@
 
 ```
 .
-├── flake.nix                      entry point: inputs, host metadata, nixosConfigurations, packages, overlays
-├── flake.lock
-├── justfile                       common maintenance commands
-├── overlays/
-│   └── default.nix                overlay injecting pkgs.myPkgs into nixpkgs
-├── hosts/
-│   └── nixos/                     machine-specific facts (disk UUIDs, bus IDs, etc.)
-│       ├── boot.nix               GRUB bootloader, Sekiro theme, dual-boot Pop!_OS entry
-│       ├── storage.nix            filesystems, Btrfs subvolumes
-│       ├── user.nix               user account creation
-│       └── hardware/
-│           ├── nvidia.nix         NVIDIA PRIME offload setup
-│           └── asus.nix           ASUS quirks (asusd daemon, mt7921e Wi-Fi blacklist, ALC256 audio jack)
-├── modules/
-│   ├── nixos/                     system-level modules
-│   │   ├── base/                  nix settings, core packages
-│   │   ├── desktop/               Niri compositor, portals (GNOME/GTK), GVFS
-│   │   └── services/              PipeWire, keyd, Podman, Espanso, SDDM, Cloudflare WARP
-│   └── home/                      Home Manager modules
-│       ├── desktop/               Niri config, official Noctalia HM module
-│       ├── programs/              shell, terminal, apps, media, vcs (Git & Jujutsu)
-│       ├── services/              MPD, Espanso
-│       ├── theme/                 GTK (Rosé Pine) / Qt (Kvantum) / cursor theme
-│       └── xdg/                   desktop entries, MIME associations, userDirs
-├── packages/                      granular local derivations (exposed as flake packages & pkgs.myPkgs)
-│   ├── default.nix                callPackage aggregator for all local derivations
-│   ├── plymouth-theme.nix         Hexa-retro Plymouth theme
-│   ├── qylock.nix                 Quickshell lockscreen & SDDM theme
-│   ├── perfmode/                  perfmode utility package
-│   ├── mailspring/                Mailspring wrapped with gnome-libsecret
-│   ├── zapfast/                   pre-compiled ZapFast WhatsApp client
-│   └── scripts/                   standalone utility scripts
-│       ├── smart-playerctl.nix    smart MPRIS player switcher (bypasses DND)
-│       ├── toggle-scratchpad.nix  Niri scratchpad toggle
-│       ├── obs-toggle-record.nix  OBS websocket recording toggle
-│       ├── launch-zen-vesktop.nix tiled Zen + Vesktop launcher
-│       ├── yt-dlp-wrapped.nix     audio extraction wrapper
-│       ├── jj-status.nix          Jujutsu terminal status indicator
-│       └── asus/                  ASUS laptop power profile & Aura RGB tools
-├── config/                        app config files linked by Home Manager
-├── assets/                        binary theme media (SDDM, Plymouth, screenshots)
-└── templates/                     dev shells for Python, Rust, web, Typst
+├── flake.nix         entry point: inputs, host metadata, NixOS host, packages, overlays
+├── justfile          maintenance recipes
+├── hosts/            machine-specific hardware, bootloader, storage, user
+├── modules/          NixOS system modules & Home Manager modules
+├── packages/         local derivations, wrapped apps, and desktop scripts (pkgs.myPkgs)
+├── overlays/         injects pkgs.myPkgs into nixpkgs
+├── config/           app config files linked or seeded by Home Manager
+├── assets/           binary theme media & screenshots
+└── templates/        dev shells for Python, Rust, web, Typst
 ```
 
 ### Commands
 
-Enter the dev shell to get `just`, `nixfmt`, `nil`, and `statix`:
-
-```shell
-nix develop
-```
+Enter the dev shell (`nix develop` or `just develop`) to get `just`, `nixfmt`, `nil`, and `statix`:
 
 | Command | What it does |
 | --- | --- |
@@ -92,46 +55,8 @@ nix develop
 | `just update` | `nix flake update` |
 | `just clean` | keep last 5 generations, run GC |
 
+### Docs
 
-### Inputs
-
-Tracks `nixos-26.05`. Third-party flake inputs follow it so the system evaluates against one unified package tree, with the exception of `noctalia` and `llm-agents`, which track their respective upstream branches independently to leverage prebuilt binary caches (`noctalia.cachix.org` and `cache.numtide.com`) and avoid local compilation.
-
-Binary cache substituters and keys are configured in `flake.nix` (`nixConfig`) and `modules/nixos/base/default.nix` (`nix.settings`), with `@wheel` included in `trusted-users`.
-
-### Reusing on another machine
-
-Everything under `hosts/nixos/` is machine-specific. Replace before using:
-
-- `hardware-configuration.nix` - regenerate with `nixos-generate-config`
-- `storage.nix` - Btrfs subvolume names and disk UUIDs
-- `boot.nix` - GRUB has a hardcoded Pop!_OS entry tied to this machine's EFI UUID
-- `hardware/nvidia.nix` - PRIME bus IDs, get them with `lspci`
-- `hardware/asus.nix` - ASUS TUF/ROG specific quirks (`asusd`, `mt7921e` blacklist, audio jack quirk); omit if non-ASUS
-- host metadata in `flake.nix` (`username`, `fullName`, `email`)
-
-`modules/` and `packages/` are completely reusable across machines without modification. No usernames or paths are hardcoded, Noctalia dynamically substitutes `@HOME@` on activation.
-
-### Notes
-
-- Kernel is `pkgs.linuxPackages` (stable) to avoid out-of-tree NVIDIA module build failures on newer kernels.
-- 32-bit graphics (`hardware.graphics.enable32Bit = true`) is enabled for 32-bit Wine/Proton games.
-- The file chooser uses the GTK portal (`xdg-desktop-portal-gtk`), pre-warmed via systemd user services for instant (<100ms) launch without cold-start delays. GTK recent file scanning is disabled to prevent disk freezes.
-- Desktop scripts (`smart-playerctl`, `asus-profile-switch`, `asus-aura-mode`) send critical priority notifications configured to bypass Noctalia's Do Not Disturb mode.
-- MPD listens on a UNIX domain socket (`~/.config/mpd/socket`) for RMPC, Cava visualizer, and yt-dlp integration.
-- Git and Jujutsu identity come from `flake.nix` and are rendered read-only in `modules/home/programs/vcs.nix`.
-- `system.stateVersion` and `home.stateVersion` are pinned. Don't bump them when the channel updates.
-- Cloudflare WARP needs `warp-cli register` once after first switch to activate.
-- Running `just switch` applies `trusted-users` so unprivileged commands (`just build`) can substitute prebuilt binaries directly from Cachix.
-
-### Manually Pinned Packages
-
-While `just update` (`nix flake update`) keeps `nixpkgs` and all flake inputs up to date, the following functional packages are pinned directly in code and require manual version bumps when upstream releases an update:
-
-| Package | Location | Description | How to Update |
-| :--- | :--- | :--- | :--- |
-| **ZapFast** | [`packages/zapfast/default.nix`](packages/zapfast/default.nix) | Native WhatsApp client (pre-compiled binary) | Bump `version` and update the release tarball hash |
-| **Zellij Autolock** | [`modules/home/programs/terminal.nix`](modules/home/programs/terminal.nix) | Auto-lock plugin for Zellij in nested CLI tools | Bump release version URL and sha256 |
-| **perfmode** | [`packages/perfmode/default.nix`](packages/perfmode/default.nix) | Lightweight power profile daemon | Bump Codeberg commit hash and tarball hash |
-| **qylock** | [`packages/qylock.nix`](packages/qylock.nix) | Quickshell lockscreen & SDDM theme | Bump Git commit revision and hash |
-
+- [ARCHITECTURE.md](ARCHITECTURE.md) - detailed layout, custom behaviors, caveats, machine reuse, and manually pinned packages
+- [ASSETS.md](ASSETS.md) - binary theme media under `assets/`
+- [SECURITY.md](SECURITY.md) - credential & keyring handling
