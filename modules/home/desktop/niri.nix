@@ -6,21 +6,26 @@
 }:
 {
   home.packages = [
+    # compositor tools
     pkgs.brightnessctl
     pkgs.hyprpicker
     pkgs.jq
     pkgs.playerctl
     inputs.niri-float-sticky.packages.${pkgs.stdenv.hostPlatform.system}.default
+
+    # niri scripts
+    pkgs.myPkgs.autostart-apps
+    pkgs.myPkgs.focus-mail
+    pkgs.myPkgs.focus-zen
+    pkgs.myPkgs.obs-toggle-record
+    pkgs.myPkgs.raise-or-run
     pkgs.myPkgs.smart-playerctl
     pkgs.myPkgs.toggle-scratchpad
-    pkgs.myPkgs.obs-toggle-record
-    pkgs.myPkgs.asus-profile-switch
-    pkgs.myPkgs.asus-aura-sync
+
+    # asus controls
     pkgs.myPkgs.asus-aura-mode
-    pkgs.myPkgs.autostart-apps
-    pkgs.myPkgs.focus-zen
-    pkgs.myPkgs.focus-mail
-    pkgs.myPkgs.raise-or-run
+    pkgs.myPkgs.asus-aura-sync
+    pkgs.myPkgs.asus-profile-switch
   ];
 
   home.activation.seedNiriNoctaliaKdl = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

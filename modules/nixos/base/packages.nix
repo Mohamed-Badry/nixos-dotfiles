@@ -11,21 +11,26 @@
   };
 
   environment.systemPackages = [
-    pkgs.android-tools
-    pkgs.vim
-    pkgs.wget
+    # core cli
     pkgs.curl
+    pkgs.wget
     pkgs.git
+    pkgs.vim
     pkgs.fd
     pkgs.ripgrep
     pkgs.wl-clipboard
     pkgs.libnotify
+    pkgs.android-tools
+
+    # gaming & network
     pkgs.heroic
     pkgs.cloudflare-warp
     pkgs.myPkgs.perfmode
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+
+    # agent clis
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.antigravity-cli
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.codex
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.rtk
   ];
 
