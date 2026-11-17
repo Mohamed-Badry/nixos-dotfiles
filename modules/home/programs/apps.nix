@@ -25,7 +25,7 @@
     pkgs.slurp
     pkgs.satty
     pkgs.cava
-    pkgs.pavucontrol
+    pkgs.pwvucontrol
     pkgs.ffmpeg
     pkgs.oxipng
 

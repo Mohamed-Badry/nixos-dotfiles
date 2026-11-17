@@ -103,7 +103,9 @@ end = [
   "tray",
   "notifications",
   "battery",
-  "blackbartblues/audio-switcher:widget",
+  "privacy",
+  "output_volume",
+  "input_volume",
   "brightness",
   "network",
   "control_center",
@@ -145,6 +147,18 @@ show_label = true
 [widget.network]
 show_label = false
 
+[widget.privacy]
+hide_inactive = true
+
+[widget.output_volume]
+type = "volume"
+device = "output"
+
+[widget.input_volume]
+type = "volume"
+device = "input"
+hide_when_inactive = false
+
 [hooks]
 started = "@ASUS_AURA_SYNC@"
 colors_changed = ["@ASUS_AURA_SYNC@"]
@@ -153,7 +167,6 @@ theme_mode_changed = ["@ASUS_AURA_SYNC@"]
 
 [plugins]
 enabled = [
-  "blackbartblues/audio-switcher",
   "kenn/keybind-cheatsheet",
   "noctalia/wallhaven"
 ]
