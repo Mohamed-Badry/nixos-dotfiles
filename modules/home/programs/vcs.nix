@@ -69,6 +69,18 @@ in
         };
       };
     };
+
+    gh = {
+      enable = true;
+      settings = {
+        git_protocol = "ssh";
+        color_labels = "enabled";
+        aliases = {
+          co = "pr checkout";
+          pv = "pr view";
+        };
+      };
+    };
   };
 
   xdg.configFile."fish/completions/jj.fish".text = ''
