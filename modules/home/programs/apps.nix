@@ -103,7 +103,7 @@
       pkgs.fetchFromGitHub {
         owner = "catppuccin";
         repo = "mailspring";
-        rev = "5c4e860812950759b1f1bf144871082844cd";
+        rev = "5c4e860812950759ba1af1bf144871a0828a44cd";
         sha256 = "1wh6msrpi97gxr3wf27sl9zbmj141z4p6avfcymw47mfd21630hn";
       }
     }/src/Catppuccin-Mocha/* "$HOME/.config/Mailspring/packages/Catppuccin-Mocha/"

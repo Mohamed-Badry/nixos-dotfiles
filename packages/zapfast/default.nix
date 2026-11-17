@@ -16,7 +16,7 @@
   pipewire,
 }:
 let
-  version = "0.20.1";
+  version = "0.21.3";
   runtimeLibs = [
     alsa-lib
     libxkbcommon
@@ -35,7 +35,7 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://github.com/crmne/zapfast/releases/download/v${version}/zapfast-v${version}-x86_64-unknown-linux-gnu.tar.gz";
-    hash = "sha256-5ZQ7wiGdDzEdThYTIiuA4y77Ko3C0pz/XZLUJKiNsTI=";
+    hash = "sha256-CJ3FpvVno0J9e9zcPYR4E5eBkSS5CnSSAvYkLf3SWcg=";
   };
 
   nativeBuildInputs = [
