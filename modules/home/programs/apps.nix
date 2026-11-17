@@ -20,6 +20,7 @@
     pkgs.transmission_4-qt
 
     # screenshots & media
+    inputs.metrolist.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.grim
     pkgs.slurp
     pkgs.satty

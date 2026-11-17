@@ -38,6 +38,11 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    metrolist = {
+      url = "github:MetrolistGroup/Metrolist";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

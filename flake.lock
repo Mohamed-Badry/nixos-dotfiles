@@ -116,6 +116,26 @@
         "type": "github"
       }
     },
+    "metrolist": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794880189,
+        "narHash": "sha256-O4XANr3a8gW5sQrTwNMW8k9Gp0s16iNcRwZeDdgI/50=",
+        "owner": "MetrolistGroup",
+        "repo": "Metrolist",
+        "rev": "4bc01b7d26154f4825965e1b506968976140f386",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MetrolistGroup",
+        "repo": "Metrolist",
+        "type": "github"
+      }
+    },
     "niri-float-sticky": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -225,6 +245,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
+        "metrolist": "metrolist",
         "niri-float-sticky": "niri-float-sticky",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
