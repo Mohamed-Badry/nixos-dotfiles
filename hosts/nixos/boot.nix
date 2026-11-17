@@ -24,15 +24,6 @@
             hash = "sha256-wTr5S/17uwQXkWwElqBKIV1J3QUP6W2Qx2Nw0SaM7Qk=";
           })
         }/Sekiro";
-        extraEntries = ''
-          menuentry "Pop_OS!" {
-            insmod part_gpt
-            insmod fat
-            search --no-floppy --fs-uuid --set=root D317-3D5D
-            linux /EFI/Pop_OS-a44ac444-0fa7-404a-a655-9cc05676fa1e/vmlinuz.efi root=UUID=a44ac444-0fa7-404a-a655-9cc05676fa1e ro splash systemd.show_status=false loglevel=0 nvidia-drm.modeset=1 quiet fbcon=nodefer usbcore.autosuspend=-1 rootflags=subvol=@popos
-            initrd /EFI/Pop_OS-a44ac444-0fa7-404a-a655-9cc05676fa1e/initrd.img
-          }
-        '';
       };
     };
 

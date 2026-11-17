@@ -15,7 +15,7 @@ Where things live in this repo, plus custom tweaks and non-default behaviors wor
 │   └── nixos/                           machine-specific config
 │       ├── default.nix                  host imports
 │       ├── hardware-configuration.nix   generated hardware & initrd config
-│       ├── boot.nix                     GRUB bootloader, Sekiro theme, Pop!_OS entry
+│       ├── boot.nix                     GRUB bootloader and Sekiro theme
 │       ├── storage.nix                  filesystems & Btrfs subvolumes
 │       ├── user.nix                     user account & groups
 │       └── hardware/
@@ -61,7 +61,7 @@ Where things live in this repo, plus custom tweaks and non-default behaviors wor
 
 #### System & Hardware
 - **Kernel pinned to LTS/stable (`pkgs.linuxPackages`)**: Set in [boot.nix](hosts/nixos/boot.nix) so NVIDIA drivers don't break on brand-new kernels.
-- **GRUB setup**: [boot.nix](hosts/nixos/boot.nix) avoids writing UEFI NVRAM entries, uses the Sekiro theme, and includes a hardcoded `Pop_OS!` dual-boot entry.
+- **GRUB setup**: [boot.nix](hosts/nixos/boot.nix) avoids writing UEFI NVRAM entries and uses the Sekiro theme.
 - **Webcam anti-flicker**: [v4l2.nix](modules/nixos/services/v4l2.nix) installs `v4l-utils` and sets the webcam to 50 Hz (`power_line_frequency=1`) when plugged in and after waking from sleep. Remove `./v4l2.nix` from [services/default.nix](modules/nixos/services/default.nix) to disable it.
 - **Keyboard remaps (`keyd`)**: [keyd.nix](modules/nixos/services/keyd.nix) maps `j+k` to `Esc` and tweaks the Super/Meta key (`overload(meta, M-a)`). Remove `./keyd.nix` from [services/default.nix](modules/nixos/services/default.nix) if keys behave unexpectedly.
 - **ASUS laptop quirks**: [asus.nix](hosts/nixos/hardware/asus.nix) enables `asusd`, disables the `mt7921e` Wi-Fi driver, fixes keyboard backlight keys, and applies a headset mic fix. Skip `hardware/asus.nix` on another laptop.
@@ -94,7 +94,6 @@ Where things live in this repo, plus custom tweaks and non-default behaviors wor
 Everything under `hosts/nixos/` is tied to this laptop. Update before using elsewhere:
 - `hosts/nixos/hardware-configuration.nix` - regenerate with `nixos-generate-config`
 - `hosts/nixos/storage.nix` - disk UUIDs and Btrfs subvolumes
-- `hosts/nixos/boot.nix` - hardcoded `Pop_OS!` dual-boot UUIDs
 - `hosts/nixos/hardware/nvidia.nix` - GPU PCI bus IDs (`lspci`)
 - `hosts/nixos/hardware/asus.nix` - ASUS laptop quirks (drop if not ASUS)
 - `flake.nix` - `username`, `fullName`, `email` (plus keeping the clone at `~/dotfiles`)
