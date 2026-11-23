@@ -77,16 +77,17 @@ window-rule {
 window-rule {
     match app-id="org.wezfurlong.wezterm"
     match app-id="scratchpad"
-    // background-effect {
-    //     blur true
-    // }
+    opacity 0.90 
+    background-effect {
+        blur true
+    }
 }
 
 window-rule {
     match app-id="(?i)^thunar$"
     geometry-corner-radius 12
     clip-to-geometry true
-    opacity 0.92
+    opacity 0.90
     background-effect {
         blur true
     }
