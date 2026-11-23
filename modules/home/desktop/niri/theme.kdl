@@ -1,4 +1,5 @@
-layout {
+layout {  
+    always-center-single-column
     focus-ring {
         width 2
         active-color "#c4a7e7"
