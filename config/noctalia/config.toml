@@ -103,7 +103,35 @@ path = "@HOME@/Pictures/Wallpapers/wallhaven_m9md18.webp"
 [wallpaper.monitors.eDP-1]
 path = "@HOME@/Pictures/Wallpapers/wallhaven_m9md18.webp"
 
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven-pkgkkp.webp"
+
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven_3kp6yv.jpg"
+
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven_5g22q5.webp"
+
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven_m9md18.webp"
+
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven_z8dg9y.webp"
+
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven_rd3pjw.webp"
+
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven-rdwjj7.jpg"
+
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven-rq61dj.webp"
+
+[[wallpaper.favorite]]
+path = "@HOME@/Pictures/Wallpapers/wallhaven-r7zm17.webp"
+
 [control_center]
+hidden_tabs = [ "power", "bluetooth", "weather" ]
 sidebar_section = "full"
 
 [system.monitor]
@@ -134,20 +162,20 @@ schema_version = 2
 widget_order = [
   "desktop-widget-0000000000000001",
   "desktop-widget-0000000000000004",
-  "desktop-widget-0000000000000005",
   "desktop-widget-0000000000000006",
+  "desktop-widget-0000000000000007",
 ]
 
 [desktop_widgets.grid]
 cell_size = 16
 major_interval = 4
-visible = true
+visible = false
 
 [desktop_widgets.widget.desktop-widget-0000000000000001]
-box_height = 336.0
+box_height = 352.0
 box_width = 976.0
-cx = 504.0
-cy = 900.0
+cx = 488.0
+cy = 828.0
 output = "eDP-1"
 placement_height = 1080.0
 placement_width = 1920.0
@@ -156,15 +184,19 @@ type = "audio_visualizer"
 
 [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
 background = false
-bands = 32
-color_2 = "secondary"
+bands = 100
+color_1 = "secondary"
+color_2 = "primary"
+mirrored = true
+reversed = false
+show_wave = false
 show_when_idle = true
 
 [desktop_widgets.widget.desktop-widget-0000000000000004]
-box_height = 464.0
-box_width = 576.0
-cx = 1600.0
-cy = 284.0
+box_height = 608.0
+box_width = 608.0
+cx = 1282.57421875
+cy = 304.67578125
 output = "eDP-1"
 placement_height = 1080.0
 placement_width = 1920.0
@@ -173,33 +205,22 @@ type = "fancy_audio_visualizer"
 
 [desktop_widgets.widget.desktop-widget-0000000000000004.settings]
 background = false
+bar_width = 0.5
+bloom_intensity = 0.5
+fade_when_idle = false
+inner_diameter = 0.7
+primary_color = "primary"
+ring_opacity = 0.7
+rotation_speed = 0.6
+secondary_color = "secondary"
+sensitivity = 1.7
 visualization_mode = "bars_rings"
 
-[desktop_widgets.widget.desktop-widget-0000000000000005]
-box_height = 224.0
-box_width = 192.0
-cx = 1816.0
-cy = 652.0
-output = "eDP-1"
-placement_height = 1080.0
-placement_width = 1920.0
-rotation = 0.0
-type = "media_player"
-
-[desktop_widgets.widget.desktop-widget-0000000000000005.settings]
-album_art_background = true
-album_art_blur = 40
-audio_visualizer = false
-background = false
-hide_when_no_media = true
-layout = "vertical"
-shadow = true
-
 [desktop_widgets.widget.desktop-widget-0000000000000006]
-box_height = 352.0
-box_width = 688.0
-cx = 1568.0
-cy = 892.0
+box_height = 512.0
+box_width = 912.0
+cx = 1464.0
+cy = 824.0
 output = "eDP-1"
 placement_height = 1080.0
 placement_width = 1920.0
@@ -211,6 +232,24 @@ background = false
 center_text = true
 clock_style = "digital"
 color = "secondary"
+
+[desktop_widgets.widget.desktop-widget-0000000000000007]
+box_height = 448.0
+box_width = 416.0
+cx = 241.16796875
+cy = 280.75390625
+output = "eDP-1"
+placement_height = 1080.0
+placement_width = 1920.0
+rotation = 0.0
+type = "calendar"
+
+[desktop_widgets.widget.desktop-widget-0000000000000007.settings]
+background = true
+background_opacity = 0.53
+background_padding = 10
+show_events = false
+show_week_numbers = false
 
 [lockscreen_widgets]
 enabled = false
@@ -267,7 +306,7 @@ show_instance_count = false
 smart_auto_hide = false
 
 [bar]
-order = [ "main" ]
+order = [ "main", "bar" ]
 
 [bar.main]
 position = "top"
@@ -301,6 +340,9 @@ end = [
   "network",
   "control_center",
 ]
+
+[bar.main.dead_zone.actions]
+middle = "notification-dnd-toggle"
 
 [[bar.main.capsule_group]]
 id = "g1"
@@ -336,8 +378,38 @@ padding = 12.0
 border_width = 1.0
 members = ["output_volume", "input_volume"]
 
+[bar.bar]
+enabled = true
+position = "bottom"
+thickness = 30
+background_opacity = 0.69
+radius = 80
+radius_bottom_left = 80
+radius_bottom_right = 80
+radius_top_left = 80
+radius_top_right = 80
+margin_ends = "30%"
+padding = 15
+contact_shadow = true
+reserve_space = false
+smart_auto_hide = true
+show_on_workspace_switch = false
+start = [ "audio_visualizer" ]
+center = [ "taskbar" ]
+end = [ "audio_visualizer" ]
+
+[bar.bar.dead_zone.actions]
+middle = "wallpaper-random"
+right = "desktop-widgets-toggle"
+
 [widget.active_window]
 enabled = false
+
+[widget.audio_visualizer]
+bands = 90
+color_2 = "secondary"
+show_when_idle = true
+width = 150
 
 [widget.clock]
 format = "{:%I:%M %p %a, %b %d}"
@@ -359,7 +431,7 @@ show_value = true
 visualization = "none"
 
 [widget.battery]
-device = "BAT1"
+device = "auto"
 display_mode = "glyph"
 show_label = true
 hide_when_plugged = false
@@ -385,6 +457,13 @@ device = "output"
 type = "volume"
 device = "input"
 hide_when_inactive = false
+
+[widget.taskbar]
+anchor = true
+colorize_icons = true
+icon_scale = 1.35
+item_spacing = 10
+pinned = [ "zen", "vesktop", "zapfast" ]
 
 [widget.workspaces]
 scroll_repeat = "steps"
