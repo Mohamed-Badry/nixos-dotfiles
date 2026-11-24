@@ -84,6 +84,13 @@ window-rule {
 }
 
 window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    background-effect {
+        blur true
+    }
+}
+
+window-rule {
     match app-id="(?i)^thunar$"
     geometry-corner-radius 12
     clip-to-geometry true

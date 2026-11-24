@@ -3,11 +3,36 @@ config_version = 20
 
 [shell]
 font_family = "JetBrainsMono Nerd Font"
+avatar_path = "@HOME@/Pictures/Important/pic.webp"
 clipboard_enabled = true
+panel_anchor_bar = "main"
+button_borders = false
+card_borders = false
+input_borders = false
+popup_borders = false
+settings_window_translucent = true
 
 [shell.panel]
 transparency_mode = "soft"
 wallpaper_position = "center"
+borders = false
+floating_layer = "top"
+session_placement = "floating"
+
+[shell.launcher]
+default_view = "all"
+layout = "simple"
+show_settings_button = false
+
+[shell.launcher.providers.panels]
+global = true
+
+[shell.launcher.providers.session]
+global = true
+
+[shell.screen_corners]
+enabled = true
+size = 50
 
 [shell.screenshot]
 directory = "@HOME@/Pictures/Screenshots"
@@ -21,9 +46,9 @@ tint_intensity = 0.4
 [theme]
 mode = "dark"
 source = "builtin"
-wallpaper_scheme = "m3-content"
+wallpaper_scheme = "m3-tonal-spot"
 builtin = "Rosé Pine"
-community_palette = "Aura"
+community_palette = "Jiva Paper"
 custom_palette = "skwd-wall"
 
 [theme.templates]
@@ -70,13 +95,122 @@ transition = ["fade", "honeycomb", "stripes"]
 transition_on_startup = false
 
 [wallpaper.default]
-path = "@HOME@/Pictures/Wallpapers/wallhaven_rdwjj7.webp"
+path = "@HOME@/Pictures/Wallpapers/wallhaven_m9md18.webp"
 
 [wallpaper.last]
-path = "@HOME@/Pictures/Wallpapers/wallhaven_rdwjj7.webp"
+path = "@HOME@/Pictures/Wallpapers/wallhaven_m9md18.webp"
 
 [wallpaper.monitors.eDP-1]
-path = "@HOME@/Pictures/Wallpapers/wallhaven_rdwjj7.webp"
+path = "@HOME@/Pictures/Wallpapers/wallhaven_m9md18.webp"
+
+[control_center]
+sidebar_section = "full"
+
+[system.monitor]
+memory_poll_seconds = 1
+network_poll_seconds = 2
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+[idle.behavior.lock]
+action = "lock"
+enabled = true
+timeout = 600.0
+
+[idle.behavior.lock-and-suspend]
+action = "lock_and_suspend"
+enabled = false
+timeout = 900.0
+
+[idle.behavior.screen-off]
+action = "screen_off"
+enabled = true
+timeout = 660.0
+
+[desktop_widgets]
+enabled = false
+schema_version = 2
+widget_order = [
+  "desktop-widget-0000000000000001",
+  "desktop-widget-0000000000000004",
+  "desktop-widget-0000000000000005",
+  "desktop-widget-0000000000000006",
+]
+
+[desktop_widgets.grid]
+cell_size = 16
+major_interval = 4
+visible = true
+
+[desktop_widgets.widget.desktop-widget-0000000000000001]
+box_height = 336.0
+box_width = 976.0
+cx = 504.0
+cy = 900.0
+output = "eDP-1"
+placement_height = 1080.0
+placement_width = 1920.0
+rotation = 0.0
+type = "audio_visualizer"
+
+[desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+background = false
+bands = 32
+color_2 = "secondary"
+show_when_idle = true
+
+[desktop_widgets.widget.desktop-widget-0000000000000004]
+box_height = 464.0
+box_width = 576.0
+cx = 1600.0
+cy = 284.0
+output = "eDP-1"
+placement_height = 1080.0
+placement_width = 1920.0
+rotation = 0.0
+type = "fancy_audio_visualizer"
+
+[desktop_widgets.widget.desktop-widget-0000000000000004.settings]
+background = false
+visualization_mode = "bars_rings"
+
+[desktop_widgets.widget.desktop-widget-0000000000000005]
+box_height = 224.0
+box_width = 192.0
+cx = 1816.0
+cy = 652.0
+output = "eDP-1"
+placement_height = 1080.0
+placement_width = 1920.0
+rotation = 0.0
+type = "media_player"
+
+[desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+album_art_background = true
+album_art_blur = 40
+audio_visualizer = false
+background = false
+hide_when_no_media = true
+layout = "vertical"
+shadow = true
+
+[desktop_widgets.widget.desktop-widget-0000000000000006]
+box_height = 352.0
+box_width = 688.0
+cx = 1568.0
+cy = 892.0
+output = "eDP-1"
+placement_height = 1080.0
+placement_width = 1920.0
+rotation = 0.0
+type = "clock"
+
+[desktop_widgets.widget.desktop-widget-0000000000000006.settings]
+background = false
+center_text = true
+clock_style = "digital"
+color = "secondary"
 
 [lockscreen_widgets]
 enabled = false
@@ -138,7 +272,7 @@ order = [ "main" ]
 [bar.main]
 position = "top"
 thickness = 33
-background_opacity = 0.68999998457729816
+background_opacity = 0.69
 radius = 80
 margin_ends = "5%"
 margin_edge = 0
@@ -252,6 +386,10 @@ type = "volume"
 device = "input"
 hide_when_inactive = false
 
+[widget.workspaces]
+scroll_repeat = "steps"
+style = "minimal"
+
 [hooks]
 started = "@ASUS_AURA_SYNC@"
 colors_changed = ["@ASUS_AURA_SYNC@"]
@@ -265,6 +403,9 @@ enabled = [
 ]
 auto_update = "all"
 
+[notification]
+background_opacity = 0.69
+
 [notification.filter.system]
 match = "system"
 bypass_dnd = true
@@ -274,4 +415,10 @@ show_toast = true
 match = "ASUS Control"
 bypass_dnd = true
 show_toast = true
+
+[osd]
+background_opacity = 0.69
+border = false
+hide_delay_ms = 1300
+position_vertical = "top_right"
 
