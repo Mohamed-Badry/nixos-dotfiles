@@ -1,11 +1,12 @@
 binds {
     // #"Applications & Panels"
+    Mod+Shift+Space hotkey-overlay-title="Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }    
     Mod+Question hotkey-overlay-title="Keybind Cheatsheet" { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
     Mod+Slash hotkey-overlay-title="Keybind Cheatsheet" { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
     Mod+Shift+Slash hotkey-overlay-title="Keybind Cheatsheet" { spawn "noctalia" "msg" "panel-toggle" "kenn/keybind-cheatsheet:cheatsheet"; }
     Mod+Return hotkey-overlay-title="Terminal (WezTerm)" { spawn "wezterm"; }
     Mod+T hotkey-overlay-title="Terminal (WezTerm)" { spawn "wezterm"; }
-    Mod+A hotkey-overlay-title="Application Launcher" { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+A hotkey-overlay-title="Control Center" { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
     Mod+D hotkey-overlay-title="Wallpaper Picker" { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
     Mod+Shift+D hotkey-overlay-title="Wallhaven Browser" { spawn "noctalia" "msg" "panel-toggle" "noctalia/wallhaven:browser"; }
     Mod+B hotkey-overlay-title="Focus / Launch Zen" { spawn "focus-zen"; }

@@ -10,7 +10,7 @@ _: {
         global.chord_timeout = 50;
         main = {
           "j+k" = "esc";
-          meta = "overload(meta, M-a)";
+          meta = "overload(meta, M-S-space)";
         };
       };
     };
